@@ -9,22 +9,24 @@
     <h1>Upload Video and Extract Frames</h1>
     <input type="file" id="videoInput" accept="video/*">
     <button onclick="extractFrames()">Extract Frames</button>
-    <button id="downloadButton" onclick="downloadFrames()" disabled>Download All Frames</button>
+    <button id="downloadBtn" onclick="downloadFrames()" disabled>Download All Frames</button>
     <div id="framesContainer"></div>
     
     <script>
         let frames = [];
-        let downloadButton = document.getElementById("downloadButton");
+        let downloadBtn = document.getElementById("downloadBtn");
 
         function extractFrames() {
             let video = document.createElement("video");
             let file = document.getElementById("videoInput").files[0];
             let canvas = document.createElement("canvas");
             let ctx = canvas.getContext("2d");
+            let framesContainer = document.getElementById("framesContainer");
+            framesContainer.innerHTML = "";
             frames = [];
             
             if (!file) return alert("Select a video first!");
-            
+
             let url = URL.createObjectURL(file);
             video.src = url;
             video.crossOrigin = "anonymous";
@@ -32,53 +34,52 @@
             
             video.addEventListener("loadeddata", () => {
                 let fps = 30;
-                let totalSeconds = Math.floor(video.duration);
                 let currentSecond = 0;
-                
-                function processSecond() {
-                    if (currentSecond > totalSeconds) {
+
+                function captureSecond() {
+                    if (currentSecond >= Math.floor(video.duration)) {
                         video.pause();
-                        downloadButton.disabled = false;
+                        downloadBtn.disabled = false;
                         return;
                     }
-                    
-                    video.currentTime = currentSecond;
-                    video.addEventListener("seeked", function captureFrames() {
-                        let capturedFrames = 0;
 
-                        function captureNextFrame() {
-                            if (capturedFrames >= fps) {
-                                video.removeEventListener("seeked", captureFrames);
-                                currentSecond++;
-                                processSecond();
-                                return;
-                            }
-                            
+                    let frameCount = 0;
+                    function captureFrame() {
+                        if (frameCount >= fps) {
+                            currentSecond++;
+                            captureSecond();
+                            return;
+                        }
+
+                        video.currentTime = currentSecond + frameCount / fps;
+                        video.addEventListener("seeked", function processFrame() {
                             canvas.width = video.videoWidth;
                             canvas.height = video.videoHeight;
                             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                             let imgData = canvas.toDataURL("image/png");
-                            let frameName = `frame_${currentSecond}_${capturedFrames}.png`;
+                            let frameName = `frame_${currentSecond}_${frameCount}.png`;
+
                             frames.push({ imgData, name: frameName });
-                            
+
                             let imgElement = document.createElement("img");
                             imgElement.src = imgData;
-                            document.getElementById("framesContainer").appendChild(imgElement);
-                            
-                            capturedFrames++;
-                            setTimeout(captureNextFrame, 1000 / fps); // Ensure all frames are captured sequentially
-                        }
-                        
-                        captureNextFrame();
-                    });
+                            framesContainer.appendChild(imgElement);
+
+                            frameCount++;
+                            video.removeEventListener("seeked", processFrame);
+                            captureFrame();
+                        });
+                    }
+
+                    captureFrame();
                 }
-                
-                processSecond();
+
+                captureSecond();
             });
         }
-        
+
         function downloadFrames() {
-            frames.forEach((frame) => {
+            frames.forEach(frame => {
                 let a = document.createElement("a");
                 a.href = frame.imgData;
                 a.download = frame.name;
