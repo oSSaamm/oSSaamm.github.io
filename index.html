@@ -10,10 +10,12 @@
     <input type="file" id="videoInput" accept="video/*">
     <button onclick="extractFrames()">Extract Frames</button>
     <button id="downloadButton" onclick="downloadFrames()" disabled>Download All Frames</button>
+    <div id="framesContainer"></div>
     
     <script>
         let frames = [];
         let downloadButton = document.getElementById("downloadButton");
+        let framesContainer = document.getElementById("framesContainer");
         
         function extractFrames() {
             let video = document.createElement("video");
@@ -21,6 +23,7 @@
             let canvas = document.createElement("canvas");
             let ctx = canvas.getContext("2d");
             frames = [];
+            framesContainer.innerHTML = "";
             downloadButton.disabled = true;
             
             if (!file) return alert("Please select a video first!");
@@ -55,7 +58,16 @@
                             canvas.height = video.videoHeight;
                             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                             let imgData = canvas.toDataURL("image/png");
-                            frames.push({ imgData, name: `frame_${second}_${frameIndex}.png` });
+                            let frameName = `frame_${second}_${frameIndex}.png`;
+                            frames.push({ imgData, name: frameName });
+                            
+                            let imgElement = document.createElement("img");
+                            imgElement.src = imgData;
+                            imgElement.alt = frameName;
+                            imgElement.style.width = "200px";
+                            imgElement.style.margin = "5px";
+                            framesContainer.appendChild(imgElement);
+                            
                             frameIndex++;
                             video.removeEventListener("seeked", processFrame);
                             captureFrame();
