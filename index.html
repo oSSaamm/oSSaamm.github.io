@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video extractor</title>
+    <title>Extrair Frames de Vídeo</title>
 </head>
 <body>
-    <h1>Video to print converter</h1>
+    <h1>Carregar Vídeo e Extrair Frames</h1>
     <input type="file" id="videoInput" accept="video/*">
-    <button onclick="extractFrames()">Extract Frames (Before download)</button>
-    <button onclick="downloadFrames()">Download all prints</button>
+    <button onclick="extractFrames()">Extrair Frames</button>
+    <button onclick="downloadFrames()">Baixar Todas as Prints</button>
     
     <script>
         let frames = [];
@@ -21,7 +21,7 @@
             let ctx = canvas.getContext("2d");
             frames = [];
             
-            if (!file) return alert("Select a video first!!!");
+            if (!file) return alert("Selecione um vídeo primeiro!");
             
             let url = URL.createObjectURL(file);
             video.src = url;
@@ -41,7 +41,7 @@
                     }
                     
                     video.currentTime = currentTime;
-                    setTimeout(() => {
+                    video.addEventListener("seeked", function processFrame() {
                         canvas.width = video.videoWidth;
                         canvas.height = video.videoHeight;
                         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -51,8 +51,9 @@
                         frames.push({ imgData, name: `frame_${second}_${frameNumber}.png` });
                         frameCount++;
                         currentTime += frameRate;
+                        video.removeEventListener("seeked", processFrame);
                         captureFrame();
-                    }, 100);
+                    });
                 }
                 
                 captureFrame();
@@ -71,5 +72,3 @@
         }
     </script>
 </body>
-</html>
-
