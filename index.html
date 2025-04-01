@@ -15,18 +15,15 @@
     <script>
         let frames = [];
         let downloadButton = document.getElementById("downloadButton");
-        let framesContainer = document.getElementById("framesContainer");
-        
+
         function extractFrames() {
             let video = document.createElement("video");
             let file = document.getElementById("videoInput").files[0];
             let canvas = document.createElement("canvas");
             let ctx = canvas.getContext("2d");
             frames = [];
-            framesContainer.innerHTML = "";
-            downloadButton.disabled = true;
             
-            if (!file) return alert("Please select a video first!");
+            if (!file) return alert("Select a video first!");
             
             let url = URL.createObjectURL(file);
             video.src = url;
@@ -35,49 +32,38 @@
             
             video.addEventListener("loadeddata", () => {
                 let fps = 30;
-                let frameRate = 1 / fps;
-                let currentTime = 0;
-                let frameCount = 0;
-                
-                function captureFramesForSecond(second) {
-                    let frameIndex = 0;
+                let totalSeconds = Math.floor(video.duration);
+                let currentSecond = 0;
+
+                function processSecond() {
+                    if (currentSecond > totalSeconds) {
+                        video.pause();
+                        downloadButton.disabled = false;
+                        return;
+                    }
                     
-                    function captureFrame() {
-                        if (frameIndex >= fps || second >= Math.floor(video.duration)) {
-                            if (second < Math.floor(video.duration)) {
-                                captureFramesForSecond(second + 1);
-                            } else {
-                                downloadButton.disabled = false;
-                            }
-                            return;
-                        }
-                        
-                        video.currentTime = second + (frameIndex * frameRate);
-                        video.addEventListener("seeked", function processFrame() {
+                    video.currentTime = currentSecond;
+                    video.addEventListener("seeked", function captureFrames() {
+                        for (let frameNumber = 0; frameNumber < fps; frameNumber++) {
                             canvas.width = video.videoWidth;
                             canvas.height = video.videoHeight;
                             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                             let imgData = canvas.toDataURL("image/png");
-                            let frameName = `frame_${second}_${frameIndex}.png`;
+                            let frameName = `frame_${currentSecond}_${frameNumber}.png`;
                             frames.push({ imgData, name: frameName });
                             
                             let imgElement = document.createElement("img");
                             imgElement.src = imgData;
-                            imgElement.alt = frameName;
-                            imgElement.style.width = "200px";
-                            imgElement.style.margin = "5px";
-                            framesContainer.appendChild(imgElement);
-                            
-                            frameIndex++;
-                            video.removeEventListener("seeked", processFrame);
-                            captureFrame();
-                        });
-                    }
-                    
-                    captureFrame();
+                            document.getElementById("framesContainer").appendChild(imgElement);
+                        }
+                        
+                        currentSecond++;
+                        video.removeEventListener("seeked", captureFrames);
+                        processSecond();
+                    });
                 }
                 
-                captureFramesForSecond(0);
+                processSecond();
             });
         }
         
