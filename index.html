@@ -34,7 +34,7 @@
                 let fps = 30;
                 let totalSeconds = Math.floor(video.duration);
                 let currentSecond = 0;
-
+                
                 function processSecond() {
                     if (currentSecond > totalSeconds) {
                         video.pause();
@@ -44,22 +44,32 @@
                     
                     video.currentTime = currentSecond;
                     video.addEventListener("seeked", function captureFrames() {
-                        for (let frameNumber = 0; frameNumber < fps; frameNumber++) {
+                        let capturedFrames = 0;
+
+                        function captureNextFrame() {
+                            if (capturedFrames >= fps) {
+                                video.removeEventListener("seeked", captureFrames);
+                                currentSecond++;
+                                processSecond();
+                                return;
+                            }
+                            
                             canvas.width = video.videoWidth;
                             canvas.height = video.videoHeight;
                             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                             let imgData = canvas.toDataURL("image/png");
-                            let frameName = `frame_${currentSecond}_${frameNumber}.png`;
+                            let frameName = `frame_${currentSecond}_${capturedFrames}.png`;
                             frames.push({ imgData, name: frameName });
                             
                             let imgElement = document.createElement("img");
                             imgElement.src = imgData;
                             document.getElementById("framesContainer").appendChild(imgElement);
+                            
+                            capturedFrames++;
+                            setTimeout(captureNextFrame, 1000 / fps); // Ensure all frames are captured sequentially
                         }
                         
-                        currentSecond++;
-                        video.removeEventListener("seeked", captureFrames);
-                        processSecond();
+                        captureNextFrame();
                     });
                 }
                 
