@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+t<!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
@@ -6,10 +6,10 @@
     <title>Extrair Frames de Vídeo</title>
 </head>
 <body>
-    <h1>Carregar Vídeo e Extrair Frames</h1>
+    <h1>Video to print converter</h1>
     <input type="file" id="videoInput" accept="video/*">
-    <button onclick="extractFrames()">Extrair Frames</button>
-    <button onclick="downloadFrames()">Baixar Todas as Prints</button>
+    <button onclick="extractFrames()">Extract Frames (Before download)</button>
+    <button onclick="downloadFrames()">Download all prints</button>
     
     <script>
         let frames = [];
@@ -21,7 +21,7 @@
             let ctx = canvas.getContext("2d");
             frames = [];
             
-            if (!file) return alert("Selecione um vídeo primeiro!");
+            if (!file) return alert("Select a video first!!!");
             
             let url = URL.createObjectURL(file);
             video.src = url;
