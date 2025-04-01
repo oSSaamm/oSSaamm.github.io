@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extrair Frames de Vídeo</title>
+</head>
+<body>
+    <h1>Carregar Vídeo e Extrair Frames</h1>
+    <input type="file" id="videoInput" accept="video/*">
+    <button onclick="extractFrames()">Extrair Frames</button>
+    <div id="framesContainer"></div>
+    <button onclick="downloadFrames()">Baixar Todas as Prints</button>
+    
+    <script>
+        function extractFrames() {
+            let video = document.createElement("video");
+            let file = document.getElementById("videoInput").files[0];
+            let canvas = document.createElement("canvas");
+            let ctx = canvas.getContext("2d");
+            let framesContainer = document.getElementById("framesContainer");
+            framesContainer.innerHTML = "";
+            
+            if (!file) return alert("Selecione um vídeo primeiro!");
+            
+            let url = URL.createObjectURL(file);
+            video.src = url;
+            video.crossOrigin = "anonymous";
+            video.play();
+            
+            video.addEventListener("loadeddata", () => {
+                let frameRate = 1 / 30; 
+                let currentTime = 0;
+                
+                function captureFrame() {
+                    if (currentTime >= video.duration) {
+                        video.pause();
+                        return;
+                    }
+                    
+                    video.currentTime = currentTime;
+                    setTimeout(() => {
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                        let img = document.createElement("img");
+                        img.src = canvas.toDataURL("image/png");
+                        framesContainer.appendChild(img);
+                        currentTime += frameRate;
+                        captureFrame();
+                    }, 100);
+                }
+                
+                captureFrame();
+            });
+        }
+        
+        function downloadFrames() {
+            let images = document.querySelectorAll("#framesContainer img");
+            images.forEach((img, index) => {
+                let a = document.createElement("a");
+                a.href = img.src;
+                a.download = `frame_${index + 1}.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            });
+        }
+    </script>
+</body>
+</html>
