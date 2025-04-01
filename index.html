@@ -9,17 +9,17 @@
     <h1>Carregar Vídeo e Extrair Frames</h1>
     <input type="file" id="videoInput" accept="video/*">
     <button onclick="extractFrames()">Extrair Frames</button>
-    <div id="framesContainer"></div>
     <button onclick="downloadFrames()">Baixar Todas as Prints</button>
     
     <script>
+        let frames = [];
+        
         function extractFrames() {
             let video = document.createElement("video");
             let file = document.getElementById("videoInput").files[0];
             let canvas = document.createElement("canvas");
             let ctx = canvas.getContext("2d");
-            let framesContainer = document.getElementById("framesContainer");
-            framesContainer.innerHTML = "";
+            frames = [];
             
             if (!file) return alert("Selecione um vídeo primeiro!");
             
@@ -29,8 +29,10 @@
             video.play();
             
             video.addEventListener("loadeddata", () => {
-                let frameRate = 1 / 30; 
+                let fps = 30;
+                let frameRate = 1 / fps;
                 let currentTime = 0;
+                let frameCount = 0;
                 
                 function captureFrame() {
                     if (currentTime >= video.duration) {
@@ -43,9 +45,11 @@
                         canvas.width = video.videoWidth;
                         canvas.height = video.videoHeight;
                         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                        let img = document.createElement("img");
-                        img.src = canvas.toDataURL("image/png");
-                        framesContainer.appendChild(img);
+                        let imgData = canvas.toDataURL("image/png");
+                        let second = Math.floor(currentTime);
+                        let frameNumber = frameCount % fps;
+                        frames.push({ imgData, name: `frame_${second}_${frameNumber}.png` });
+                        frameCount++;
                         currentTime += frameRate;
                         captureFrame();
                     }, 100);
@@ -56,11 +60,10 @@
         }
         
         function downloadFrames() {
-            let images = document.querySelectorAll("#framesContainer img");
-            images.forEach((img, index) => {
+            frames.forEach((frame, index) => {
                 let a = document.createElement("a");
-                a.href = img.src;
-                a.download = `frame_${index + 1}.png`;
+                a.href = frame.imgData;
+                a.download = frame.name;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
@@ -69,3 +72,4 @@
     </script>
 </body>
 </html>
+
