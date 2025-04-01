@@ -9,10 +9,11 @@
     <h1>Upload Video and Extract Frames</h1>
     <input type="file" id="videoInput" accept="video/*">
     <button onclick="extractFrames()">Extract Frames</button>
-    <button onclick="downloadFrames()">Download All Frames</button>
+    <button id="downloadButton" onclick="downloadFrames()" disabled>Download All Frames</button>
     
     <script>
         let frames = [];
+        let downloadButton = document.getElementById("downloadButton");
         
         function extractFrames() {
             let video = document.createElement("video");
@@ -20,6 +21,7 @@
             let canvas = document.createElement("canvas");
             let ctx = canvas.getContext("2d");
             frames = [];
+            downloadButton.disabled = true;
             
             if (!file) return alert("Please select a video first!");
             
@@ -41,6 +43,8 @@
                         if (frameIndex >= fps || second >= Math.floor(video.duration)) {
                             if (second < Math.floor(video.duration)) {
                                 captureFramesForSecond(second + 1);
+                            } else {
+                                downloadButton.disabled = false;
                             }
                             return;
                         }
