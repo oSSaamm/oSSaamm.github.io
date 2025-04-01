@@ -11,7 +11,7 @@
     <button onclick="extractFrames()">Extract Frames</button>
     <button id="downloadBtn" onclick="downloadFrames()" disabled>Download All Frames</button>
     <div id="framesContainer"></div>
-    
+
     <script>
         let frames = [];
         let downloadBtn = document.getElementById("downloadBtn");
@@ -32,45 +32,32 @@
             video.crossOrigin = "anonymous";
 
             video.addEventListener("loadedmetadata", () => {
-                let fps = 30;
                 let totalSeconds = Math.floor(video.duration);
                 let currentSecond = 0;
 
                 function captureNextSecond() {
-                    if (currentSecond >= totalSeconds) {
+                    if (currentSecond > totalSeconds) {
                         downloadBtn.disabled = false;
                         return;
                     }
 
-                    let frameCount = 0;
+                    video.currentTime = currentSecond;
+                    video.onseeked = () => {
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                        let imgData = canvas.toDataURL("image/png");
+                        let frameName = `frame_${currentSecond}.png`;
 
-                    function captureFrame() {
-                        if (frameCount >= fps) {
-                            currentSecond++;
-                            setTimeout(captureNextSecond, 10); // Pequena pausa para evitar bloqueios
-                            return;
-                        }
+                        frames.push({ imgData, name: frameName });
 
-                        video.currentTime = currentSecond + frameCount / fps;
-                        video.onseeked = () => {
-                            canvas.width = video.videoWidth;
-                            canvas.height = video.videoHeight;
-                            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                            let imgData = canvas.toDataURL("image/png");
-                            let frameName = `frame_${currentSecond}_${frameCount}.png`;
+                        let imgElement = document.createElement("img");
+                        imgElement.src = imgData;
+                        framesContainer.appendChild(imgElement);
 
-                            frames.push({ imgData, name: frameName });
-
-                            let imgElement = document.createElement("img");
-                            imgElement.src = imgData;
-                            framesContainer.appendChild(imgElement);
-
-                            frameCount++;
-                            captureFrame();
-                        };
-                    }
-
-                    captureFrame();
+                        currentSecond++;
+                        setTimeout(captureNextSecond, 100); // Pequena pausa para evitar bloqueio
+                    };
                 }
 
                 captureNextSecond();
