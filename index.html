@@ -30,29 +30,29 @@
             let url = URL.createObjectURL(file);
             video.src = url;
             video.crossOrigin = "anonymous";
-            video.play();
-            
-            video.addEventListener("loadeddata", () => {
+
+            video.addEventListener("loadedmetadata", () => {
                 let fps = 30;
+                let totalSeconds = Math.floor(video.duration);
                 let currentSecond = 0;
 
-                function captureSecond() {
-                    if (currentSecond >= Math.floor(video.duration)) {
-                        video.pause();
+                function captureNextSecond() {
+                    if (currentSecond >= totalSeconds) {
                         downloadBtn.disabled = false;
                         return;
                     }
 
                     let frameCount = 0;
+
                     function captureFrame() {
                         if (frameCount >= fps) {
                             currentSecond++;
-                            captureSecond();
+                            setTimeout(captureNextSecond, 10); // Pequena pausa para evitar bloqueios
                             return;
                         }
 
                         video.currentTime = currentSecond + frameCount / fps;
-                        video.addEventListener("seeked", function processFrame() {
+                        video.onseeked = () => {
                             canvas.width = video.videoWidth;
                             canvas.height = video.videoHeight;
                             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -66,15 +66,14 @@
                             framesContainer.appendChild(imgElement);
 
                             frameCount++;
-                            video.removeEventListener("seeked", processFrame);
                             captureFrame();
-                        });
+                        };
                     }
 
                     captureFrame();
                 }
 
-                captureSecond();
+                captureNextSecond();
             });
         }
 
