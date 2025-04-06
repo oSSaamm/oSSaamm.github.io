@@ -1,84 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Extract Video Frames</title>
+    <title>As Religiões e Culturas nas Mídias</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        a {
+            color: #2980b9;
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload Video and Extract Frames</h1>
-    <input type="file" id="videoInput" accept="video/*">
-    <button onclick="extractFrames()">Extract Frames</button>
-    <button id="downloadBtn" onclick="downloadFrames()" disabled>Download All Frames</button>
-    <div id="framesContainer"></div>
 
-    <script>
-        let frames = [];
-        let downloadBtn = document.getElementById("downloadBtn");
+    <h1>As Religiões e Culturas nas Mídias: Uma Análise da Representação de Africanidades, Indiandidades, Budismo, Espiritismo, Judaísmo e Cristianismo</h1>
 
-        function extractFrames() {
-            let video = document.createElement("video");
-            let file = document.getElementById("videoInput").files[0];
-            let canvas = document.createElement("canvas");
-            let ctx = canvas.getContext("2d");
-            let framesContainer = document.getElementById("framesContainer");
-            framesContainer.innerHTML = "";
-            frames = [];
-            
-            if (!file) return alert("Select a video first!");
+    <h2>Introdução</h2>
+    <p>
+        A diversidade cultural e religiosa do Brasil é um reflexo da complexa formação histórica do país, marcada por influências indígenas, africanas, europeias e orientais. Neste contexto plural, a maneira como essas tradições são representadas na mídia tem impacto direto na forma como são percebidas e valorizadas pela sociedade. A mídia desempenha um papel crucial na difusão de conhecimentos, no combate ao preconceito e na valorização da diversidade. Este trabalho propõe uma análise de como diferentes vertentes religiosas e culturais são apresentadas em três plataformas distintas: a mídia externa, o jornal e a internet.
+    </p>
+    <p>
+        Especificamente, abordaremos o tema das Africanidades e Indiandidades veiculadas por meio da mídia externa; o Budismo e o Espiritismo como aparecem em jornais; e, por fim, o Judaísmo, o Cristianismo e o Espiritismo analisados a partir de fontes da internet. A proposta é observar como essas mídias tratam temas que vão além do conhecimento tradicional escolar, revelando a importância de se manter uma mente aberta e respeitosa frente à pluralidade cultural e religiosa.
+    </p>
 
-            let url = URL.createObjectURL(file);
-            video.src = url;
-            video.crossOrigin = "anonymous";
-            video.muted = true; // Evita problemas de autoplay
-            video.play();
+    <h2>Desenvolvimento</h2>
 
-            video.addEventListener("loadedmetadata", () => {
-                let totalSeconds = Math.floor(video.duration);
-                let fps = 24; // Assumindo 24 FPS (pode ser ajustado conforme o vídeo real)
-                let frameInterval = 1 / fps;
-                let currentTime = 0;
+    <h3>1. Mídia Externa: Africanidades e Indiandidades</h3>
+    <p>
+        A mídia externa compreende formas de comunicação visual em espaços públicos, como outdoors, painéis, cartazes, ônibus, muros pintados, entre outros. Essa modalidade de mídia possui grande potencial de impacto por estar inserida no cotidiano urbano e rural, alcançando diferentes públicos.
+    </p>
+    <p>
+        No contexto das africanidades, observa-se uma crescente utilização da mídia externa para divulgar eventos culturais, como a celebração do Dia da Consciência Negra, festivais de capoeira, rodas de samba, maracatu, além de campanhas educativas sobre o respeito às religiões de matriz africana, como o Candomblé e a Umbanda. Essa representação visual contribui para reforçar a identidade afro-brasileira e combater o racismo estrutural presente na sociedade.
+    </p>
+    <p>
+        Já no que diz respeito às indiandidades, campanhas em mídia externa frequentemente buscam destacar a luta dos povos indígenas por seus direitos, como a demarcação de terras e a preservação de suas línguas, costumes e modos de vida. Algumas campanhas também valorizam elementos da cultura indígena, como a arte plumária, a medicina tradicional e os rituais sagrados. É fundamental destacar que, mesmo com avanços, ainda existe uma carência de representações autênticas e não estereotipadas das populações indígenas na mídia, o que exige um trabalho contínuo de valorização e respeito.
+    </p>
 
-                function captureNextFrame() {
-                    if (currentTime >= video.duration) {
-                        video.pause();
-                        downloadBtn.disabled = false;
-                        return;
-                    }
+    <h3>2. Jornal: Budismo e Espiritismo</h3>
+    <p>
+        O jornal é um veículo tradicional de comunicação que continua relevante no cenário contemporâneo, especialmente na abordagem de temas religiosos sob uma perspectiva jornalística, crítica e educativa. Ele cumpre um papel fundamental na divulgação de informações sobre doutrinas, práticas e pensamentos espirituais diversos.
+    </p>
+    <p>
+        O Budismo, por exemplo, aparece frequentemente em reportagens que tratam de bem-estar, saúde mental, meditação e estilo de vida. Muitas matérias explicam conceitos como o karma, o nirvana, a compaixão e a busca pelo autoconhecimento, sempre destacando sua origem no Oriente e sua chegada ao Ocidente. Também é comum que matérias jornalísticas abordem a influência do budismo no cotidiano de pessoas famosas, em retiros espirituais ou em práticas de meditação guiada.
+    </p>
+    <p>
+        O Espiritismo, por sua vez, costuma ser abordado nos jornais principalmente em datas comemorativas ligadas a Allan Kardec ou em acontecimentos ligados a fenômenos tidos como espirituais, como psicografias ou curas espirituais. A doutrina espírita, fundada na França no século XIX, tem grande influência no Brasil e é frequentemente relacionada à caridade, à vida após a morte e à evolução espiritual. O jornalismo procura, muitas vezes, mostrar como o Espiritismo se conecta com a ciência e a moral, além de sua atuação em obras sociais.
+    </p>
 
-                    video.currentTime = currentTime;
-                    video.onseeked = () => {
-                        canvas.width = video.videoWidth;
-                        canvas.height = video.videoHeight;
-                        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                        let imgData = canvas.toDataURL("image/png");
-                        let frameName = `frame_${Math.floor(currentTime)}_${(currentTime % 1 * fps).toFixed(0)}.png`;
+    <h3>3. Internet: Judaísmo, Cristianismo e Espiritismo</h3>
+    <p>
+        A internet revolucionou a forma como lidamos com a informação, inclusive sobre religião. Atualmente, é possível encontrar uma infinidade de conteúdos – desde artigos acadêmicos até vídeos, fóruns e blogs – abordando diferentes tradições religiosas. Nesse meio, o acesso é fácil, o público é amplo, e o conteúdo é extremamente diversificado.
+    </p>
+    <p>
+        O Judaísmo é apresentado em sites que abordam sua história milenar, desde os tempos bíblicos até o Holocausto, passando pelas festas como o Yom Kipur e o Pessach, e os rituais como o Shabat. A internet permite que judeus do mundo todo compartilhem tradições, receitas, músicas, orações e experiências pessoais, criando uma sensação de comunidade e identidade.
+    </p>
+    <p>
+        O Cristianismo, por ser a religião com maior número de seguidores no mundo, também é amplamente difundido na internet. Canais de YouTube, redes sociais e sites oferecem pregações, estudos bíblicos, louvores, orações e debates teológicos. As diversas denominações (católica, evangélica, ortodoxa etc.) utilizam a internet como ferramenta para evangelização, educação religiosa e debates morais e sociais.
+    </p>
+    <p>
+        O Espiritismo, além de seu espaço em jornais, também tem forte presença na internet. Portais específicos oferecem livros, palestras, estudos sobre reencarnação, mediunidade e o mundo espiritual. A facilidade de acesso permite que novos adeptos ou curiosos conheçam a doutrina, estudem os livros de Allan Kardec e participem de grupos de discussão. Essa presença digital ajuda a desfazer preconceitos e esclarecer pontos sobre a filosofia espírita.
+    </p>
 
-                        frames.push({ imgData, name: frameName });
+    <h2>Conclusão</h2>
+    <p>
+        A análise da representação de tradições religiosas e culturais na mídia mostra que, embora tenhamos avançado muito, ainda há desafios importantes a enfrentar. A mídia externa vem contribuindo para o reconhecimento de culturas historicamente marginalizadas, como as africanas e indígenas, mas precisa de ações contínuas para combater estereótipos e ampliar o espaço dessas vozes. O jornal tem o papel de educar e informar de forma crítica e equilibrada, dando visibilidade a religiões como o Budismo e o Espiritismo, muitas vezes vistas com curiosidade ou desinformação. Já a internet surge como um espaço dinâmico e acessível, onde religiões como o Judaísmo, Cristianismo e Espiritismo encontram terreno fértil para expansão, ensino e diálogo.
+    </p>
+    <p>
+        Portanto, é fundamental que o consumo dessas informações seja feito com senso crítico, respeito e empatia. Compreender as diferentes formas de religiosidade e tradição cultural é um passo essencial para construir uma sociedade mais justa, tolerante e plural.
+    </p>
 
-                        let imgElement = document.createElement("img");
-                        imgElement.src = imgData;
-                        framesContainer.appendChild(imgElement);
+    <h2>Referências Bibliográficas</h2>
+    <ul>
+        <li><a href="https://oglobo.globo.com/brasil/budismo-cristianismo-1-21619613" target="_blank">O Globo - Budismo e Cristianismo</a></li>
+        <li><a href="https://pt.wikipedia.org/wiki/Juda%C3%ADsmo_e_cristianismo" target="_blank">Wikipédia - Judaísmo e Cristianismo</a></li>
+        <li><a href="https://www.atribunapiracicabana.com.br/2021/01/06/existe-alguma-semelhanca-entre-o-espiritismo-o-hinduismo-e-o-budismo" target="_blank">A Tribuna Piracicabana - Espiritismo, Hinduísmo e Budismo</a></li>
+    </ul>
 
-                        currentTime += frameInterval;
-                        setTimeout(captureNextFrame, 10); // Pequena pausa para evitar bloqueios
-                    };
-                }
-
-                captureNextFrame();
-            });
-        }
-
-        function downloadFrames() {
-            frames.forEach(frame => {
-                let a = document.createElement("a");
-                a.href = frame.imgData;
-                a.download = frame.name;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            });
-        }
-    </script>
 </body>
 </html>
