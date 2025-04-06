@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Religiões e Culturas nas Mídias</title>
+  <meta charset="UTF-8">
+  <title>Diversidade Religiosa na Mídia</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
-      margin: 40px;
+      margin: 30px;
       background-color: #f9f9f9;
       color: #333;
     }
-    h1, h2, h3 {
+    h1 {
       color: #004080;
+    }
+    h2 {
+      color: #006699;
+    }
+    ul {
+      padding-left: 20px;
     }
     a {
       color: #0066cc;
@@ -22,39 +27,48 @@
     a:hover {
       text-decoration: underline;
     }
+
+    /* Slide Styles */
+    .slide-container {
+      margin-top: 50px;
+      background-color: white;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
     .slide {
       display: none;
-      margin-top: 80px;
-      padding: 40px;
-      background-color: #ffe680;
-      border: 2px dashed #ffa500;
     }
-    .slide h2 {
-      color: #b36b00;
-    }
-    .slide.active {
+    .active {
       display: block;
     }
-    .aviso {
-      font-size: 20px;
-      font-weight: bold;
-      color: red;
+    .slide-title {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #004080;
     }
-    .botoes {
-      margin-top: 30px;
+    .slide-text {
+      font-size: 18px;
+    }
+    .buttons {
       text-align: center;
+      margin-top: 20px;
     }
-    .botoes button {
-      margin: 5px;
+    .buttons button {
       padding: 10px 20px;
+      margin: 0 10px;
       font-size: 16px;
-      cursor: pointer;
       border: none;
       background-color: #004080;
       color: white;
+      cursor: pointer;
       border-radius: 5px;
     }
-    .botoes button:hover {
+    .buttons button:hover {
       background-color: #0066cc;
     }
   </style>
@@ -89,32 +103,58 @@
   <p>O jornal tem o papel de educar e informar de forma crítica e equilibrada, dando visibilidade a religiões como o Budismo e o Espiritismo. Já a internet surge como um espaço dinâmico e acessível, onde religiões como o Judaísmo, Cristianismo e Espiritismo encontram terreno fértil para expansão, ensino e diálogo.</p>
   <p>Portanto, é fundamental que o consumo dessas informações seja feito com senso crítico, respeito e empatia. Compreender as diferentes formas de religiosidade e tradição cultural é um passo essencial para construir uma sociedade mais justa, tolerante e plural.</p>
 
-  <h2>Referências Bibliográficas</h2>
+  <h2>Referências Bibliográficas (com links)</h2>
   <ul>
     <li><a href="https://oglobo.globo.com/brasil/budismo-cristianismo-1-21619613" target="_blank">O Globo - Budismo e Cristianismo</a></li>
     <li><a href="https://pt.wikipedia.org/wiki/Juda%C3%ADsmo_e_cristianismo" target="_blank">Wikipédia - Judaísmo e Cristianismo</a></li>
     <li><a href="https://www.atribunapiracicabana.com.br/2021/01/06/existe-alguma-semelhanca-entre-o-espiritismo-o-hinduismo-e-o-budismo" target="_blank">A Tribuna Piracicabana - Espiritismo, Hinduísmo e Budismo</a></li>
   </ul>
 
-  <div class="botoes">
-    <button onclick="mostrarSlide(0)">Introdução</button>
-    <button onclick="mostrarSlide(1)">Mídia Externa</button>
-    <button onclick="mostrarSlide(2)">Jornal</button>
-    <button onclick="mostrarSlide(3)">Internet</button>
-    <button onclick="mostrarSlide(4)">Considerações Finaiso</button>
+  <div class="slide-container">
+    <div class="slide active">
+      <div class="slide-title">Introdução</div>
+      <div class="slide-text">Diversidade religiosa e cultural nas mídias: o papel da mídia na valorização e no respeito às tradições.</div>
+    </div>
+    <div class="slide">
+      <div class="slide-title">Mídia Externa</div>
+      <div class="slide-text">Africanidades e indiandidades: valorização cultural e combate ao preconceito.</div>
+    </div>
+    <div class="slide">
+      <div class="slide-title">Jornal</div>
+      <div class="slide-text">Budismo e Espiritismo: temas de saúde, bem-estar, caridade e espiritualidade.</div>
+    </div>
+    <div class="slide">
+      <div class="slide-title">Internet</div>
+      <div class="slide-text">Judaísmo, Cristianismo e Espiritismo: alcance global, ensino, comunidade e diálogo religioso.</div>
+    </div>
+    <div class="slide">
+      <div class="slide-title">Considerações finais</div>
+      <div class="slide-text">Importância do respeito, da empatia e do senso crítico na construção de uma sociedade plural e justa.</div>
+    </div>
+    <div class="buttons">
+      <button onclick="prevSlide()">Anterior</button>
+      <button onclick="nextSlide()">Próximo</button>
+    </div>
   </div>
 
-  <div class="slide active"><h2>Introdução</h2><p>O Brasil possui uma rica diversidade religiosa e cultural. Este trabalho analisa como diferentes crenças são representadas na mídia: mídia externa, jornal e internet.</p></div>
-  <div class="slide"><h2>Mídia Externa</h2><p>Divulgação de culturas africanas e indígenas, como festivais e campanhas de respeito às tradições. Destaca lutas e conquistas dos povos indígenas e afro-brasileiros.</p></div>
-  <div class="slide"><h2>Jornal</h2><p>Apresenta temas como meditação, bem-estar (Budismo) e fenômenos espirituais (Espiritismo) com caráter informativo e educativo.</p></div>
-  <div class="slide"><h2>Internet</h2><p>Espaço amplo e acessível com sites, vídeos e redes sociais. Judaísmo, Cristianismo e Espiritismo encontram grande visibilidade e oportunidade de diálogo e ensino.</p></div>
-  <div class="slide"><h2>Considerações finais</h2><p>A mídia deve ser usada para promover respeito e compreensão. Representações devem combater estereótipos e ampliar a valorização da diversidade cultural e religiosa.</p></div>
-
   <script>
-    function mostrarSlide(index) {
-      const slides = document.querySelectorAll('.slide');
-      slides.forEach(slide => slide.classList.remove('active'));
-      slides[index].classList.add('active');
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".slide");
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
     }
   </script>
 
