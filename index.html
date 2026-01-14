@@ -1,86 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Moves Data</title>
+<style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
-
 body{
-    background:radial-gradient(circle at top, #0f0f0f, #070707);
-    color:#d6d6d6;
+    background:#0f0f0f;
+    color:#e0e0e0;
     display:flex;
     height:100vh;
 }
-
 .sidebar{
-    width:270px;
-    background:linear-gradient(180deg, #0e0e0e, #0a0a0a);
-    border-right:1px solid rgba(255,255,255,0.06);
-    padding:22px;
+    width:260px;
+    background:#161616;
+    border-right:1px solid #2a2a2a;
+    padding:20px;
     overflow-y:auto;
 }
-
 .sidebar h2{
-    margin-bottom:18px;
-    font-size:18px;
-    color:#ffffff;
-    letter-spacing:0.4px;
+    margin-bottom:15px;
+    color:#fff;
 }
-
 .tab-btn{
     width:100%;
-    background:linear-gradient(145deg, #151515, #0f0f0f);
-    border:1px solid rgba(255,255,255,0.05);
-    color:#bdbdbd;
-    padding:12px;
-    margin-bottom:10px;
+    background:#1f1f1f;
+    border:none;
+    color:#ccc;
+    padding:10px;
+    margin-bottom:8px;
     cursor:pointer;
     text-align:left;
-    border-radius:10px;
-    transition:all 0.2s ease;
+    border-radius:6px;
 }
-
 .tab-btn:hover{
-    background:linear-gradient(145deg, #1c1c1c, #141414);
-    color:#fff;
+    background:#2b2b2b;
 }
-
 .tab-btn.active{
-    background:linear-gradient(145deg, #242424, #191919);
+    background:#3a3a3a;
     color:#fff;
-    box-shadow:0 0 18px rgba(255,255,255,0.05);
 }
-
 .content{
     flex:1;
-    padding:35px;
+    padding:25px;
     overflow-y:auto;
 }
-
-.section{
-    background:linear-gradient(145deg, #121212, #0c0c0c);
-    border:1px solid rgba(255,255,255,0.06);
-    border-radius:16px;
-    padding:28px;
-    box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,0.02),
-        0 20px 60px rgba(0,0,0,0.7);
-}
-
 .section h1{
-    margin-bottom:18px;
-    font-size:26px;
-    color:#ffffff;
-    letter-spacing:0.3px;
+    margin-bottom:15px;
+    color:#fff;
+}
+pre{
+    background:#151515;
+    padding:15px;
+    border-radius:8px;
+    white-space:pre-wrap;
+    line-height:1.4;
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>Categories</h2>
+    <div id="tabs"></div>
+</div>
+
+<div class="content">
+    <div class="section">
+        <h1 id="title"></h1>
+        <pre id="text"></pre>
+    </div>
+</div>
+
+<script>
+const data = {
+    "Hand Open / Close Animations": `
+C = close | O = open
+
+PiercingBlood C
+Malevolent shrine C
+Shutter doors C
+Body repel C O
+Plasma wave C O
+Open/divine flame C O C O
+`,
+    "Grab Durations": `
+Lapse blue: 1.450~
+Rapid punches: 3.416~
+Twofold kick: 0.733~
+Cursed strikes: 1.750~
+Crushing blow: 0.866~
+Rush: 2.516~
+Fever breaker: 0.883~
+Lucky rushdown: 1.733~
+Divine pummel: 1.800~
+Ground pitch: 1.416~
+Drill splitter: 1.916~
+Spike wrath: 3.550~
+Crushing rushdown: 3.600~
+Face blitz: 3~
+Widespread strikes: 5~
+Flowing red scale: 1.833~
+Blood edge: 1~
+Elbow drop: 1.33~
+Climax jumping: 3.516~
+Idols debut: 2.283~
+Twirling strikes: 0.950~
+Execution 1: 1.133~
+Execution 2: 1.616~
+Execution 3: 2.066~
+Verdict: 1.166~
+Severing path: 2.366~
+Revolve: 0.500~
+Wing throw: 1.200~
+Garuda stab: 0.650
+Sacrilege: 1.650~
+Shut up!: 1.950~
+Cleave: 1.016~
+Bleedout: 0.450~
+Cursory impact: 0.850~
+Cursory impact shatter: 1.500~
+Decisive strike: 2.100~
+`,
+    "Kick Legs & Direction": `
+L = left | R = right | B = both
+
+Lapse blue: R up
+Rapid punches: R down
+Twofold kick 1: R up
+Twofold kick 2: R down
+Cursed strikes: R sideways
+Divergent 2: R down
+Majin kick: R sideways/down
+Rush: R up
+Fever breaker: L forward
+Crushing rushdown: R forward
+Drill split: B forward
+Red scale 1: L sideways
+Red scale 2: R sideways
+Brute force: R sideways
+Execution 1: L sideways
+Execution 2: B sideways
+Garuda rebound: L sideways
+Garuda stab: R down
+Shut up!: R forward
+Sacrilegious: R sideways
+Idols debut: R down
+Judgement reach: B forward
+`,
+    "Move Startups": `
+Lapse blue: 0.483~
+Rapid punches: 0.500~
+Twofold kick: 0.350~
+Red: 0.500~
+MAX blue: 0.500~
+MAX red: 1.183~
+Purple: 2.666~
+Cursed strikes: 0.466~
+Crushing blow: 0.466~
+Divergent fist: 0.466~
+Dismantle: 0.383~
+Rush: 0.466~
+Open: 2.700~
+Reserve balls: 0.283~
+Shutter doors: 0.366~
+Rough energy: 0.683~
+Fever breaker: 0.466~
+Lucky volley: 0.383~
+Lucky rushdown: 0.583~
+Overwhelming luck: 2.083~
+Mahoraga: 3.033~
+Divine pummel: 0.616~
+Earthquake: 0.466~
+Takedown: 0.800~
+Ground pitch: 0.350~
+Body repel: 1.416~
+Idle transfiguration: 0.850~
+Drill splitter: 0.750~
+Spike wrath: 0.800~
+Widespread strikes: 2.650~
+Piercing blood: 0.783~
+Flowing red scale: 0.333~
+Plasma wave: 2.016~
+Swift kick: 0.466~
+Elbow drop: 0.566~
+Climax jumping: 1.000~
+Execution: 1~
+Verdict: 0.366~
+Veilstep: 0.233~
+Revolve: 0.250~
+Garuda stab: 0.466~
+Shut up!: 0.466~
+Cleave: 0.583~
+Bleedout: 0.533~
+Cursory impact: 0.716~
+Decisive strike: 1.050~
+`,
+    "Running / Walking Animations": `
+Rush
+Lucky rushdown
+Overwhelming luck
+Shadow swarm run
+Crushing rushdown
+Final judgement
+Swift kick
+Idle transfiguration
+`,
+    "Flip Animations": `
+B = backwards | F = forwards | S = sideways
+
+Divergent fist 2: B
+Majin kick finisher: S
+Dismantle: S
+Stockpile: S
+Spike wrath end: F
+Red scale air: F
+Swift kick: S
+Execution 2: S
+Veilstep: B
+Veilstep dive: F S
+Shut up air: F
+`,
+    "Punches & Attacks": `
+Cursed strikes: alternating sideways
+Divergent fist: R forward
+Energy surge: R sideways
+Lucky rushdown: R sideways
+Overwhelming luck: mix
+Rough energy: R up
+Focus strike: R forward
+Idle transfiguration: R forward
+Red scale 1: L forward
+Red scale 2: R sideways
+Supernova counter: R forward
+Brute force: R sideways
+Climax jumping: ALT forward
+Pebble throw: R forward
+Judgement reach: L forward
+Garuda rebound: R sideways
+Mass breaker: R forward
+Veilstep dive: R down
+Resolute slash finisher: L forward
+Cleave rush: R forward
+
+Non-punch attacks:
+Cleave: R up
+Rush: B down
+Mahoraga summon: L sideways
+Earthquake: R down
+Ground pitch: R forward
+Worldslash: R sideways
+Garuda stab: R forward
+`
+};
+
+const tabsDiv = document.getElementById("tabs");
+const title = document.getElementById("title");
+const text = document.getElementById("text");
+
+function loadTab(name){
+    title.textContent = name;
+    text.textContent = data[name];
+    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+    document.getElementById(name).classList.add("active");
 }
 
-pre{
-    background:linear-gradient(145deg, #101010, #0b0b0b);
-    padding:20px;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,0.05);
-    white-space:pre-wrap;
-    line-height:1.5;
-    color:#cfcfcf;
-    box-shadow:inset 0 0 20px rgba(255,255,255,0.03);
-}
+Object.keys(data).forEach((name,i)=>{
+    const btn = document.createElement("button");
+    btn.className="tab-btn";
+    btn.id=name;
+    btn.textContent=name;
+    btn.onclick=()=>loadTab(name);
+    tabsDiv.appendChild(btn);
+    if(i===0) loadTab(name);
+});
+</script>
+
+</body>
+</html>
