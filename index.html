@@ -1,283 +1,220 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Moves Data</title>
+<title>JJS Sounds</title>
 <style>
-*{
+body{
     margin:0;
-    padding:0;
-    box-sizing:border-box;
+    background:#0f0f0f;
+    color:#eaeaea;
     font-family:Arial, Helvetica, sans-serif;
 }
-body{
-    background:#0f0f0f;
-    color:#e0e0e0;
+#container{
     display:flex;
     height:100vh;
 }
-.sidebar{
+#tabs{
     width:260px;
-    background:#161616;
-    border-right:1px solid #2a2a2a;
+    background:#151515;
+    overflow-y:auto;
+    border-right:2px solid #222;
+}
+.tab{
+    padding:14px;
+    cursor:pointer;
+    border-bottom:1px solid #222;
+}
+.tab:hover{
+    background:#1f1f1f;
+}
+.tab.active{
+    background:#272727;
+}
+#content{
+    flex:1;
     padding:20px;
     overflow-y:auto;
-}
-.sidebar h2{
-    margin-bottom:15px;
-    color:#fff;
-}
-.tab-btn{
-    width:100%;
-    background:#1f1f1f;
-    border:none;
-    color:#ccc;
-    padding:10px;
-    margin-bottom:8px;
-    cursor:pointer;
-    text-align:left;
-    border-radius:6px;
-}
-.tab-btn:hover{
-    background:#2b2b2b;
-}
-.tab-btn.active{
-    background:#3a3a3a;
-    color:#fff;
-}
-.content{
-    flex:1;
-    padding:25px;
-    overflow-y:auto;
-}
-.section h1{
-    margin-bottom:15px;
-    color:#fff;
-}
-pre{
-    background:#151515;
-    padding:15px;
-    border-radius:8px;
     white-space:pre-wrap;
-    line-height:1.4;
 }
 </style>
 </head>
 <body>
 
-<div class="sidebar">
-    <h2>Categories</h2>
+<div id="container">
     <div id="tabs"></div>
-</div>
-
-<div class="content">
-    <div class="section">
-        <h1 id="title"></h1>
-        <pre id="text"></pre>
-    </div>
+    <div id="content">clica numa aba aí, animal</div>
 </div>
 
 <script>
 const data = {
-    "Hand Open / Close Animations": `
-C = close | O = open
+    "ALL JJS Sounds": `
+Impacts and Ragdolls:
 
-PiercingBlood C
-Malevolent shrine C
-Shutter doors C
-Body repel C O
-Plasma wave C O
-Open/divine flame C O C O
-`,
-    "Grab Durations": `
-Lapse blue: 1.450~
-Rapid punches: 3.416~
-Twofold kick: 0.733~
-Cursed strikes: 1.750~
-Crushing blow: 0.866~
-Rush: 2.516~
-Fever breaker: 0.883~
-Lucky rushdown: 1.733~
-Divine pummel: 1.800~
-Ground pitch: 1.416~
-Drill splitter: 1.916~
-Spike wrath: 3.550~
-Crushing rushdown: 3.600~
-Face blitz: 3~
-Widespread strikes: 5~
-Flowing red scale: 1.833~
-Blood edge: 1~
-Elbow drop: 1.33~
-Climax jumping: 3.516~
-Idols debut: 2.283~
-Twirling strikes: 0.950~
-Execution 1: 1.133~
-Execution 2: 1.616~
-Execution 3: 2.066~
-Verdict: 1.166~
-Severing path: 2.366~
-Revolve: 0.500~
-Wing throw: 1.200~
-Garuda stab: 0.650
-Sacrilege: 1.650~
-Shut up!: 1.950~
-Cleave: 1.016~
-Bleedout: 0.450~
-Cursory impact: 0.850~
-Cursory impact shatter: 1.500~
-Decisive strike: 2.100~
-`,
-    "Kick Legs & Direction": `
-L = left | R = right | B = both
+91186117342 Impact1
+9118615862 Impact2
+9118614058 Impact3
+9116816096 Impact4
+3784888301 RagdollFall1
+3784888809 RagdollFall2
+3784889529 RagdollFall3
+3778609188 Break(downslam)
 
-Lapse blue: R up
-Rapid punches: R down
-Twofold kick 1: R up
-Twofold kick 2: R down
-Cursed strikes: R sideways
-Divergent 2: R down
-Majin kick: R sideways/down
-Rush: R up
-Fever breaker: L forward
-Crushing rushdown: R forward
-Drill split: B forward
-Red scale 1: L sideways
-Red scale 2: R sideways
-Brute force: R sideways
-Execution 1: L sideways
-Execution 2: B sideways
-Garuda rebound: L sideways
-Garuda stab: R down
-Shut up!: R forward
-Sacrilegious: R sideways
-Idols debut: R down
-Judgement reach: B forward
-`,
-    "Move Startups": `
-Lapse blue: 0.483~
-Rapid punches: 0.500~
-Twofold kick: 0.350~
-Red: 0.500~
-MAX blue: 0.500~
-MAX red: 1.183~
-Purple: 2.666~
-Cursed strikes: 0.466~
-Crushing blow: 0.466~
-Divergent fist: 0.466~
-Dismantle: 0.383~
-Rush: 0.466~
-Open: 2.700~
-Reserve balls: 0.283~
-Shutter doors: 0.366~
-Rough energy: 0.683~
-Fever breaker: 0.466~
-Lucky volley: 0.383~
-Lucky rushdown: 0.583~
-Overwhelming luck: 2.083~
-Mahoraga: 3.033~
-Divine pummel: 0.616~
-Earthquake: 0.466~
-Takedown: 0.800~
-Ground pitch: 0.350~
-Body repel: 1.416~
-Idle transfiguration: 0.850~
-Drill splitter: 0.750~
-Spike wrath: 0.800~
-Widespread strikes: 2.650~
-Piercing blood: 0.783~
-Flowing red scale: 0.333~
-Plasma wave: 2.016~
-Swift kick: 0.466~
-Elbow drop: 0.566~
-Climax jumping: 1.000~
-Execution: 1~
-Verdict: 0.366~
-Veilstep: 0.233~
-Revolve: 0.250~
-Garuda stab: 0.466~
-Shut up!: 0.466~
-Cleave: 0.583~
-Bleedout: 0.533~
-Cursory impact: 0.716~
-Decisive strike: 1.050~
-`,
-    "Running / Walking Animations": `
-Rush
-Lucky rushdown
-Overwhelming luck
-Shadow swarm run
-Crushing rushdown
-Final judgement
-Swift kick
-Idle transfiguration
-`,
-    "Flip Animations": `
-B = backwards | F = forwards | S = sideways
+Dashes:
+17866719328 StrikeStart(Mahito blade windup)
+17866718764 Strike(mahito blade hit)
+4909206080 Chase(normal frontdash)
+8595975458 DashHit(normal frontdash hit)
+103563218704266 DashHit(Mangaka frontdash hit)
+3929467229 SideDash
 
-Divergent fist 2: B
-Majin kick finisher: S
-Dismantle: S
-Stockpile: S
-Spike wrath end: F
-Red scale air: F
-Swift kick: S
-Execution 2: S
-Veilstep: B
-Veilstep dive: F S
-Shut up air: F
-`,
-    "Punches & Attacks": `
-Cursed strikes: alternating sideways
-Divergent fist: R forward
-Energy surge: R sideways
-Lucky rushdown: R sideways
-Overwhelming luck: mix
-Rough energy: R up
-Focus strike: R forward
-Idle transfiguration: R forward
-Red scale 1: L forward
-Red scale 2: R sideways
-Supernova counter: R forward
-Brute force: R sideways
-Climax jumping: ALT forward
-Pebble throw: R forward
-Judgement reach: L forward
-Garuda rebound: R sideways
-Mass breaker: R forward
-Veilstep dive: R down
-Resolute slash finisher: L forward
-Cleave rush: R forward
+Block:
+4306994267 Block1
+4306994664 Block2
+4306994923 Block3
 
-Non-punch attacks:
-Cleave: R up
-Rush: B down
-Mahoraga summon: L sideways
-Earthquake: R down
-Ground pitch: R forward
-Worldslash: R sideways
-Garuda stab: R forward
+M1 Normal:
+4571259077 Swing
+8595975878 Hit1
+8595975878 Hit2
+8595975458 Hit3
+8595974357 Hit
+
+M1 Yuji:
+8595975878 Hit1,2,3
+8595975458 Hit4
+
+M1 LocustGuy:
+6881026094 Slash
+106685608076122 Punch(3rd m1)
+
+M1 Charles(Mangaka):
+94107281648467 Hit1
+103563218704266 Hit2
+103563218704266 Hit3
+8595974357 Hit4
+
+(Mahito) Blade:
+6603295565 Hit1,2,3,4
+
+(Mahito) Club:
+5507815764 Hit1
+5507830815 Hit2
+5507829691 Hit3
+5507830449 Hit4
+
+====================
+CHARACTERS
+====================
+
+Gojo – Lapse Blue:
+411286671 Pull
+9105467029 Grab
+9066732918 Infinity
+
+Gojo – Red:
+6006851551 Wind
+154787303 Throw
+3059775624 Explode
+
+Gojo – Rapid Punches:
+12764933067 BlackFlashHit
+
+Gojo – Twofold Kick:
+3755637186 Swing1
+3755636992 Swing2
+4086172909 Hit1
+7515452875 Hit2
+
+Gojo – Special:
+9118159096 TeleportWindup
+6737581315 GlassBreak
+
+Face Crush:
+931861173642807 TeleportDrag
+82926856324306 DragThrow
+
+Gojo – Awakening:
+3929467888 BlindGrab
+4458760518 BlindsOff
+9066673412 FistSlam
+
+Gojo – Hollow Purple:
+14326861262 Music
+17018019870 Merge
+15075475525 Snap
+698224146 Hit
+
+Gojo – Domain:
+6667923288 Voice
+3059775781 DomainOpen
+7260423115 Domain
+15171602676 InfiniteVoid
+16071901783 Music
+6737581507 Shatter
+
+====================
+Yuji / Sukuna
+====================
+
+Cursed Strikes:
+16773286492 Startup
+3084314259 Slide
+16773286330 Hit
+
+Crushing Blow:
+4403634269 Crack
+4571259077 Fist
+7093763783 GroundImpact
+
+Divergent Fist:
+4403634269 Crack
+4059009185 Swing
+5795505380 Divergent
+7515452875 Hit
+
+Manji Kick:
+9125615451 Startup
+6470740758 Dodge
+9126228977 Swing
+9113504593 Slam
+
+Dismantle:
+935843979 Slash
+9119749145 FinishSlash
+
+Open:
+1072005487 Hands
+6874043782 Clap
+5801273676 FireShoot
+331888892 Explode
+
+Shrine:
+7817341182 Voice
+3059775781 DomainOpen
+7260423115 Domain
+7817336081 Ring
+15583493700 Music
 `
 };
 
-const tabsDiv = document.getElementById("tabs");
-const title = document.getElementById("title");
-const text = document.getElementById("text");
+const tabs = document.getElementById("tabs");
+const content = document.getElementById("content");
 
-function loadTab(name){
-    title.textContent = name;
-    text.textContent = data[name];
-    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
-    document.getElementById(name).classList.add("active");
-}
-
-Object.keys(data).forEach((name,i)=>{
-    const btn = document.createElement("button");
-    btn.className="tab-btn";
-    btn.id=name;
-    btn.textContent=name;
-    btn.onclick=()=>loadTab(name);
-    tabsDiv.appendChild(btn);
-    if(i===0) loadTab(name);
+Object.keys(data).forEach((key, index) => {
+    const div = document.createElement("div");
+    div.className = "tab";
+    div.textContent = key;
+    div.onclick = () => {
+        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+        div.classList.add("active");
+        content.textContent = data[key];
+    };
+    if(index === 0){
+        div.classList.add("active");
+        content.textContent = data[key];
+    }
+    tabs.appendChild(div);
 });
 </script>
 
