@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Skillbuilder's Help</title>
+
 <style>
 body{
     margin:0;
@@ -19,17 +20,35 @@ body{
     background:#151515;
     overflow-y:auto;
     border-right:2px solid #222;
+    position:relative;
 }
 .tab{
     padding:14px;
     cursor:pointer;
     border-bottom:1px solid #222;
+    position:relative;
+    transition:background .2s, box-shadow .25s;
 }
 .tab:hover{
     background:#1f1f1f;
 }
 .tab.active{
     background:#272727;
+    box-shadow:
+        inset 0 0 12px rgba(255,212,0,0.25),
+        0 0 10px rgba(255,212,0,0.15);
+}
+
+/* BARRA AMARELA */
+#indicator{
+    position:absolute;
+    left:0;
+    width:4px;
+    height:0;
+    background:#ffd400;
+    transition:
+        top .25s cubic-bezier(.4,0,.2,1),
+        height .25s cubic-bezier(.4,0,.2,1);
 }
 #content{
     flex:1;
@@ -39,10 +58,13 @@ body{
 }
 </style>
 </head>
+
 <body>
 
 <div id="container">
-    <div id="tabs"></div>
+    <div id="tabs">
+        <div id="indicator"></div>
+    </div>
     <div id="content">clica numa aba aí, animal</div>
 </div>
 
@@ -85,6 +107,21 @@ Normal:
 Yuji:
 8595975878 Hit1,2,3
 8595975458 Hit4
+
+Higurama:
+113209095877671 Swing1
+84939324218501  Swing2
+135909874140545 Swing3
+79836302909830  Swing4
+
+Yuta(goat):
+96045121549069  Swing1
+122411333696591 Swing2
+115274191208556 Swing3
+4571259077      Swing4
+88685272276380 Hit1
+83770717073727 Hit2
+74317472561001 Hit3
 
 LocustGuy:
 6881026094 Slash
@@ -757,6 +794,469 @@ Brothers:
 12761286504 Voice
 12764933067 BlackFlashHit
 9114314398  BlackFlash
+__________________________
+
+Higurama:
+
+Extended Swings:
+4571259077 Swing
+8595975878 Hit
+4086190876 LastHit
+—Special:
+17168365111 Hit1(no block)
+6737581315 BlockBreak
+3755637186 LastSwing
+
+Justice Served:
+140527314975641 HeavySwing
+3778609188 Break
+71472197762839 Impact
+
+Judgement's Reach:
+87590911386077 JudgeReachStart
+102880207942198 JudgeReachSwing
+105213688680216 JudgeReach
+
+Twirling Strikes:
+91477583246788 Start
+118282544664000 Swing3
+106620419375208 Swing2
+106620419375208 Swing1
+118282544664000 Swing3
+138752442741376 Hit
+95667653480776  Final
+9118614717  FinalHit
+17169365331 FinalHit1
+
+NoEscape:
+
+Awakening:
+137100901601126 Voice
+7260423115 Domain
+1838873271 Music
+167123203  Travel
+8388724806 Click
+5473174633 Tick
+97182227194468 Talk
+4612385951 Fill
+6737581507 Shatter
+83172464708469 Awaken
+
+Execution:
+85889207849279  Charge
+122106379884893 Flash
+74107786334233  Dash
+91882353459943  Stab
+134273082284707 Sever
+17169365111     Hit
+
+Final Judgement:
+
+102929342782364 Sprint
+83275111049273  Swing
+83048216359043  Dodges
+6470740758      Dodge
+4306994267 Block1
+4306994664 Block2
+8595975878 Hit
+9105467029 Grab
+122106379884893 Flash
+7072652156 Stab
+5754299808 SwordPull
+
+Verdict:
+96847703906101 Start
+17169365111 Hit1
+102251058729529 RunSmack
+115997745833984 Hit1
+74801973019001  Hit2
+
+Triple Sentence:
+128159562878534 ThrowStart
+134273082284707 Sever
+124837936201770 Throw2
+132889926530295 Sweep
+7072652156 Stab
+5754299808 SwordPull
+
+DomainAmp:
+84293649223671 Start
+__________________________
+
+Yuta(goat):
+
+Severing Path:
+128763907862260 Leap
+mix of swings and hit of his m1s
+
+Resolute Slash:
+122209095269858 SwordGrab
+128763907862260 Leap
+86506412325620  Swing
+14427790767     ResoluteSlash
+
+Veilstep:
+121354995604661 Veilstep
+8595974357 Hit4
+—UseAgain:
+74892667038544  VeilstepJump
+79148321721845  VeilstepDive
+120458587618994 Shock
+90439756216771  VeilstepHit
+71472197762839  Impact
+
+Revolve:
+96045121549069 Swing1
+88685272276380 Hit1
+122411333696591 Swing2
+88685272276380 Hit1
+88685272276380 Hit1
+113403339442588 RevolveDive
+79148321721845 VeilstepDive
+122860314546755 RevolveLand
+
+RikaSpecial:
+81914373674135 Summon
+136734180743874 voiceline(yuhtah)
+
+
+Downslam:
+8595974357 Hit4
+90439756216771 VeilstepHit
+
+Launch:
+72050513112942 Launch
+
+Throw:
+94504796493417 RikaMovement
+121746815389545 ThrowStart
+8595974357 Hit4
+90439756216771 VeilstepHit
+
+Haymaker:
+92653689754693 Haymaker
+8595974357 Hit4
+90439756216771 VeilstepHit
+
+Awakening:
+123373069192090 Start
+85246358633776  Voiceline
+87637812190192  BreakChain
+82858286583983  BreakChain
+82858286583983  PutRing
+93926154797041  VL
+138460768017549 Break
+
+Elbow Rush:
+84493401750489 Whiff
+9118612945 Impact4
+108742052808505 MetalHit2
+96377525338185 Hit
+76842997698748 Step1
+90282304902568 Step2
+106463408823054 Teleport
+118844796311667 Barrage
+95680035639252 Barrage2
+8595974357 Hit4
+90439756216771 VeilstepHit
+113344342875514 MetalHit
+
+Cursed Speech:
+76485051513534 CursedSpeechStart
+88080590196375 Voice
+91630012293502 VoiceDontMove
+
+TLB:
+118689694101518 TrueLove
+114265785065488 ChargeSFX
+82962697738747  VoiceLine
+90439756216771  VeilstepHit
+94504796493417  RikaMovement
+117663808507739 Music
+111645361582005 SmallBeam
+
+MutualLove:
+8098966252 Voice
+121842315815683 Start
+139647861430129 OST
+91942331202663 AmbianceLoop
+1382296680778086 SwordFall
+129174925057034 JacobLadder
+__________________________
+
+Mechamaru:
+
+Ultra Spin:
+84086575329798 Start
+140170031367282 Dash
+4988621662 DrillHit
+
+Boost On:
+100318681703568 Start
+74496850917248  Booster
+135426272617658 SecondPart
+133212067497301 PunchWoosh
+95000450601035  Hit
+—Special:
+104732468256369 SupermanLand
+129170380119486 DummyThrow
+
+Ultra Cannon:
+134210095047021 Start
+135423939868890 Shoot
+138458686172685 Explode
+—Holdable:
+92378884776528 FunnyFall
+95331755325332 SmoothLanding2
+95402418269891 Albatros
+
+Puppet Barrage:
+117932005679311 Kick
+86442687037437  Grab
+89864850840092  Sparks
+8595974357      Hit4
+90439756216771  VeilstepHit
+
+Special:
+127886167245545 Charge
+89529539001765  Burst
+125624636902462 StopSound
+
+Awakening:
+89864850840092  Sparks
+140013024412222 Explode
+118151923808388 RedLight
+139616349986648 FloorClimb
+111234176541963 VideoAppear
+134118844472163 VideoEnd
+
+Miracle Cannon:
+93972901144059 AttemptCharge
+115628303287481 AttemptChargePhase
+133539727442636 ChargeBeam
+83221875448666 Explosion
+
+Pigeon Viola:
+116321073104316 Start
+100910853016629 Hit1
+87672355641711  Hit2
+
+Jump:
+103299572527813 Jump
+93545676012051 Dropkick
+90439756216771 VeilstepHit
+__________________________
+
+Naoya:
+
+Misc:
+9116384757 Frame
+117947531369694 FrameBreak
+
+Projection Breaker:
+136567919489969 1
+139629826004213 Spin
+117954571666770 Kick
+95000450601035  Hit
+16773286330     Hit
+
+Bleedout:
+120434937298193 Startup
+103711283192425 Hit
+80064422113149 Bleed
+123491349270512 Sandevistan(afterimages)
+135840401388179 FinisherStab
+85770270274263 Throw
+
+Decisive Strike:
+132967103418764 Startup
+117817818925397 Flicker
+114943144739692 Flicker2
+111770082377892 Swing
+132856141242580 FirstHit
+73629332494583  SecondHit
+102143839764358 Swing2
+hits by: Senipkoo1 (Valiant) thank you brotha
+Hit1-135367226283909
+Hit2-100905404143936
+Hit3-116472527330220
+Hit4-70397374333185
+
+Cursory Impact:
+132967103418764 Startup
+83127118538873  Swing
+114943144739692 Flicker2
+105590625569131 Hit
+82810979613330  Kick
+90410999998931  KickHit
+—Shatter
+9105467029 Grab
+137048570141513 Grab
+114943144739692 Flicker2
+7978512114 Swing
+
+Special:
+94144459580306 Acceleration
+
+Ultimate:
+106542373538584 Parry
+84738383989434  Catch
+88458298681974  Grab
+110744212285066 Grab2
+103711283192425 Stab
+84461843348673  Fall
+78303395722270  Form
+
+Top Speed:
+76441723033793  Startup
+121692248969984 Fly
+17169365111     Hit1
+
+Flash Freezing:
+9116384757 Frame
+117947531369694 FrameBreak
+
+Domain:
+99951577218359 Voice
+18110707051 Transform3
+9113678080 Flicker
+103306767550001 Music
+935843979 Slash
+__________________________
+
+Locust Guy:
+
+Clever:
+80668615055821 FourArmed
+mix of normals m1s and swings
+
+Black Mucus:
+113347338503767 Use
+100827769870979 Fire
+78710776102497  Explode
+
+Crushing Jaws:
+116622642632294 Bite1
+76763256436030  Bite2
+95015102526752  Bite3
+4459570664      BiteFinisher
+75618749388830  Hit
+97479273744599  Throw
+123322530943923 Slam
+7093763783      GroundImpact
+
+Wing Throw:
+9105467029 Grab
+9114876115 Flight
+7978512114 Swing
+
+Special:
+9114876115 Flight
+
+Awakening:
+4459576395      Retract
+18110707051     Transform3
+102259199317446 Victory
+3848838070      Swing
+3932141920      Hit
+18110706601     Transform1
+__________________________
+
+Yuki:
+
+GarudaRebound:
+
+94830582667262 Startup
+3755636825      Swing2
+7978512114      Swing
+140210011421911 Bounce
+12482038747864  Charged
+93528549345434  Slow
+91677916810574  Punch
+124116283788613 Return
+
+Rising Rage:
+83066231638545  Startup
+130483916115974 ChargeFail(variant)
+114235921050731 Swing
+72214797814045  Hit
+114235921050731 Swing
+72214797814045  Hit
+114235921050731 Swing
+108671308229639 Hit3
+94234054127236  Hit2(full charge)
+126216905119949 Charge
+
+Mass Breaker:
+115575205427140 Start
+105475201107176 Miss
+72214797814045  Hit
+75089222303073  Hit2
+ChargeFail(variant)
+
+Garuda Stab:
+9113837941      Startup2
+137783275962038 Stab
+7072652156      Stab
+72214797814045  Hit
+75089222303073  Hit2
+—Charge
+104413303615093 WhipFlyBack
+108271854301469 FirstWhip
+76311359826097  SecondWhip
+
+Awakening:
+17309157540 Scream
+3084314259  Rush
+17169364809 Teleport
+9105467029 Grab
+131800911231116 Grab
+15048731914 GrabOST
+137050048462822 Start
+75191661535842 Finish
+73828252330994 Hole
+
+Special:
+137050048462822 Start
+75191661535842 Finish
+__________________________
+
+Mangaka:
+
+Despair:
+107284905728635 Startup
+102170331317268 Spin
+98574727138893  Swing
+mix of m1s
+
+Shut Up!:
+128854350040211 Swing
+134654946718633 Stab
+123300556709057 Throw
+140443001346012 Hit
+104974135649084 Hit2
+—Air
+3755637186 Fist3
+7093763783 GroundImpact
+74801973019001 Hit2
+
+Eye Catching:
+6470740758      Dodge
+128854350040211 Dodge
+125025280611426 Hit
+
+Sacrilege:
+102170331317268 Spin
+91882353459943 Stab
+114235921050731 Swing
+98574727138893 Hit
+123300556709057 Thrpw
+104974135649084 Hit2
+
+Awakening:
+114694152385335 UltStart
+135733886312570 Ult
+83082182015605  UltVoice
 `,
 
 "Punches + Direction": `
@@ -1029,20 +1529,31 @@ Time Cell Moon Palace C
 
 const tabs = document.getElementById("tabs");
 const content = document.getElementById("content");
+const indicator = document.getElementById("indicator");
+
+function moveIndicator(el){
+    indicator.style.top = el.offsetTop + "px";
+    indicator.style.height = el.offsetHeight + "px";
+}
 
 Object.keys(data).forEach((key, index) => {
     const div = document.createElement("div");
     div.className = "tab";
     div.textContent = key;
+
     div.onclick = () => {
         document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
         div.classList.add("active");
         content.textContent = data[key];
+        moveIndicator(div);
     };
+
     if(index === 0){
         div.classList.add("active");
         content.textContent = data[key];
+        requestAnimationFrame(() => moveIndicator(div));
     }
+
     tabs.appendChild(div);
 });
 </script>
