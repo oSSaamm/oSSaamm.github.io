@@ -3,69 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <title>Skillbuilder's Help</title>
-
 <style>
-body{
-    margin:0;
-    background:#0f0f0f;
-    color:#eaeaea;
-    font-family:Arial, Helvetica, sans-serif;
+body {
+    margin: 0;
+    background: #0f0f0f;
+    color: #eaeaea;
+    font-family: Arial, Helvetica, sans-serif;
 }
-#container{
-    display:flex;
-    height:100vh;
+#container {
+    display: flex;
+    height: 100vh;
 }
-#tabs{
-    width:260px;
-    background:#151515;
-    overflow-y:auto;
-    border-right:2px solid #222;
-    position:relative;
+#tabs {
+    width: 260px;
+    background: #151515;
+    overflow-y: auto;
+    border-right: 2px solid #222;
+    position: relative;
 }
-.tab{
-    padding:14px;
-    cursor:pointer;
-    border-bottom:1px solid #222;
-    position:relative;
-    transition:background .2s, box-shadow .25s;
+.tab {
+    padding: 14px;
+    cursor: pointer;
+    border-bottom: 1px solid #222;
+    position: relative;
+    transition: background .2s, box-shadow .25s;
 }
-.tab:hover{
-    background:#1f1f1f;
+.tab:hover {
+    background: #1f1f1f;
 }
-.tab.active{
-    background:#272727;
+.tab.active {
+    background: #272727;
     box-shadow:
         inset 0 0 12px rgba(255,212,0,0.25),
         0 0 10px rgba(255,212,0,0.15);
 }
-
 /* BARRA AMARELA */
-#indicator{
-    position:absolute;
-    left:0;
-    width:4px;
-    height:0;
-    background:#ffd400;
+#indicator {
+    position: absolute;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: #ffd400;
     transition:
         top .25s cubic-bezier(.4,0,.2,1),
         height .25s cubic-bezier(.4,0,.2,1);
 }
-#content{
-    flex:1;
-    padding:20px;
-    overflow-y:auto;
-    white-space:pre-wrap;
+#content-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+#search-bar {
+    padding: 12px 20px;
+    background: #151515;
+    border-bottom: 1px solid #222;
+}
+#search-input {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 15px;
+    background: #1f1f1f;
+    color: #eaeaea;
+    border: 1px solid #444;
+    border-radius: 6px;
+    outline: none;
+}
+#search-input:focus {
+    border-color: #ffd400;
+    box-shadow: 0 0 0 2px rgba(255,212,0,0.2);
+}
+#content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    line-height: 1.45;
+}
+
+/* Highlight amarelo */
+.highlight {
+    background-color: #ffd400;
+    color: #000;
+    padding: 1px 3px;
+    border-radius: 3px;
 }
 </style>
 </head>
-
 <body>
-
 <div id="container">
     <div id="tabs">
         <div id="indicator"></div>
     </div>
-    <div id="content">clica numa aba aí, animal</div>
+
+    <div id="content-area">
+        <div id="search-bar">
+            <input type="text" id="search-input" placeholder="Pesquisar no conteúdo atual...">
+        </div>
+        <div id="content">clica numa aba aí, animal</div>
+    </div>
 </div>
 
 <script>
@@ -219,6 +254,21 @@ Domain:
 15171602676 InfiniteVoid
 16071901783 Music
 6737581507 Shatter
+0.2:
+111507747920000 - ShortOpen
+16071901783     - Music
+135495866944584 - Startup
+77956271026948  - ShortDomain2
+93070893390347  - Boost1
+86891100502580  - ShortDomain3
+76523688182264  - Slowdown
+126837281119039 - Boost2
+130525286637724 - Hit1
+94234054127236  - Hit2
+108671308229639 - Hit3
+127027345708590 - Barrage
+76523688182264  - Slowdown
+82179939991290  - Breathe
 __________________________
 
 Yuji/Sugoona:
@@ -321,6 +371,7 @@ Shutter Doors:
 858508159 Swing
 9116684884 Slam
 9118614717 Hit
+2227416952 Divide
 
 Rough Energy:
 17046377464 Charge
@@ -340,6 +391,17 @@ Fever Breaker:
 17101065425 Dash
 6324841214 Slam
 9118614717 Hit2
+-FeverCrush:
+17101065238 - Swing
+100606314590244 CrushSwing(0.15 start)
+9125644321 Spawn
+858508159 Swing
+9118614717 Hit2
+9116684884 Slam(0.18 start)
+9126228977 Swing
+6324841214 Slam
+9118614717 Hit2
+3778609188 Break
 
 Special:
 —Door Guard:
@@ -451,10 +513,11 @@ Shadow Swarm:
 Mahoraga Summon:
 17206057404 Start
 17607887277 Timer
-9038469500 Summon2(Christmas)
+9038469500  Summon2(Christmas)
+17607886466 Summon(normal)
 17607885989 Appear
 17607887774 Moving
-15583493700 Music
+15583493700 Music(2 start)
 17607886878 Hit
 __________________________
 
@@ -896,6 +959,12 @@ Resolute Slash:
 128763907862260 Leap
 86506412325620  Swing
 14427790767     ResoluteSlash
+BlackFlash:
+126598851794168 - Windup1(music)
+85972589629135 - Windup2
+132879779265336 - Land2(electric shock and knockback)
+132472285449398 - Land1(the music with voiceline)
+12764933067 - BlackFlashHit 
 
 Veilstep:
 121354995604661 Veilstep
@@ -1019,6 +1088,12 @@ Puppet Barrage:
 8595974357      Hit4
 90439756216771  VeilstepHit
 
+HeatEmission:
+99141482888889 Start
+82105741477552 Vent
+79885225857047 Ignition
+102143839764358 Swing2
+
 Special:
 127886167245545 Charge
 89529539001765  Burst
@@ -1047,6 +1122,16 @@ Absolute Destruction:
 86551700610888 Run
 79252900483987 Jump
 110146716041793 Slam
+
+Technique Charge:
+95875243041940  FastBeep
+77485525406669  Start
+119556501266993 LightningStart
+102823781132282 LightningLoop
+97775263336318  Lock
+127728932215477 LongBeep
+97280758781987  Shot
+3742310026      Fire
 
 Dash:
 138284014987713 KickStart
@@ -1180,6 +1265,45 @@ Ratio:
 91977155481568 Appear
 132640361437873 Succes
 74763348702619 Disappear
+-Awk:
+107311996562711 - EyeFlash
+72705960325356 - Break(RatioBreaker)
+
+Awakening:
+99971740567145 - Ultimate
+111627864602847 - Music
+
+RB1:
+129476317253467 - Whoosh
+70661569139566 - SlashHit
+140357722460039 - Charge
+114890408068900 - Hit
+
+RB2:
+109606601595459 - Whoosh
+128470369858785 - Hit
+
+RB3:
+131926569091906 - Jump
+138559373472111 - Charge
+113305253204345 - Slam
+137417358886595 - Hit
+
+RB4:
+114438794227487 - Start
+77727716120757 - Hit
+115290636129284 - Dash
+
+Collapse:
+84988803689953 - Jump
+111660088544435 - Charge
+105799337452305 - ImpactGround
+3848076724 - Impact1
+9118615862 - Impact2
+9118614058 - Impact3
+89971826287050 - Activate
+94475379772653 - DebreeDrop
+
 
 __________________________
 
@@ -1709,33 +1833,75 @@ Time Cell Moon Palace C
 const tabs = document.getElementById("tabs");
 const content = document.getElementById("content");
 const indicator = document.getElementById("indicator");
+const searchInput = document.getElementById("search-input");
 
-function moveIndicator(el){
+let currentTerm = "";
+let lastMatches = [];
+
+function moveIndicator(el) {
     indicator.style.top = el.offsetTop + "px";
     indicator.style.height = el.offsetHeight + "px";
+}
+
+function clearHighlights() {
+    content.innerHTML = content.innerHTML.replace(/<span class="highlight">|<\/span>/g, '');
+}
+
+function highlightAndScroll(term) {
+    if (!term.trim()) return;
+
+    clearHighlights();
+
+    const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    const newHTML = content.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+
+    if (newHTML !== content.innerHTML) {
+        content.innerHTML = newHTML;
+
+        // Scroll para a primeira ocorrência
+        const firstHighlight = content.querySelector('.highlight');
+        if (firstHighlight) {
+            firstHighlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
 }
 
 Object.keys(data).forEach((key, index) => {
     const div = document.createElement("div");
     div.className = "tab";
     div.textContent = key;
-
     div.onclick = () => {
         document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
         div.classList.add("active");
-        content.textContent = data[key];
+        content.textContent = data[key];           // texto puro primeiro
+        currentTerm = "";                          // reseta busca ao trocar aba
+        searchInput.value = "";
+        clearHighlights();
         moveIndicator(div);
     };
-
-    if(index === 0){
+    if (index === 0) {
         div.classList.add("active");
         content.textContent = data[key];
         requestAnimationFrame(() => moveIndicator(div));
     }
-
     tabs.appendChild(div);
 });
-</script>
 
+// Evento de busca (ao soltar tecla)
+searchInput.addEventListener('input', (e) => {
+    const term = e.target.value.trim();
+    if (term === currentTerm) return;
+    currentTerm = term;
+    highlightAndScroll(term);
+});
+
+// Também reage ao pressionar Enter (opcional, mas melhora UX)
+searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        highlightAndScroll(searchInput.value.trim());
+    }
+});
+</script>
 </body>
 </html>
