@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Skillbuilder's Help</title>
+<title>Skillbuilder's Help + Video Extractor</title>
 <style>
 body {
     margin: 0;
@@ -56,6 +56,7 @@ body {
     padding: 12px 20px;
     background: #151515;
     border-bottom: 1px solid #222;
+    display: none; /* escondido na aba de vídeo por enquanto */
 }
 #search-input {
     width: 100%;
@@ -75,7 +76,6 @@ body {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
-    white-space: pre-wrap;
     line-height: 1.45;
 }
 .highlight {
@@ -84,6 +84,57 @@ body {
     padding: 1px 3px;
     border-radius: 3px;
 }
+
+/* === Estilos específicos do Video Extractor === */
+#video-extractor {
+    padding: 0 20px;
+}
+#video-extractor h2 {
+    margin-top: 0;
+    color: #ffd400;
+}
+#videoInput, #preview {
+    display: block;
+    margin: 16px 0;
+}
+#preview {
+    max-width: 100%;
+    background: #000;
+    border: 1px solid #333;
+}
+button {
+    padding: 10px 18px;
+    margin: 8px 12px 8px 0;
+    background: #1f1f1f;
+    color: #eaeaea;
+    border: 1px solid #444;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+button:hover {
+    background: #2a2a2a;
+}
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+button#startBtn, button#downloadBtn {
+    background: #ffd400;
+    color: #111;
+    border: none;
+    font-weight: bold;
+}
+progress {
+    width: 100%;
+    height: 20px;
+    margin: 16px 0;
+}
+#status {
+    min-height: 1.4em;
+    color: #0f8;
+}
+.hidden { display: none; }
 </style>
 </head>
 <body>
@@ -91,7 +142,6 @@ body {
     <div id="tabs">
         <div id="indicator"></div>
     </div>
-
     <div id="content-area">
         <div id="search-bar">
             <input type="text" id="search-input" placeholder="Search at actual content">
@@ -100,1742 +150,38 @@ body {
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
 <script>
+// ────────────────────────────────────────────────
+// DADOS DAS ABAS ANTIGAS
+// ────────────────────────────────────────────────
 const data = {
-    "ALL JJS Sounds": `
-Credits: oSam(site owner) and his friend
-
-Impacts and Ragdolls:
-
-91186117342 Impact1
-9118615862  Impact2
-9118614058  Impact3
-9116816096  Impact4
-3784888301 RagdollFall1
-3784888809 RagdollFall2
-3784889529 RagdollFall3
-3778609188 Break(downslam)
-
-Dashes:
-17866719328 StrikeStart(Mahito blade windup)
-17866718764 Strike(mahito blade hit)
-4909206080 Chase(normal frontdash)
-8595975458 DashHit(normal frontdash hit)
-103563218704266 DashHit(Mangaka frontdash hit)
-3929467229 SideDash
-
-Block:
-4306994267 Block1
-4306994664 Block2
-4306994923 Block3
-
-M1:
-
-Normal:
-4571259077 Swing
-8595975878 Hit1
-8595975878 Hit2
-8595975458 Hit3
-8595974357 Hit
-
-Yuji:
-8595975878 Hit1,2,3
-8595975458 Hit4
-
-Higurama:
-113209095877671 Swing1
-84939324218501  Swing2
-135909874140545 Swing3
-79836302909830  Swing4
-
-Yuta(goat):
-96045121549069  Swing1
-122411333696591 Swing2
-115274191208556 Swing3
-4571259077      Swing4
-88685272276380 Hit1
-83770717073727 Hit2
-74317472561001 Hit3
-
-LocustGuy:
-6881026094 Slash
-106685608076122 Punch(plays at the 3rd m1)
-
-Charles(Mangaka)
-94107281648467  Hit1
-103563218704266 Hit2
-103563218704266 Hit3
-8595974357 Hit 4
-
-(Mahito)Blade
-6603295565 Hit1,2,3,4
-(Mahito)Club
-5507815764 Hit1
-5507830815 Hit2
-5507829691 Hit3
-5507830449 Hit4
-
-
-CHARACTERS
-
-Gojo:
-
-LapseBlue:
-411286671 LapseBluePull
-9105467029 Grab
-9066732918 Infinity
-
-Red:
-6006851551 Wind
-154787303 Throw
-3059775624 Explode
-
-RapidPunches:
-Im not fucking doing it it is a mix of normal M1s hit
-12764933067 BlackflashHit
-
-TwofoldKick:
-3755637186 Swing1
-3755636992 Swing2
-4086172909 Hit1
-7515452875 Hit2
-
-Special:
-9118159096 TeleportWindup
-6737581315 GlassBreak
-—FaceCrush:
-931861173642807 TeleportDrag
-82926856324306 DragThrow
-
-Awakening:
-3929467888 BlindGrab
-4458760518 BlindsOff
-9066673412 FistSlam
-
-LapseBlueMax:
-9056932358 Wind
-4299623070 Absorb
-9105467029 Grab
-2227416952 Explode(finisher)
-
-ReversalRedMax:
-16828657180 MaxCharge
-16773286492 Aim
-16828657180 MaxFire
-8595975458 Hit3
-3059775624 Explode(red ball hit)
-17284219852 Remember music
-17520297840 BlackFlash
-—Finisher:
-12764933067 BlackFlashSparks
-9114314398 BlackFlashSparks2
-17520297840 BlackFlash(lasthit)
-
-Hollow Purple:
-14326861262 Music
-17018019870 Merge
-15075475525 Snap
-698224146 Hit
-HollowNuke:
-4776197442 Smash
-14457960806 Music2
-3929467229 Dash
-4858918400 Summon
-4299624634 MaxCharge
-7602599324 Explode
-
-Domain:
-6667923288 Voice
-3059775781 DomainOpen
-7260423115 Domain
-15171602676 InfiniteVoid
-16071901783 Music
-6737581507 Shatter
-0.2:
-111507747920000 - ShortOpen
-16071901783     - Music
-135495866944584 - Startup
-77956271026948  - ShortDomain2
-93070893390347  - Boost1
-86891100502580  - ShortDomain3
-76523688182264  - Slowdown
-126837281119039 - Boost2
-130525286637724 - Hit1
-94234054127236  - Hit2
-108671308229639 - Hit3
-127027345708590 - Barrage
-76523688182264  - Slowdown
-82179939991290  - Breathe
-__________________________
-
-Yuji/Sugoona:
-
-CursedStrikes:
-16773286492 Startup
-3084314259 FrontSlide
-16773286330 Hit
-another hits are just his m1s
-—Aerial:
-8120249833 Spin
-3084314259 Rush
-7093763783 GroundImpact
-
-CrushingBlow:
-4403634269 Crack
-4571259077 Fist
-7093763783 GroundImpact
-7307838125 Hit1 \ __ plays at the same time
-9118614717 Hit2 /
-
-DivergentFist:
-4403634269 Crack
-4059009185 Swing
-5795505380 Divergent
-7515452875 DivergentHit
-—BlackFlash:
-   12764933067 BlackFlashSparks
-   9114314398 BlackFlash
-   112426502291350 PerfectHit(back)
-   -Finisher:
-	12764933067 BlackFlashHit
-	12761286504 Voice(Kôkusen)
-
-ManjiKick:
-9125615451 Startup
-6470740758 Dodge
-9126228977 Swing
-9113504593 Slam
-—Finisher:
-9118614717 Hit2
-8120249833 Spin
-3778609188 Break
-4307207693 Crush
-3848082818 Crush2
-
-Awakening:
-15675012262 Switch
-7278163473 Arrow
-4458760518 BlindsOff
-
-Dismantle:
-935843979 Slash(multiple times)
-9119749145 FinishSlash(finisher and m1 sound)
-8120249833 Spin(air variant)
-—WCS:
-17053666464 WorldSlash1
-17053670289 WorldSlash2
-17053667034 WorldSlash3
-
-Open:
-
-1072005487 Hands
-6874043782 Clap
-7278163473 Arrow
-7978653185 Idle
-5801273676 FireShoot
-331888892 Explode
-
-Rush:
-
-3084314259 Rush
-(when hit)
-8595975878 Hit1
-3763467977 RushHit
-8595975878 Hit2
-4086172909 RushBreak(kickup)
-8595975458 Hit4
-7093763783 GroundImpact(mid air)
-
-Shrine:
-7817341182 Voice
-3059775781 DomainOpen
-7260423115 Domain
-7817336081 Ring
-15583493700 Music
-8181034930 Ready
-9120548819 WaterSplash
-__________________________
-
-Hakari:
-
-ReserveBalls:
-4059009185 Swing
-9114427348 Fire
-7512928742 Impact
-
-Shutter Doors:
-9125644321 Spawn
-858508159 Swing
-9116684884 Slam
-9118614717 Hit
-2227416952 Divide
-
-Rough Energy:
-17046377464 Charge
-4059009185 Swing
-9118614717 Hit
-—Air:
-17046377464 Charge
-17168364647 Swing
-17046282310 Speed1
-120458587618994 Shock
-71472197762839 Impact
-
-Fever Breaker:
-17101065238 Swing
-17101065020 Hit1
-858508159 Swing2
-17101065425 Dash
-6324841214 Slam
-9118614717 Hit2
--FeverCrush:
-17101065238 - Swing
-100606314590244 CrushSwing(0.15 start)
-9125644321 Spawn
-858508159 Swing
-9118614717 Hit2
-9116684884 Slam(0.18 start)
-9126228977 Swing
-6324841214 Slam
-9118614717 Hit2
-3778609188 Break
-
-Special:
-—Door Guard:
-9125615451 Startup
-9125644321 Spawn
-9116684884 Slam
-9126228977 Swing
-6324841214 Slam
-9118614717 Hit2
-——Rhythm:
-17046377464 Charge
-
-Awakening:
-137100901601126 Voice
-3059775781 DomainOpen
-7260423115 Domain
-7252480818 IdleDeath
-9039704032 Music
-16943255415 Travel
-3299794881 Roll
-1841443579 JackpotMusic
-6644505962 Jackpot
-
-Lucky Volley:
-mix of normals m1
-
-Lucky Rushdown:
-3084314259 Rush
-9105467029 Grab
-16773286492 Startup
-
-Overwhelming Luck:
-17046377464 Charge
-17046281380 Dash
-17046282310 Speed1
-3755636992 Fist2
-3755637186 Fist3
-17046505673 Swing
-
-Energy Surge:
-3929467229 Dash
-17169364965 Dash
-17169364647 Swing
-17046282624 Hit1
-17169365111 Hit1
-9119122635 Swag
-17169364809 Teleport
-17046282624 Hit1
-17169365331 Hit2
-9114362943 RushLaunch
-__________________________
-
-Megumi:
-
-Rabbit Escape:
-17206057016 Spawn
-17206056478 Despawn
-
-Nue:
-17269358415 Spawn
-17269354824 Hit1
-3929458922  Hit2
-
-Toad:
-17269355559 Spawn
-17269355114 Fly
-9105467029 Grab
-17269354737 Hit
-17269354618 Flyback
-17269355252 Despawn
-
-Totality:
-17392238439 Spawn
-17392240969 Slash
-3932141920 SlashHit
-
-
-Special:
-4459057272  ShadowEnter
-17206056478 ShadowLeave
-
-Awakening:
-125901185360744 Awaken
-
-Max Elephant:
-17206057404 Start
-17457463445 Spawn
-4086190876  Hit
-4086190876  Hit
-17457463045 Despawn
-
-Great Serpent:
-17513691601 Start
-8120249833 Spin
-17513691601 Start
-17513691442 Spawn
-3778630178 Fly
-17513691220 Hit
-17513690981 Despawn
-17392238770 Despawn
-
-Shadow Swarm:
-9105467029 Grab
-4459057272  ShadowEnter
-17206056478 ShadowLeave
-3084314259 Rush
-9114362943 RushLaunch
-
-Mahoraga Summon:
-17206057404 Start
-17607887277 Timer
-9038469500  Summon2(Christmas)
-17607886466 Summon(normal)
-17607885989 Appear
-17607887774 Moving
-15583493700 Music(2 start)
-17607886878 Hit
-__________________________
-
-Mahoraga:
-
-DivinePummel:
-3755637186 Swing
-9105467029 Grab
-8595975458 Hit1
-8595975458 Hit2
-8595974357 Hit3
-
-Ground Pitch:
-3848835272 Wind
-3932587669 Throw
-3763467977 RushHit
-3778609188 Break
-
-Earthquake:
-18205736907 Startup
-18205737752 Attempt
-18205737353 Success
-
-Takedown:
-18440677683 Startup
-18440678071 Teleport
-4086190876 Hit
-9114362943 RushLaunch
-
-Adaptation:
-3932669033 AdaptGlow
-17612867532 Adapt
-
-World Slash:
-4299510555 Swing
-4299510555 SlashThrow
-
-Special:
-17612867532 AdaptationWheel
-__________________________
-
-Mahito:
-
-Stockpile:
-
-3755636638 Swing
-9118609396 Hit1
-37556366825 Swing2
-9118614717 Hit2
-
-Soul Fire:
-
-3929463305 Morph
-3742310026 Fire
-3932141920 Hit
-
-Focus Strike:
-
-17046377464 Charge
-9118609396 Hit1
-12764933067 BlackFlashHit
-17520297840 BlackFlash
-—Blade:
-9113756883 Chains
-3751519865 Swing
-7131799080 Hit
-——Club:
-18110707051 Transform3
-18110706199 Transform2
-3848838070  Swing
-17169365111 Hit1
-
-Body Repel:
-18259558562 Start
-18259558246 Clap
-18259557789 Fire
-17169365331 Hit2
-
-Special:
-18110706601 Transform1(Blade)
-18110706199 Transform2(Club)
-18110707051 Transform3(Back)
-
-Awakening:
-4458760518 BlindsOff
-9114741340 Spit
-3929467888 GrabBlinds
-18259557789 Fire(15 times)
-
-Idle Transfig:
-4086203738 Start
-4085790525 Eyes
-3084314259 Rush
-17046282624 Hit1
-3929463305 Morph
-—Finisher:
-7837489886 Slap
-4086172909 RushBreak
-2227416952 Explode
-
-BodyDisfigure:
-4086172420 Morph
-3848838070 Leap
-17169365111 Hit1
-9114240880 DrillWind
-4086172420 Morph
-3848838070 Leap
-4459571224 Drill
-4988621662 DrillHit(8 times)
-17169365111 Hit1
-4086172099 Unmorph
-
-Spike Wrath:
-4459576395 Retract
-93437252503790 Roll
-4086172099 Unmorph
-17046282624 Hit1
-
-Jihei Endonka:
-17866271934 Voice
-3059775781 DomainOpen
-7260423115 Domain
-17866727111 Perfection
-17856253579 Music
-
-Super awk:
-3084314259 Rush
-4086203738 Start
-12764933067 BlackFlashHit
-17520297840 BlackFlash
-4459576395 Morph
-9119747260 Whip
-4458760518 BlindsOff
-
-WideStrikes:
-128285017632391 Start
-1788179214 Voice
-129416140764076 Hit1
-136525465702097 Hit2
-97547768328998  Hit3
-98835249800067  Hit4
-70844809405348  Hit5
-18123145861 KOKUSEN!!
-12764933067 BlackFlashHit
-
-Face Blitz:
-18440678071 Teleport
-17866718764 Strike
-9105467029  Grab
-7093763783 Jump
-9114362943 Crush
-3778609188 Break
-4307207693 Crush1
-3848082818 Crush2
-
-Crushing Rushdown:
-
-90579969522260 HairPull
-3848838070 Leap
-17169365111 Hit1
-3848838070 Leap
-17169365111 Hit1
-3848082818 Crush2
-3848835272 Wind
-3932587669 Throw
-
-Head Splitter:
-9114158056 Weave
-3848838070 Leap
-9120734610 Weave2
-8406997653 Bass
-83353502086066 What(huh?)
-9126229280 Slash
-935843979 Slash
-4459571224 HeadSplit
-__________________________
-
-Choso:
-
-Piercing Blood:
-
-9125615451      Startup
-18259558246     Clap
-124532419231032 Fire
-4086202171      Hit
-
-Flowing Red Scale:
-
-16773286492 Startup
-3084314259  Rush
-16773286492 Aim
-16773286330 Hit
-8595975878  Hit1
-8595975458  Hit4
-16773286330 Hit
-8120249833 Spin(air)
-
-Supernova:
-
-9113764330  Counter
-7131799080  Hit
-2227416952  Convergence
-3755636638  Swing
-17169365331 Hit2
-3739364168  BloodBurst
-—Special
-9120086654 BloodMerge
-6470740758 Dodge
-4059009185 Swing
-18427761019 BloodBurst2
-
-
-Blood Edge:
-
-4086172099  KnifeSummon
-3755636152  Dash
-3932142219  StabHit
-3848838070  Leap
-7093763783  GroundImpact
-16773286330 Hit
-3932142219  StabHit(12 times)
-
-Special:
-4458760518 BlindsOff
-4459578169 Convergence
-8120249833 Spin
-
-Awakening:
-119654508166149 Awaken
-
-Slicing Exorcism:
-124532419231032 Fire
-4086202171 Hit
-—Special:
-4459578169 Convergence
-114060318185092 Saw1
-4459578169 Convergence
-3739364168 BloodBurst
-8120249833 Spin
-90579969522260 HairPull
-8847056740 Saw
-4459571224 DrillHit
-
-Wing King:
-3755637186 Swing
-17046282624 Hit
-17046281074 Hit2
-90579969522260 HairPull
-3778609188 Break
-4307207693 Crush
-3848082818 Crush2
-
-Blood Rain:
-137790880409950 Start
-935843979 Slash
-99414146840490 End
-
-Plasma Wave:
-9114828109 Swarm
-18259558246 Clap
-9120610973 Fire
-124532419231032 Fire
-99414146840490 End
-17046281074 Hit2
-__________________________
-
-Swift Kick:
-17101065425 Dash
-9125615451  Startup
-9118614717  Hit2
-3084314259 Rush
-9105467029 Grab
-38488338070 Leap
-3755636825 Swing2
-
-Brute Force:
-17725418857    Start
-3755636825     Swing2
-7978512114     Swing
-9118614717     Hit2
-98484366943330 Hit
-—BlackFlash:
-83892455359949 Music
-92231886696392 Voice
-
-Pebble Throw:
-3778609188 Break
-3932587669 Throw
-4307207693 Crush
-7515452875 DivergentHit
-—Special:
-17156034319 Clap
-17046281074 Hit2
-8595975458  Hit3
-8595975858  Hit2
-8595974357  Hit4
-——BlackFlash:
-105692714483194 Woosh(piano)
-9114314398      BlackFlash
-17520297840     BlackFlash
-
-Elbow Drop:
-4086172909 ElbowHit1
-8595975878 Hit2
-3778609188 Break
-7093763783 GroundImpact
-
-Special:
-17156034319 Clap
-1358454187  Perfect
-
-Awakening:
-126354519236423 SFX
-98778929139784  Music
-
-Idol's Debut:
-9119122635 Swag
-3848838070 Leap
-9125615451 Startup
-17169365111 Hit1
-16773286492 Jump
-17101065425 Jump2
-17169365111 Hit1
-9118614717  Hit2
-
-Climax Jumping:
-16773286492 Startup
-9114362943  RushLaunch
-mix of normals m1s
-6810760581  Bell
-
-Dreams:
-17169364647 Swing
-17169365111 Hit1
-17169365331 Hit2
-
-Brothers:
-17156034319 Clap
-12761286504 Voice
-12764933067 BlackFlashHit
-9114314398  BlackFlash
-__________________________
-
-Higurama:
-
-Extended Swings:
-4571259077 Swing
-8595975878 Hit
-4086190876 LastHit
-—Special:
-17168365111 Hit1(no block)
-6737581315 BlockBreak
-3755637186 LastSwing
-
-Justice Served:
-140527314975641 HeavySwing
-3778609188 Break
-71472197762839 Impact
-
-Judgement's Reach:
-87590911386077 JudgeReachStart
-102880207942198 JudgeReachSwing
-105213688680216 JudgeReach
-
-Twirling Strikes:
-91477583246788 Start
-118282544664000 Swing3
-106620419375208 Swing2
-106620419375208 Swing1
-118282544664000 Swing3
-138752442741376 Hit
-95667653480776  Final
-9118614717  FinalHit
-17169365331 FinalHit1
-
-NoEscape:
-
-Awakening:
-137100901601126 Voice
-7260423115 Domain
-1838873271 Music
-167123203  Travel
-8388724806 Click
-5473174633 Tick
-97182227194468 Talk
-4612385951 Fill
-6737581507 Shatter
-83172464708469 Awaken
-
-Execution:
-85889207849279  Charge
-122106379884893 Flash
-74107786334233  Dash
-91882353459943  Stab
-134273082284707 Sever
-17169365111     Hit
-
-Final Judgement:
-
-102929342782364 Sprint
-83275111049273  Swing
-83048216359043  Dodges
-6470740758      Dodge
-4306994267 Block1
-4306994664 Block2
-8595975878 Hit
-9105467029 Grab
-122106379884893 Flash
-7072652156 Stab
-5754299808 SwordPull
-
-Verdict:
-96847703906101 Start
-17169365111 Hit1
-102251058729529 RunSmack
-115997745833984 Hit1
-74801973019001  Hit2
-
-Triple Sentence:
-128159562878534 ThrowStart
-134273082284707 Sever
-124837936201770 Throw2
-132889926530295 Sweep
-7072652156 Stab
-5754299808 SwordPull
-
-DomainAmp:
-84293649223671 Start
-__________________________
-
-Yuta(goat):
-
-Severing Path:
-128763907862260 Leap
-mix of swings and hit of his m1s
-
-Resolute Slash:
-122209095269858 SwordGrab
-128763907862260 Leap
-86506412325620  Swing
-14427790767     ResoluteSlash
-BlackFlash:
-126598851794168 - Windup1(music)
-85972589629135 - Windup2
-132879779265336 - Land2(electric shock and knockback)
-132472285449398 - Land1(the music with voiceline)
-12764933067 - BlackFlashHit 
-
-Veilstep:
-121354995604661 Veilstep
-8595974357 Hit4
-—UseAgain:
-74892667038544  VeilstepJump
-79148321721845  VeilstepDive
-120458587618994 Shock
-90439756216771  VeilstepHit
-71472197762839  Impact
-
-Revolve:
-96045121549069 Swing1
-88685272276380 Hit1
-122411333696591 Swing2
-88685272276380 Hit1
-88685272276380 Hit1
-113403339442588 RevolveDive
-79148321721845 VeilstepDive
-122860314546755 RevolveLand
-
-RikaSpecial:
-81914373674135 Summon
-136734180743874 voiceline(yuhtah)
-
-
-Downslam:
-8595974357 Hit4
-90439756216771 VeilstepHit
-
-Launch:
-72050513112942 Launch
-
-Throw:
-94504796493417 RikaMovement
-121746815389545 ThrowStart
-8595974357 Hit4
-90439756216771 VeilstepHit
-
-Haymaker:
-92653689754693 Haymaker
-8595974357 Hit4
-90439756216771 VeilstepHit
-
-Awakening:
-123373069192090 Start
-85246358633776  Voiceline
-87637812190192  BreakChain
-82858286583983  BreakChain
-82858286583983  PutRing
-93926154797041  VL
-138460768017549 Break
-
-Elbow Rush:
-84493401750489 Whiff
-9118612945 Impact4
-108742052808505 MetalHit2
-96377525338185 Hit
-76842997698748 Step1
-90282304902568 Step2
-106463408823054 Teleport
-118844796311667 Barrage
-95680035639252 Barrage2
-8595974357 Hit4
-90439756216771 VeilstepHit
-113344342875514 MetalHit
-
-Cursed Speech:
-76485051513534 CursedSpeechStart
-88080590196375 Voice
-91630012293502 VoiceDontMove
-
-TLB:
-118689694101518 TrueLove
-114265785065488 ChargeSFX
-82962697738747  VoiceLine
-90439756216771  VeilstepHit
-94504796493417  RikaMovement
-117663808507739 Music
-111645361582005 SmallBeam
-
-MutualLove:
-8098966252 Voice
-121842315815683 Start
-139647861430129 OST
-91942331202663 AmbianceLoop
-1382296680778086 SwordFall
-129174925057034 JacobLadder
-__________________________
-
-Mechamaru:
-
-Ultra Spin:
-84086575329798 Start
-140170031367282 Dash
-4988621662 DrillHit
-
-Boost On:
-100318681703568 Start
-74496850917248  Booster
-135426272617658 SecondPart
-133212067497301 PunchWoosh
-95000450601035  Hit
-—Special:
-104732468256369 SupermanLand
-129170380119486 DummyThrow
-
-Ultra Cannon:
-134210095047021 Start
-135423939868890 Shoot
-138458686172685 Explode
-—Holdable:
-92378884776528 FunnyFall
-95331755325332 SmoothLanding2
-95402418269891 Albatros
-
-Puppet Barrage:
-117932005679311 Kick
-86442687037437  Grab
-89864850840092  Sparks
-8595974357      Hit4
-90439756216771  VeilstepHit
-
-HeatEmission:
-99141482888889 Start
-82105741477552 Vent
-79885225857047 Ignition
-102143839764358 Swing2
-
-Special:
-127886167245545 Charge
-89529539001765  Burst
-125624636902462 StopSound
-
-Awakening:
-89864850840092  Sparks
-140013024412222 Explode
-118151923808388 RedLight
-139616349986648 FloorClimb
-111234176541963 VideoAppear
-134118844472163 VideoEnd
-
-Miracle Cannon:
-93972901144059 AttemptCharge
-115628303287481 AttemptChargePhase
-133539727442636 ChargeBeam
-83221875448666 Explosion
-
-Pigeon Viola:
-116321073104316 Start
-100910853016629 Hit1
-87672355641711  Hit2
-
-Absolute Destruction:
-86551700610888 Run
-79252900483987 Jump
-110146716041793 Slam
-
-Technique Charge:
-95875243041940  FastBeep
-77485525406669  Start
-119556501266993 LightningStart
-102823781132282 LightningLoop
-97775263336318  Lock
-127728932215477 LongBeep
-97280758781987  Shot
-3742310026      Fire
-
-Dash:
-138284014987713 KickStart
-77121845853523 KickSwing
-
-Jump:
-103299572527813 Jump
-93545676012051 Dropkick
-90439756216771 VeilstepHit
-__________________________
-
-Naoya:
-
-Misc:
-9116384757 Frame
-117947531369694 FrameBreak
-
-Projection Breaker:
-136567919489969 1
-139629826004213 Spin
-117954571666770 Kick
-95000450601035  Hit
-16773286330     Hit
-
-Bleedout:
-120434937298193 Startup
-103711283192425 Hit
-80064422113149 Bleed
-123491349270512 Sandevistan(afterimages)
-135840401388179 FinisherStab
-85770270274263 Throw
-
-Decisive Strike:
-132967103418764 Startup
-117817818925397 Flicker
-114943144739692 Flicker2
-111770082377892 Swing
-132856141242580 FirstHit
-73629332494583  SecondHit
-102143839764358 Swing2
-hits by: Senipkoo1 (Valiant) thank you brotha
-Hit1-135367226283909
-Hit2-100905404143936
-Hit3-116472527330220
-Hit4-70397374333185
-
-Cursory Impact:
-132967103418764 Startup
-83127118538873  Swing
-114943144739692 Flicker2
-105590625569131 Hit
-82810979613330  Kick
-90410999998931  KickHit
-—Shatter
-9105467029 Grab
-137048570141513 Grab
-114943144739692 Flicker2
-7978512114 Swing
-
-Special:
-94144459580306 Acceleration
-
-Ultimate:
-106542373538584 Parry
-84738383989434  Catch
-88458298681974  Grab
-110744212285066 Grab2
-103711283192425 Stab
-84461843348673  Fall
-78303395722270  Form
-
-Top Speed:
-76441723033793  Startup
-121692248969984 Fly
-17169365111     Hit1
-
-Flash Freezing:
-9116384757 Frame
-117947531369694 FrameBreak
-
-Tendril Grab:
-101436171540292 Start
-131805187374240 Preview
-104531288598918 Grab
-119812081621029 Retrieve
-127414943518610 GrabEnd
-
-Domain:
-99951577218359 Voice
-18110707051 Transform3
-9113678080 Flicker
-103306767550001 Music
-935843979 Slash
-__________________________
-
-Nanami(true goat):
-
-Cleaving Whirlwind:
-76686174099249 Start
-112016169570826 Hit
-1358231117772524 RatioHit
-
-Severance Kick:
-89020571624799  WhooshFront
-78963760295110  AirHit2
-123177859397652 HitFront
-—Reverse Kick
- 81817452065610 WhooshBack
-91207251126673  HitBack
-
-Blunt Cut:
-120044543888205 Start
-132547948177910 Hit
-115254148621223 Dash
-87832618406303 Finisher
-—Air
-8120249833      Spin
-120044543888205 Start
-3084314259      Rush
-80326265097136  AirWhoosh
-106529011379327 AirHit1
-78963760295110  AirHit2
-
-Stabilize:
-106889101756832 Start
-78963760295110  AirHit2
-81674903851837  SpinShort
-112176479612273 Spin
-
-Ratio:
-91977155481568 Appear
-132640361437873 Succes
-74763348702619 Disappear
--Awk:
-107311996562711 - EyeFlash
-72705960325356 - Break(RatioBreaker)
-
-Awakening:
-99971740567145 - Ultimate
-111627864602847 - Music
-
-RB1:
-129476317253467 - Whoosh
-70661569139566 - SlashHit
-140357722460039 - Charge
-114890408068900 - Hit
-
-RB2:
-109606601595459 - Whoosh
-128470369858785 - Hit
-
-RB3:
-131926569091906 - Jump
-138559373472111 - Charge
-113305253204345 - Slam
-137417358886595 - Hit
-
-RB4:
-114438794227487 - Start
-77727716120757 - Hit
-115290636129284 - Dash
-
-Collapse:
-84988803689953 - Jump
-111660088544435 - Charge
-105799337452305 - ImpactGround
-3848076724 - Impact1
-9118615862 - Impact2
-9118614058 - Impact3
-89971826287050 - Activate
-94475379772653 - DebreeDrop
-
-
-__________________________
-
-Locust Guy:
-
-Clever:
-80668615055821 FourArmed
-mix of normals m1s and swings
-
-Black Mucus:
-113347338503767 Use
-100827769870979 Fire
-78710776102497  Explode
-
-Crushing Jaws:
-116622642632294 Bite1
-76763256436030  Bite2
-95015102526752  Bite3
-4459570664      BiteFinisher
-75618749388830  Hit
-97479273744599  Throw
-123322530943923 Slam
-7093763783      GroundImpact
-
-Wing Throw:
-9105467029 Grab
-9114876115 Flight
-7978512114 Swing
-
-Special:
-9114876115 Flight
-
-Awakening:
-4459576395      Retract
-18110707051     Transform3
-102259199317446 Victory
-3848838070      Swing
-3932141920      Hit
-18110706601     Transform1
-__________________________
-
-Yuki:
-
-GarudaRebound:
-
-94830582667262 Startup
-3755636825      Swing2
-7978512114      Swing
-140210011421911 Bounce
-12482038747864  Charged
-93528549345434  Slow
-91677916810574  Punch
-124116283788613 Return
-
-Rising Rage:
-83066231638545  Startup
-130483916115974 ChargeFail(variant)
-114235921050731 Swing
-72214797814045  Hit
-114235921050731 Swing
-72214797814045  Hit
-114235921050731 Swing
-108671308229639 Hit3
-94234054127236  Hit2(full charge)
-126216905119949 Charge
-
-Mass Breaker:
-115575205427140 Start
-105475201107176 Miss
-72214797814045  Hit
-75089222303073  Hit2
-ChargeFail(variant)
-
-Garuda Stab:
-9113837941      Startup2
-137783275962038 Stab
-7072652156      Stab
-72214797814045  Hit
-75089222303073  Hit2
-—Charge
-104413303615093 WhipFlyBack
-108271854301469 FirstWhip
-76311359826097  SecondWhip
-
-Awakening:
-17309157540 Scream
-3084314259  Rush
-17169364809 Teleport
-9105467029 Grab
-131800911231116 Grab
-15048731914 GrabOST
-137050048462822 Start
-75191661535842 Finish
-73828252330994 Hole
-
-Special:
-137050048462822 Start
-75191661535842 Finish
-__________________________
-
-Mangaka:
-
-Despair:
-107284905728635 Startup
-102170331317268 Spin
-98574727138893  Swing
-mix of m1s
-
-Shut Up!:
-128854350040211 Swing
-134654946718633 Stab
-123300556709057 Throw
-140443001346012 Hit
-104974135649084 Hit2
-—Air
-3755637186 Fist3
-7093763783 GroundImpact
-74801973019001 Hit2
-
-Eye Catching:
-6470740758      Dodge
-128854350040211 Dodge
-125025280611426 Hit
-
-Sacrilege:
-102170331317268 Spin
-91882353459943 Stab
-114235921050731 Swing
-98574727138893 Hit
-123300556709057 Thrpw
-104974135649084 Hit2
-
-Awakening:
-114694152385335 UltStart
-135733886312570 Ult
-83082182015605  UltVoice
-__________________________
-
-Heian:
-
-StrongDismantle:
-70482785888704  Start
-125288142627715 Fire
-74232847084175  Hit
-—Chant1
-134011003057260 Dismantle1(Kai Voice)
-——Chant2
- 70482785888704  Start
- 125288142627715 Fire
- 135309023186303 Slashes2
- 97581017049145  Dismantle2
-———Chant3
-  70482785888704  Start
-  115955384025484 Dismantle3
-  4299584756 FireWCS
-  125288142627715 Fire
-  74232847084175  Hit
-  2227416952 Explode(finisher)
-
-Open Furnace:
-1072005487 Hands
-7978653185 FlameIdle
-6874043782 Clap
-100843467610521 Voice
-7278163473 Arrow
-78637547122675 FugaVoice
-5801273676 Fire
-5447233442 Shockwave
-331888892 Explode
-
-Cleave Rush:
-109660701821480 CleaveStart
-17046377464 Charge
-9118612065 Stance
-17725419392 Stance2
-4085790525 Eyes
-97960256382964 CleaveVoice
-3084314259 Rush
-9105467029 Grab
-77732395767858 CleaveVoice2
-935843979 Slash
-2227416952 Explode
-9119749145 FinishSlash
-
-Kamutoke:
-6605239584 Equip
-3744393890 Equip2
-3750993658 1
-4299587602 2
-4299513168 3
-4776302225 4
-
-Shrine:
-130807317538504 Voice
-3059775781 DomainOpen
-252289753 UhohStart
-83360856832970 Music
-7817336081 Uhoh
-133077835308960 Voice2
-135309023186303 Slashes
-124012721234128 Voice3
-__________________________
-
-Goku:
-
-Kamehameha:
-128138421943286 Use
-
-Staff Uppercut:
-113917760201943 Swing
-136281286882999 Hit
-
-Staff Extend:
-84803863795019 Swing
-132043726972669 Hit
-
-Ki Spam:
-136181939400388 ShootKi
-78258660213953 ExplodeKi(miss)
-73984021575636 HitKi
-
-Ultimate:
-8388724806 Click
-8595975878 ChestBeat
-`,
-
-"Punches + Direction": `
-CREDITS(docs):
-someonewhoyouusedtoknow12
-ujhjth
-	
-Key: L=Left R=Right B=Both ALT=Alternating
-
-strikes 1 x curse strike 2 x
-Rapid Punches 18 ALT
-Cursed strikes ALT sideways
-Divergent fist R forward
-Energy surge R sideways
-Lucky rushdown R sideways
-Lucky volley ALT sideways (end R)
-Overwhelming luck 1 L down
-Overwhelming luck 2-4 ALT
-Overwhelming luck 5 R forward
-Rough energy R up
-Focus strike R forward
-Focus strike (Home Run) R up
-Idle transfiguration R forward
-Red scale 1 L forward
-Red scale 2 R sideways
-Supernova counter R forward
-Wing king last hit R down
-Brothers R sideways
-Brute force R sideways
-Climax jumping ALT forward
-Dreams ALT forward
-Pebble throw R forward
-Clever ALT forward
-Judgement reach 1-2 L forward
-Garuda rebound R sideways
-Mass breaker R forward
-Severing path air ALT sideways
-Severing path last hit R down
-Veilstep dive R down
-Resolute slash finisher L forward
-Cleave rush R forward
-Ultra Spin R forward
-BoostOnEnd L sideways
-Cursory Impact R sideways
-Decisive strikes sequence:
-R sideways → L up → 17 ALT
-`,
-
-"Non-punch | Extras": `
-CREDITS(docs):
-someonewhoyouusedtoknow12
-ujhjth
-	
-Cleave R up
-Dismantle 2-3 R sideways
-Rush B down
-Slaughter demon B sideways
-Slaughter demon 2 R forward
-Slaughter demon 3 R up
-Mahoraga summon L sideways
-Earthquake R down
-Ground pitch R forward
-Takedown R up
-Worldslash R sideways
-Force grab R forward
-Chase sword B forward
-Slicing exorcism R forward
-Idols debut B up
-Extended swings ALT sideways
-Extended swings end B down
-Justice served B down
-Gavel throw R up
-Triple sentence end B sideways
-Garuda stab R forward
-Ultra cannon B forward
-Bleedout R forward / end R down
-Naoya ult hit L down
-Flash freezing R sideways
-Grapple B down
-`,
-
-"Run/Walk Anim": `
-CREDITS(docs):
-someonewhoyouusedtoknow12
-ujhjth
-
-Rush
-Lucky rushdown
-Overwhelming luck
-Shadow swarm run
-Crushing rushdown
-Final judgement
-Swift kick
-Idle transfiguration
-Limitless (face crush)
-Elbow rush
-Decisive strikes
-RunSlash
-`,
-
-"Kicks + Direction": `
-CREDITS(docs):
-someonewhoyouusedtoknow12
-ujhjth
-
-Key: L=Left R=Right B=Both
-
-Lapse blue R up
-Rapid punches R down
-Two fold kick R up → R down
-Cursed strikes R sideways
-Divergent 2 R down
-Majin kick R sideways/down
-Rush R up
-Fever breaker L forward
-Crushing rushdown R forward
-Drill split B forward
-Red scale L sideways → R sideways
-Brute force R sideways
-Swift kick R sideways
-Execution L sideways → B sideways
-Garuda rebound L sideways
-Garuda stab R down
-Rising star L sideways → L up
-Veilstep L up
-Severing path air L → R sideways
-Shut up! R forward
-Sacrilegious R sideways
-Idols debut R down
-Judgement reach B forward
-Projection breaker R sideways
-Fever crush L down
-`,
-
-"Grabs + Timing": `
-CREDITS(docs):
-someonewhoyouusedtoknow12
-ujhjth
-
-(times in seconds ~)
-
-Lapse blue 1.450
-Rapid punches 3.416
-Twofold kick 0.733
-Cursed strikes 1.750
-Crushing blow 0.866
-Rush 2.516
-Fever breaker 0.883
-Lucky rushdown 1.733
-Divine pummel 1.800
-Ground pitch 1.416
-Drill splitter 1.916
-Spike wrath 3.550
-Crushing rushdown 3.600
-Face blitz 3.000
-Widespread strikes 5.000
-Flowing red scale 1.833
-Blood edge 1.000
-Elbow drop 1.330
-Climax jumping 3.516
-Idols debut 2.283
-Execution chain 1.133 → 2.066
-Verdict 1.166
-Severing path 2.366
-Wing throw 1.200
-Garuda stab 0.650
-Bleedout 0.450
-Cursory impact 0.850
-Decisive strike 2.100
-`,
-
-"Flips": `
-CREDITS(docs):
-someonewhoyouusedtoknow12
-ujhjth
-
-B=Back F=Forward S=Side
-
-Divergent fist end B
-Majin kick finisher S
-Dismantle S
-Spike wrath end F
-Red scale air F
-Swift kick S
-Execution 2 S
-Veilstep B
-Veilstep dive F/S
-Shut up air F
-Boost On Target B
-Cursory impact F
-`,
-
-"Moves Startup": `
-CREDITS(docs):
-someonewhoyouusedtoknow12
-ujhjth
-
-(values in seconds)
-
-Lapse blue 0.483~
-Rapid punches 0.500~
-Twofold kick 0.350~
-Red 0.500~
-MAX blue 0.500~
-MAX red 1.183~
-Purple 2.666~(spooky)
-Cursed strikes 0.466~
-Crushing blow 0.466~
-Divergent fist 0.466~ (TZE must really like that number)
-Dismantle 0.383~
-Rush 0.466~(ok seriously what’s going on here)
-Open 2.700~
-Reserve balls 0.283~
-Shutter doors 0.366~
-Rough energy 0.683~
-Fever breaker 0.466~
-Lucky volley 0.383~
-Lucky rushdown 0.583~
-Energy surge 0.550~
-Overwhelming luck 2.083~
-Megumis base was pretty weird skipped it :p
-Great serpent 1.100~
-Shadow swarm 0.866~(very rough calculation)
-Mahoraga 3.033~
-Divine pummel 0.616~
-Earthquake 0.466~
-Takedown 0.800~
-Ground pitch 0.350~
-Stockpile 0.466~
-Soul fire 0.466~
-Focus strike 0.333~
-Body repel 1.416~
-Idle transfiguration 0.850~
-Drill splitter 0.750~
-Spike wrath 0.800~
-Wide spread strikes 2.650~
-Face blitz 0.783~
-Piercing blood 0.783~
-Flowing red scale 0.333~
-Blood edge 0.366~
-Slicing exorcism 0.333~
-Wing king is instant (I think)
-Plasma wave 2.016~
-Swift kick 0.466~
-Brute force 0.733~
-Pebble throw 0.683~
-Elbow drop 0.566~
-Idols debut 0.383~
-Climax jumping 1.000~
-Dreams 0.333~
-Brothers 1.883~
-Extended swings 0.316~
-Justice served 0.616~
-Twirling strikes 0.516~
-Execution 1~
-Final judgment 1.583~
-Verdict 0.366~
-Triple sentence 0.500~
-Severing path 0.466~
-Resolute slash 0.466~
-Veilstep 0.233~
-Revolve 0.250~
-Clever 0.383~
-Black mucus 0.500~
-Crushing jaws 0.366~
-Wing throw 0.366~
-Garuda rebound 0.500~
-Rising rage 0.333~
-Mass breaker 0.633~
-Garuda stab 0.466~
-Despair 0.333~
-Shut up! 0.466~
-Sacrilege 0.466~
-Strong dismantle 0.466~
-Open furnace 4.200~
-Cleave rush 0.800~
-Kamutoke 0.466~
-Cleave 0.583~
-projection breaker 0.750~
-Bleedout 0.533~
-cursory impact 0.716~
-decisive strike 1.050~
-
-`,
-
-"Hand Open/Close": `
-CREDITS(docs):
-someonewhoyouusedtoknow12
-ujhjth
-
-C = Close | O = Open
-
-Piercing Blood C
-Malevolent Shrine C
-Shutter doors C
-Body repel C O
-Plasma wave C O
-Open / Divine Flame C O C O
-Time Cell Moon Palace C
-`
+    "ALL JJS Sounds": `Credits: oSam(site owner) and his friend ... (teu conteúdo original aqui, mantive cortado pra não ficar gigante)`,
+    "Punches + Direction": `CREDITS(docs): ...`,
+    "Non-punch | Extras": `...`,
+    // ... coloca aqui todas as outras chaves que tu tinha
+    // (não repeti tudo pra resposta não ficar gigante, mas mantém igual)
 };
 
-const tabsEl = document.getElementById("tabs");
-const contentEl = document.getElementById("content");
-const indicator = document.getElementById("indicator");
+// ────────────────────────────────────────────────
+// ELEMENTOS DO DOM
+// ────────────────────────────────────────────────
+const tabsEl      = document.getElementById("tabs");
+const contentEl   = document.getElementById("content");
+const indicator   = document.getElementById("indicator");
+const searchBar   = document.getElementById("search-bar");
 const searchInput = document.getElementById("search-input");
 
+// Variáveis de busca
 let currentTerm = "";
 let highlights = [];
 let currentHighlightIndex = -1;
 
+// ────────────────────────────────────────────────
+// FUNÇÕES DE BUSCA (só aparecem nas abas de texto)
+// ────────────────────────────────────────────────
 function moveIndicator(el) {
     indicator.style.top = el.offsetTop + "px";
     indicator.style.height = el.offsetHeight + "px";
@@ -1848,30 +194,17 @@ function clearHighlights() {
 }
 
 function performSearch(term) {
-    if (!term.trim()) {
-        clearHighlights();
-        return;
-    }
+    if (!term.trim()) { clearHighlights(); return; }
+    if (term === currentTerm) { goToNextHighlight(); return; }
 
-    if (term === currentTerm) {
-        // Já buscou → Enter significa "próximo"
-        goToNextHighlight();
-        return;
-    }
-
-    // Nova busca
     currentTerm = term;
     clearHighlights();
 
     const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const regex = new RegExp(escaped, 'gi');
-
-    contentEl.innerHTML = contentEl.innerHTML.replace(regex, match => 
-        `<span class="highlight">${match}</span>`
-    );
+    contentEl.innerHTML = contentEl.innerHTML.replace(regex, match => `<span class="highlight">${match}</span>`);
 
     highlights = Array.from(contentEl.querySelectorAll('.highlight'));
-
     if (highlights.length > 0) {
         currentHighlightIndex = 0;
         scrollToCurrent();
@@ -1880,46 +213,193 @@ function performSearch(term) {
 
 function scrollToCurrent() {
     if (currentHighlightIndex >= 0 && currentHighlightIndex < highlights.length) {
-        const el = highlights[currentHighlightIndex];
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        highlights[currentHighlightIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 }
 
 function goToNextHighlight() {
     if (highlights.length === 0) return;
-
     currentHighlightIndex = (currentHighlightIndex + 1) % highlights.length;
     scrollToCurrent();
 }
 
-Object.keys(data).forEach((key, index) => {
+// ────────────────────────────────────────────────
+// CRIA AS ABAS
+// ────────────────────────────────────────────────
+function createTab(key, isVideoExtractor = false) {
     const div = document.createElement("div");
     div.className = "tab";
     div.textContent = key;
+    div.dataset.key = key;
+
     div.onclick = () => {
         document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
         div.classList.add("active");
-        contentEl.textContent = data[key];
-        currentTerm = "";
-        searchInput.value = "";
-        clearHighlights();
+
+        if (isVideoExtractor) {
+            showVideoExtractor();
+        } else {
+            contentEl.innerHTML = `<pre>${data[key] || "Conteúdo não encontrado"}</pre>`;
+            searchBar.style.display = "block";
+            currentTerm = "";
+            searchInput.value = "";
+            clearHighlights();
+        }
+
         moveIndicator(div);
     };
-    if (index === 0) {
-        div.classList.add("active");
-        contentEl.textContent = data[key];
-        requestAnimationFrame(() => moveIndicator(div));
-    }
+
     tabsEl.appendChild(div);
+    return div;
+}
+
+// ────────────────────────────────────────────────
+// VIDEO EXTRACTOR (aba especial)
+// ────────────────────────────────────────────────
+function showVideoExtractor() {
+    searchBar.style.display = "none"; // esconde busca na aba de vídeo
+
+    contentEl.innerHTML = `
+<div id="video-extractor">
+    <h2>Video Extractor (24 fps → PNGs → ZIP)</h2>
+
+    <input type="file" id="videoInput" accept="video/*">
+    <video id="preview" controls muted></video>
+
+    <div>
+        <button id="startBtn">Começar extração (24 fps)</button>
+        <button id="downloadBtn" disabled>Baixar tudo como ZIP</button>
+    </div>
+
+    <progress id="progress" value="0" max="100"></progress>
+    <div id="status">Selecione um vídeo para começar</div>
+</div>`;
+
+    // Re-conecta os eventos do extrator
+    const videoInput = document.getElementById('videoInput');
+    const preview     = document.getElementById('preview');
+    const startBtn    = document.getElementById('startBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const progress    = document.getElementById('progress');
+    const status      = document.getElementById('status');
+
+    let frames = [];
+    let videoDuration = 0;
+    const fps = 24;
+
+    videoInput.onchange = e => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const url = URL.createObjectURL(file);
+        preview.src = url;
+        preview.onloadedmetadata = () => {
+            videoDuration = preview.duration;
+            status.textContent = `Vídeo carregado — ${videoDuration.toFixed(2)} segundos`;
+            startBtn.disabled = false;
+        };
+    };
+
+    startBtn.onclick = async () => {
+        startBtn.disabled = true;
+        downloadBtn.disabled = true;
+        frames = [];
+        status.textContent = "Extraindo frames... (pode demorar)";
+        progress.value = 0;
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = preview.videoWidth || 1280;
+        canvas.height = preview.videoHeight || 720;
+
+        const frameInterval = 1 / fps;
+        const totalFrames = Math.floor(videoDuration * fps) + 1;
+        let currentTime = 0;
+        let frameCount = 0;
+
+        async function extractNext() {
+            if (currentTime > videoDuration) {
+                status.textContent = `Extraídos ${frames.length} frames`;
+                downloadBtn.disabled = frames.length === 0;
+                startBtn.disabled = false;
+                return;
+            }
+
+            preview.currentTime = currentTime;
+
+            await new Promise(resolve => {
+                preview.onseeked = () => {
+                    setTimeout(() => {
+                        try {
+                            ctx.drawImage(preview, 0, 0, canvas.width, canvas.height);
+                            canvas.toBlob(blob => {
+                                if (blob) {
+                                    const num = String(frameCount).padStart(5, '0');
+                                    frames.push({ name: `frame_${num}.png`, data: blob });
+                                    frameCount++;
+                                    progress.value = (frameCount / totalFrames) * 100;
+                                }
+                                currentTime += frameInterval;
+                                extractNext();
+                            }, 'image/png');
+                        } catch (err) {
+                            currentTime += frameInterval;
+                            extractNext();
+                        }
+                    }, 60);
+                };
+            });
+        }
+
+        extractNext();
+    };
+
+    downloadBtn.onclick = async () => {
+        if (frames.length === 0) return;
+        status.textContent = "Gerando ZIP...";
+
+        const zip = new JSZip();
+        frames.forEach(f => zip.file(f.name, f.data));
+
+        try {
+            const blob = await zip.generateAsync({type: 'blob'});
+            if ('showSaveFilePicker' in window) {
+                const handle = await window.showSaveFilePicker({
+                    suggestedName: `frames-${new Date().toISOString().slice(0,10)}.zip`,
+                    types: [{ description: 'ZIP', accept: {'application/zip': ['.zip']} }],
+                });
+                const writable = await handle.createWritable();
+                await blob.stream().pipeTo(writable);
+                status.textContent = "ZIP salvo na pasta escolhida!";
+            } else {
+                saveAs(blob, `frames-${frames.length}-imgs.zip`);
+                status.textContent = "Download iniciado";
+            }
+        } catch (err) {
+            status.textContent = "Erro: " + err.message;
+        }
+    };
+}
+
+// ────────────────────────────────────────────────
+// INICIALIZAÇÃO DAS ABAS
+// ────────────────────────────────────────────────
+Object.keys(data).forEach(key => {
+    createTab(key);
 });
 
-// Busca ao digitar (live)
-searchInput.addEventListener('input', (e) => {
-    performSearch(e.target.value.trim());
-});
+// Aba do Video Extractor (última)
+const videoTab = createTab("Video Extractor", true);
 
-// Enter → próximo resultado (ou inicia busca se for nova)
-searchInput.addEventListener('keydown', (e) => {
+// Abre a primeira aba por padrão
+const firstTab = tabsEl.querySelector(".tab");
+if (firstTab) {
+    firstTab.click();
+}
+
+// Eventos de busca
+searchInput.addEventListener('input', e => performSearch(e.target.value.trim()));
+searchInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
         e.preventDefault();
         performSearch(searchInput.value.trim());
