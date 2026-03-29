@@ -1721,9 +1721,9 @@ function showMessageMe() {
     contentEl.innerHTML = `
 <div id="message-me">
     <h2>Message Me</h2>
-    <input type="text" id="discordUsername" placeholder="Seu username do Discord (ex: osam)">
-    <textarea id="messageText" placeholder="Escreva sua mensagem aqui..."></textarea>
-    <button id="sendMessageBtn">Enviar Mensagem</button>
+    <input type="text" id="discordUsername" placeholder="Your discord username">
+    <textarea id="messageText" placeholder="Write here whatchu want to tell me."></textarea>
+    <button id="sendMessageBtn">Send message</button>
     <div id="status"></div>
 </div>`;
 
@@ -1738,18 +1738,18 @@ function showMessageMe() {
 
         if (!username) {
             statusEl.style.color = '#f88';
-            statusEl.textContent = "Por favor, informe seu username do Discord.";
+            statusEl.textContent = "Send your discord name so I can warn your if i fixed/added it or not.";
             return;
         }
         if (!message) {
             statusEl.style.color = '#f88';
-            statusEl.textContent = "Escreva uma mensagem antes de enviar.";
+            statusEl.textContent = "You need a text to send a message broski";
             return;
         }
 
         sendBtn.disabled = true;
         statusEl.style.color = '#ff0';
-        statusEl.textContent = "Enviando...";
+        statusEl.textContent = "Sending...";
 
         try {
             const payload = {
@@ -1764,15 +1764,15 @@ function showMessageMe() {
 
             if (res.ok) {
                 statusEl.style.color = '#0f8';
-                statusEl.textContent = "Mensagem enviada com sucesso! ✅";
+                statusEl.textContent = "Sent!";
                 messageInput.value = "";
             } else {
                 statusEl.style.color = '#f88';
-                statusEl.textContent = "Erro ao enviar (verifique o webhook).";
+                statusEl.textContent = "Failed for some reason.";
             }
         } catch (err) {
             statusEl.style.color = '#f88';
-            statusEl.textContent = "Erro de conexão.";
+            statusEl.textContent = "Connection error.";
             console.error(err);
         }
 
