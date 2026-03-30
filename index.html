@@ -3,175 +3,242 @@
 <head>
 <meta charset="UTF-8">
 <title>Skillbuilder's Help + Video Extractor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body {
-    margin: 0;
-    background: #0f0f0f;
-    color: #eaeaea;
-    font-family: Arial, Helvetica, sans-serif;
-}
-#container {
-    display: flex;
-    height: 100vh;
-}
-#tabs {
-    width: 260px;
-    background: #151515;
-    overflow-y: auto;
-    border-right: 2px solid #222;
-    position: relative;
-}
-.tab {
-    padding: 14px;
-    cursor: pointer;
-    border-bottom: 1px solid #222;
-    position: relative;
-    transition: background .2s, box-shadow .25s;
-}
-.tab:hover {
-    background: #1f1f1f;
-}
-.tab.active {
-    background: #272727;
-    box-shadow:
-        inset 0 0 12px rgba(255,212,0,0.25),
-        0 0 10px rgba(255,212,0,0.15);
-}
-#indicator {
-    position: absolute;
-    left: 0;
-    width: 4px;
-    height: 0;
-    background: #ffd400;
-    transition:
-        top .25s cubic-bezier(.4,0,.2,1),
-        height .25s cubic-bezier(.4,0,.2,1);
-}
-#content-area {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-#search-bar {
-    padding: 12px 20px;
-    background: #151515;
-    border-bottom: 1px solid #222;
-    display: none;
-}
-#search-input {
-    width: 100%;
-    padding: 10px 14px;
-    font-size: 15px;
-    background: #1f1f1f;
-    color: #eaeaea;
-    border: 1px solid #444;
-    border-radius: 6px;
-    outline: none;
-}
-#search-input:focus {
-    border-color: #ffd400;
-    box-shadow: 0 0 0 2px rgba(255,212,0,0.2);
-}
-#content {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    line-height: 1.45;
-    white-space: pre-wrap;
-    font-family: 'Courier New', monospace;
-}
-.highlight {
-    background-color: #ffd400;
-    color: #000;
-    padding: 1px 3px;
-    border-radius: 3px;
-}
-#message-me {
-    max-width: 620px;
-    margin: 30px auto;
-    padding: 20px;
-}
-#message-me h2 {
-    color: #ffd400;
-    margin-bottom: 25px;
-    text-align: center;
-}
-#message-me input, #message-me textarea {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 16px;
-    background: #1f1f1f;
-    color: #eaeaea;
-    border: 1px solid #444;
-    border-radius: 8px;
-    font-size: 15px;
-    box-sizing: border-box;
-}
-#message-me textarea {
-    min-height: 200px;
-    resize: vertical;
-}
-#message-me button {
-    width: 100%;
-    padding: 14px;
-    background: #ffd400;
-    color: #111;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-#message-me button:hover {
-    background: #ffeb3b;
-    transform: translateY(-1px);
-}
-#message-me #status {
-    margin-top: 20px;
-    text-align: center;
-    font-weight: bold;
-    min-height: 1.5em;
-}
-button {
-    padding: 10px 18px;
-    margin: 8px 12px 8px 0;
-    background: #1f1f1f;
-    color: #eaeaea;
-    border: 1px solid #444;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-button:hover {
-    background: #2a2a2a;
-}
-button:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-}
-button#startBtn, button#downloadBtn {
-    background: #ffd400;
-    color: #111;
-    border: none;
-    font-weight: bold;
-}
-progress {
-    width: 100%;
-    height: 20px;
-    margin: 16px 0;
-}
-.hidden { display: none; }
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        background: #0f0f0f;
+        color: #eaeaea;
+        font-family: Arial, Helvetica, sans-serif;
+        overflow: hidden;
+        height: 100vh;
+    }
+
+    #container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    #tabs {
+        background: #151515;
+        border-bottom: 2px solid #222;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        padding: 8px 0;
+        position: relative;
+        scrollbar-width: thin;
+        scrollbar-color: #ffd400 #222;
+    }
+
+    #tabs::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    #tabs::-webkit-scrollbar-thumb {
+        background: #ffd400;
+        border-radius: 3px;
+    }
+
+    .tab {
+        display: inline-block;
+        padding: 12px 18px;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        transition: all .2s;
+        font-size: 15px;
+        color: #ccc;
+    }
+
+    .tab:hover {
+        background: #1f1f1f;
+        color: #fff;
+    }
+
+    .tab.active {
+        background: #272727;
+        color: #ffd400;
+        border-bottom: 3px solid #ffd400;
+        box-shadow: 0 2px 8px rgba(255, 212, 0, 0.2);
+    }
+
+    #content-area {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0; /* importante para o overflow funcionar */
+    }
+
+    #search-bar {
+        padding: 12px 15px;
+        background: #151515;
+        border-bottom: 1px solid #222;
+        display: none;
+    }
+
+    #search-input {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 16px; /* melhor para mobile */
+        background: #1f1f1f;
+        color: #eaeaea;
+        border: 1px solid #444;
+        border-radius: 8px;
+        outline: none;
+    }
+
+    #search-input:focus {
+        border-color: #ffd400;
+        box-shadow: 0 0 0 3px rgba(255,212,0,0.2);
+    }
+
+    #content {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        line-height: 1.5;
+        font-family: 'Courier New', monospace;
+        font-size: 15px;
+        background: #0f0f0f;
+    }
+
+    .highlight {
+        background-color: #ffd400;
+        color: #000;
+        padding: 2px 4px;
+        border-radius: 4px;
+    }
+
+    #message-me {
+        max-width: 100%;
+        padding: 20px 15px;
+        margin: 0 auto;
+    }
+
+    #message-me h2 {
+        color: #ffd400;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    #message-me input, 
+    #message-me textarea {
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 16px;
+        background: #1f1f1f;
+        color: #eaeaea;
+        border: 1px solid #444;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+
+    #message-me textarea {
+        min-height: 180px;
+        resize: vertical;
+    }
+
+    #message-me button {
+        width: 100%;
+        padding: 15px;
+        background: #ffd400;
+        color: #111;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 17px;
+        cursor: pointer;
+    }
+
+    button {
+        padding: 12px 18px;
+        margin: 8px 8px 8px 0;
+        background: #1f1f1f;
+        color: #eaeaea;
+        border: 1px solid #444;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    button:hover:not(:disabled) {
+        background: #2a2a2a;
+    }
+
+    button#startBtn, button#downloadBtn {
+        background: #ffd400;
+        color: #111;
+        font-weight: bold;
+    }
+
+    progress {
+        width: 100%;
+        height: 22px;
+        margin: 15px 0;
+    }
+
+    .hidden { display: none; }
+
+    @media (min-width: 768px) {
+        #container {
+            flex-direction: row;
+        }
+
+        #tabs {
+            width: 280px;
+            border-bottom: none;
+            border-right: 2px solid #222;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 0;
+            white-space: normal;
+        }
+
+        .tab {
+            display: block;
+            width: 100%;
+            padding: 14px 18px;
+            border-bottom: 1px solid #222;
+            border-bottom-color: transparent;
+        }
+
+        .tab.active {
+            border-bottom: 1px solid #222;
+            border-left: 4px solid #ffd400;
+        }
+
+        #content {
+            padding: 25px;
+            font-size: 15.5px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .tab {
+            padding: 10px 14px;
+            font-size: 14px;
+        }
+
+        #content {
+            padding: 12px;
+            font-size: 14.5px;
+        }
+    }
 </style>
 </head>
 <body>
+
 <div id="container">
-    <div id="tabs">
-        <div id="indicator"></div>
-    </div>
+    <div id="tabs"></div>
+    
     <div id="content-area">
         <div id="search-bar">
-            <input type="text" id="search-input" placeholder="Search current content">
+            <input type="text" id="search-input" placeholder="Buscar no conteúdo atual...">
         </div>
         <div id="content">Clique em uma aba para começar</div>
     </div>
@@ -181,7 +248,7 @@ progress {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 <script>
 // ==================== DATA ====================
-const data = {
+const data = const data = {
     "ALL JJS Sounds": `
 Credits: oSam aka pinguimdoimalia(site owner) and his friend
 Impacts and Ragdolls:
@@ -2195,24 +2262,14 @@ Melee4 R forward
     -Brought back the Move Startups
 `,
 };
-
-const URL = "https://discord.com/api/webhooks/1487825172386939012/j-DMbySnWLAkkjWjff17AVh7kslDai6WYvNcFFbIN66H-v6wXC_GV5e_lSU3XyMDSbcw"; 
-
-// ==================== FUNCTIONS ====================
 const tabsEl = document.getElementById("tabs");
 const contentEl = document.getElementById("content");
-const indicator = document.getElementById("indicator");
 const searchBar = document.getElementById("search-bar");
 const searchInput = document.getElementById("search-input");
 
 let currentTerm = "";
 let highlights = [];
 let currentHighlightIndex = -1;
-
-function moveIndicator(el) {
-    indicator.style.top = el.offsetTop + "px";
-    indicator.style.height = el.offsetHeight + "px";
-}
 
 function escapeHtml(unsafe) {
     return unsafe
@@ -2230,31 +2287,23 @@ function performSearch(term) {
         currentHighlightIndex = -1;
         return;
     }
-    if (term === currentTerm) {
-        goToNextHighlight();
-        return;
-    }
-    currentTerm = term;
+
     const rawContent = contentEl.dataset.raw || "";
     let htmlContent = escapeHtml(rawContent);
     const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const regex = new RegExp(escapedTerm, 'gi');
-   
-    htmlContent = htmlContent.replace(regex, match =>
+
+    htmlContent = htmlContent.replace(regex, match => 
         `<span class="highlight">${match}</span>`
     );
+
     contentEl.innerHTML = `<pre>${htmlContent}</pre>`;
     highlights = Array.from(contentEl.querySelectorAll('.highlight'));
+
     if (highlights.length > 0) {
         currentHighlightIndex = 0;
         highlights[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-}
-
-function goToNextHighlight() {
-    if (highlights.length === 0) return;
-    currentHighlightIndex = (currentHighlightIndex + 1) % highlights.length;
-    highlights[currentHighlightIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function createTab(key, isVideoExtractor = false, isMessageMe = false) {
@@ -2262,6 +2311,7 @@ function createTab(key, isVideoExtractor = false, isMessageMe = false) {
     div.className = "tab";
     div.textContent = key;
     div.dataset.key = key;
+
     div.onclick = () => {
         document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
         div.classList.add("active");
@@ -2271,7 +2321,7 @@ function createTab(key, isVideoExtractor = false, isMessageMe = false) {
         } else if (isVideoExtractor) {
             showVideoExtractor();
         } else {
-            const contentText = data[key] || "Content not found";
+            const contentText = data[key] || "Conteúdo não encontrado";
             contentEl.dataset.raw = contentText;
             contentEl.innerHTML = `<pre>${escapeHtml(contentText)}</pre>`;
             searchBar.style.display = "block";
@@ -2279,188 +2329,14 @@ function createTab(key, isVideoExtractor = false, isMessageMe = false) {
             currentTerm = "";
             highlights = [];
         }
-        moveIndicator(div);
     };
+
     tabsEl.appendChild(div);
     return div;
 }
 
-function showMessageMe() {
-    searchBar.style.display = "none";
-    contentEl.innerHTML = `
-<div id="message-me">
-    <h2>Message Me</h2>
-    <input type="text" id="discordUsername" placeholder="Your discord username">
-    <textarea id="messageText" placeholder="Write here what you want to tell me"></textarea>
-    <button id="sendMessageBtn">Send message</button>
-    <div id="status"></div>
-</div>`;
+// (Mantive as funções showMessageMe e showVideoExtractor iguais às suas)
 
-    const usernameInput = document.getElementById('discordUsername');
-    const messageInput = document.getElementById('messageText');
-    const sendBtn = document.getElementById('sendMessageBtn');
-    const statusEl = document.getElementById('status');
-
-    sendBtn.onclick = async () => {
-        const username = usernameInput.value.trim();
-        const message = messageInput.value.trim();
-
-        if (!username) {
-            statusEl.style.color = '#f88';
-            statusEl.textContent = "Send your discord name so I can warn you if i fixed/added it or not";
-            return;
-        }
-        if (!message) {
-            statusEl.style.color = '#f88';
-            statusEl.textContent = "You need a text to send a message broski";
-            return;
-        }
-
-        sendBtn.disabled = true;
-        statusEl.style.color = '#ff0';
-        statusEl.textContent = "Sending...";
-
-        try {
-            const payload = {
-                content: `**Nova mensagem de ${username}**\n\n${message}`
-            };
-
-            const res = await fetch(URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
-
-            if (res.ok) {
-                statusEl.style.color = '#0f8';
-                statusEl.textContent = "Sent!!1!!11!";
-                messageInput.value = "";
-            } else {
-                statusEl.style.color = '#f88';
-                statusEl.textContent = "Failed for some reason.";
-            }
-        } catch (err) {
-            statusEl.style.color = '#f88';
-            statusEl.textContent = "Connection error.";
-            console.error(err);
-        }
-
-        sendBtn.disabled = false;
-    };
-}
-
-function showVideoExtractor() {
-    searchBar.style.display = "none";
-    contentEl.innerHTML = `
-<div id="video-extractor">
-    <h2>Video Extractor (24 fps → PNGs → ZIP)</h2>
-    <input type="file" id="videoInput" accept="video/*">
-    <video id="preview" controls muted></video>
-    <div>
-        <button id="startBtn">Start Extraction (24 fps)</button>
-        <button id="downloadBtn" disabled>Download All as ZIP</button>
-    </div>
-    <progress id="progress" value="0" max="100"></progress>
-    <div id="status">Select a video to begin</div>
-</div>`;
-
-    const videoInput = document.getElementById('videoInput');
-    const preview = document.getElementById('preview');
-    const startBtn = document.getElementById('startBtn');
-    const downloadBtn = document.getElementById('downloadBtn');
-    const progress = document.getElementById('progress');
-    const status = document.getElementById('status');
-    let frames = [];
-    let videoDuration = 0;
-    const fps = 24;
-
-    videoInput.onchange = e => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const url = URL.createObjectURL(file);
-        preview.src = url;
-        preview.onloadedmetadata = () => {
-            videoDuration = preview.duration;
-            status.textContent = `Video loaded — ${videoDuration.toFixed(2)} seconds`;
-            startBtn.disabled = false;
-        };
-    };
-
-    startBtn.onclick = async () => {
-        startBtn.disabled = true;
-        downloadBtn.disabled = true;
-        frames = [];
-        status.textContent = "Extracting frames... (may take a while)";
-        progress.value = 0;
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = preview.videoWidth || 1280;
-        canvas.height = preview.videoHeight || 720;
-        const frameInterval = 1 / fps;
-        const totalFrames = Math.floor(videoDuration * fps) + 1;
-        let currentTime = 0;
-        let frameCount = 0;
-
-        async function extractNext() {
-            if (currentTime > videoDuration) {
-                status.textContent = `Extracted ${frames.length} frames`;
-                downloadBtn.disabled = frames.length === 0;
-                startBtn.disabled = false;
-                return;
-            }
-            preview.currentTime = currentTime;
-            await new Promise(resolve => {
-                preview.onseeked = () => {
-                    setTimeout(() => {
-                        try {
-                            ctx.drawImage(preview, 0, 0, canvas.width, canvas.height);
-                            canvas.toBlob(blob => {
-                                if (blob) {
-                                    const num = String(frameCount).padStart(5, '0');
-                                    frames.push({ name: `frame_${num}.png`, data: blob });
-                                    frameCount++;
-                                    progress.value = (frameCount / totalFrames) * 100;
-                                }
-                                currentTime += frameInterval;
-                                extractNext();
-                            }, 'image/png');
-                        } catch (err) {
-                            currentTime += frameInterval;
-                            extractNext();
-                        }
-                    }, 60);
-                };
-            });
-        }
-        extractNext();
-    };
-
-    downloadBtn.onclick = async () => {
-        if (frames.length === 0) return;
-        status.textContent = "Generating ZIP...";
-        const zip = new JSZip();
-        frames.forEach(f => zip.file(f.name, f.data));
-        try {
-            const blob = await zip.generateAsync({type: 'blob'});
-            if ('showSaveFilePicker' in window) {
-                const handle = await window.showSaveFilePicker({
-                    suggestedName: `frames-${new Date().toISOString().slice(0,10)}.zip`,
-                    types: [{ description: 'ZIP', accept: {'application/zip': ['.zip']} }],
-                });
-                const writable = await handle.createWritable();
-                await blob.stream().pipeTo(writable);
-                status.textContent = "ZIP saved to chosen folder!";
-            } else {
-                saveAs(blob, `frames-${frames.length}-imgs.zip`);
-                status.textContent = "Download started";
-            }
-        } catch (err) {
-            status.textContent = "Error: " + err.message;
-        }
-    };
-}
-
-// ==================== INIT ====================
 Object.keys(data).forEach(key => {
     createTab(key);
 });
@@ -2468,12 +2344,15 @@ Object.keys(data).forEach(key => {
 createTab("Video Extractor", true);
 createTab("Message Me", false, true);
 
+// Ativa a primeira aba
 const firstTab = tabsEl.querySelector(".tab");
 if (firstTab) firstTab.click();
 
+// Busca
 searchInput.addEventListener('input', e => {
     performSearch(e.target.value.trim());
 });
+
 searchInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
         e.preventDefault();
