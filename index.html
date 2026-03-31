@@ -2189,6 +2189,8 @@ Melee4 R forward
     -1.0.3.2
     --Added naginata hit sounds
     --Added 30 emotes(30/145🥀)
+    -1.0.3.2.5
+    ---Fixed Video Extractor not working
 `,
 "My channel": `
    If you wanna support me go to my channel pls i want money
@@ -2336,7 +2338,7 @@ function showVideoExtractor() {
     <progress id="progress" value="0" max="100"></progress>
     <div id="status">Select a video to begin</div>
 </div>`;
-    // (o código do video extractor permanece o mesmo que você tinha)
+    
     const videoInput = document.getElementById('videoInput');
     const preview = document.getElementById('preview');
     const startBtn = document.getElementById('startBtn');
@@ -2360,9 +2362,59 @@ function showVideoExtractor() {
     };
 
     startBtn.onclick = async () => {
-        // ... (mesmo código de extração que você tinha originalmente)
-        // mantido completo, mas por brevidade aqui não repeti tudo novamente
-        // se precisar eu mando a versão completa com essa função também
+        startBtn.onclick = async () => {
+    startBtn.disabled = true;
+    downloadBtn.disabled = true;
+    frames = [];
+    status.textContent = "Extracting frames... (may take a while)";
+    progress.value = 0;
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = preview.videoWidth || 1280;
+    canvas.height = preview.videoHeight || 720;
+
+    const frameInterval = 1 / fps;
+    const totalFrames = Math.floor(videoDuration * fps) + 1;
+    let currentTime = 0;
+    let frameCount = 0;
+
+    async function extractNext() {
+        if (currentTime > videoDuration) {
+            status.textContent = `Extracted ${frames.length} frames`;
+            downloadBtn.disabled = frames.length === 0;
+            startBtn.disabled = false;
+            return;
+        }
+
+        preview.currentTime = currentTime;
+
+        await new Promise(resolve => {
+            preview.onseeked = () => {
+                setTimeout(() => {
+                    try {
+                        ctx.drawImage(preview, 0, 0, canvas.width, canvas.height);
+                        canvas.toBlob(blob => {
+                            if (blob) {
+                                const num = String(frameCount).padStart(5, '0');
+                                frames.push({ name: `frame_${num}.png`, data: blob });
+                                frameCount++;
+                                progress.value = (frameCount / totalFrames) * 100;
+                            }
+                            currentTime += frameInterval;
+                            extractNext();
+                        }, 'image/png');
+                    } catch (err) {
+                        currentTime += frameInterval;
+                        extractNext();
+                    }
+                }, 60);
+            };
+        });
+    }
+
+    extractNext();
+};
     };
 }
 
