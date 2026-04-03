@@ -89,7 +89,7 @@
         <div id="search-bar">
             <input type="text" id="search-input" placeholder="Example: Emotes">
         </div>
-        <div id="content">Loading 😭🥀</div>
+        <div id="content">Loading 😭🥀/if you get this message for too long then it means im updating the site/trying to fix something</div>
     </div>
 </div>
 
@@ -2468,8 +2468,7 @@ function convertBold(text) {
 
 function render(text) {
     const safe = escapeHtml(text);
-    const withBold = convertBold(safe);
-    contentEl.innerHTML = `<pre>${withBold}</pre>`;
+    contentEl.innerHTML = `<pre>${safe}</pre>`;
 }
 
 // ==================== SEARCH DECENTE ====================
@@ -2546,7 +2545,7 @@ function createTab(key, isVideoExtractor = false, isMessageMe = false, isPresets
 
             contentEl.dataset.raw = contentText;
 
-           //-- render(contentText);
+            render(contentText);
 
             searchInput.value = "";
             searchInput.parentElement.style.display = "block";
