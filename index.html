@@ -2455,55 +2455,69 @@ const searchInput = document.getElementById("search-input");
 let highlights = [];
 let currentHighlightIndex = -1;
 
-function escapeHtml(unsafe) {
-    return unsafe
+function escapeHtml(text) {
+    return text
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(/>/g, "&gt;");
 }
 
 function convertBold(text) {
-    return text.replace(/\*\*([^*]+)\*\*/g, '<span class="bold">$1</span>');
+    return text.replace(/\*\*(.*?)\*\*/g, '<span class="bold">$1</span>');
 }
 
-// ==================== PERFORM SEARCH (CORRIGIDO) ====================
+function render(text) {
+    const safe = escapeHtml(text);
+    const withBold = convertBold(safe);
+    contentEl.innerHTML = `<pre>${withBold}</pre>`;
+}
+
+// ==================== SEARCH DECENTE ====================
 function performSearch(term) {
     if (!contentEl.dataset.raw) return;
 
     const raw = contentEl.dataset.raw;
 
+    highlights = [];
+    currentHighlightIndex = -1;
+
     if (!term || !term.trim()) {
-        const processed = convertBold(escapeHtml(raw));
-        contentEl.innerHTML = `<pre>${processed}</pre>`;
-        highlights = [];
-        currentHighlightIndex = -1;
+        render(raw);
         return;
     }
 
-    let textWithBold = convertBold(raw);
-    let escaped = escapeHtml(textWithBold);
+    const query = term.toLowerCase().trim();
 
-    const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(escapedTerm, 'gi');
+    const lines = raw.split("\n");
 
-    escaped = escaped.replace(regex, match => 
-        `<span class="highlight">${match}</span>`
-    );
+    const filtered = lines.filter(line => {
+        const clean = line
+            .replace(/\d+/g, "")
+            .toLowerCase();
+        return clean.includes(query);
+    });
 
-    contentEl.innerHTML = `<pre>${escaped}</pre>`;
+    const processedLines = filtered.map(line => {
+        const safe = escapeHtml(line);
+        const withBold = convertBold(safe);
 
-    highlights = Array.from(contentEl.querySelectorAll('.highlight'));
+        const escapedTerm = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`(${escapedTerm})`, "gi");
+
+        return withBold.replace(regex, `<span class="highlight">$1</span>`);
+    });
+
+    contentEl.innerHTML = `<pre>${processedLines.join("\n")}</pre>`;
+
+    highlights = Array.from(contentEl.querySelectorAll(".highlight"));
     currentHighlightIndex = highlights.length > 0 ? 0 : -1;
 
-    if (highlights.length > 0) {
-        highlights[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    scrollToHighlight();
 }
 
 function scrollToHighlight() {
     if (highlights.length === 0 || currentHighlightIndex < 0) return;
+
     highlights[currentHighlightIndex].scrollIntoView({
         behavior: "smooth",
         block: "center"
@@ -2516,6 +2530,7 @@ function createTab(key, isVideoExtractor = false, isMessageMe = false, isPresets
     div.className = "tab";
     div.textContent = key;
     div.dataset.key = key;
+
     div.onclick = () => {
         document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
         div.classList.add("active");
@@ -2528,15 +2543,19 @@ function createTab(key, isVideoExtractor = false, isMessageMe = false, isPresets
             showVideoExtractor();
         } else {
             let contentText = data[key] || "Content not found";
+
             contentEl.dataset.raw = contentText;
-            
-            const processed = convertBold(escapeHtml(contentText));
-            contentEl.innerHTML = `<pre>${processed}</pre>`;
-            
+
+            render(contentText);
+
             searchInput.value = "";
             searchInput.parentElement.style.display = "block";
+
+            highlights = [];
+            currentHighlightIndex = -1;
         }
     };
+
     tabsEl.appendChild(div);
 }
 
