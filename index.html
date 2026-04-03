@@ -2485,34 +2485,20 @@ function performSearch(term) {
         return;
     }
 
-    const query = term.toLowerCase().trim();
+    const safe = escapeHtml(raw);
 
-    const lines = raw.split("\n");
+    const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escapedTerm})`, "gi");
 
-    const filtered = lines.filter(line => {
-        const clean = line
-            .replace(/\d+/g, "")
-            .toLowerCase();
-        return clean.includes(query);
-    });
+    const highlighted = safe.replace(regex, `<span class="highlight">$1</span>`);
 
-    const processedLines = filtered.map(line => {
-       const safe = escapeHtml(line);
-   
-       const escapedTerm = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-       const regex = new RegExp(`(${escapedTerm})`, "gi");
-   
-       return safe.replace(regex, `<span class="highlight">$1</span>`);
-    });
-
-    contentEl.innerHTML = `<pre>${processedLines.join("\n")}</pre>`;
+    contentEl.innerHTML = `<pre>${highlighted}</pre>`;
 
     highlights = Array.from(contentEl.querySelectorAll(".highlight"));
     currentHighlightIndex = highlights.length > 0 ? 0 : -1;
 
     scrollToHighlight();
 }
-
 function scrollToHighlight() {
     if (highlights.length === 0 || currentHighlightIndex < 0) return;
 
