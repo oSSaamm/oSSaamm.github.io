@@ -1514,9 +1514,9 @@ Hit4 - 70397374333185
 
 **Awakening:**
 89655786683392 UltimateStart
-137364280179144 Ultimate
+137364280179144 Aizo Instrumentals
 129375015802470 Jingle
-92475178445200 UltimateVocals
+92475178445200 Aizo Vocals
 117201550249538 UltimateFire
 8595975878 Hit
 
@@ -2430,10 +2430,14 @@ Melee4 R forward
     -Added Hit sound to Absolute Destruction
     -Added M1 Swings from Absolute Mechamaru
     -Added Ryu's Sounds
+    -Stylized Video Extractor and Message Me tabs
+    -Now pressing enter while searching will go to the next result
     -Added AIZO music in Ryu's awakening
     -Added DOMAIN CLASH music
     -Added new Presets tab
-    -Added spaces between all moves so dyslexic users can enjoy more using the site
+    -Added spaces and bold between all moves so dyslexic users can enjoy more using the site
+    -Changed Tabs position
+    -Improved Visuals overall for the site
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
@@ -2451,6 +2455,21 @@ const tabsEl = document.getElementById("tabs");
 const contentEl = document.getElementById("content");
 const searchInput = document.getElementById("search-input");
 
+searchInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+
+        if (highlights.length === 0) return;
+        currentHighlightIndex = (currentHighlightIndex + 1) % highlights.length;
+
+        scrollToHighlight();
+    }
+});
+
+searchInput.addEventListener('input', e => {
+    performSearch(e.target.value.trim());
+});
+
 function escapeHtml(unsafe) {
     return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
                  .replace(/"/g, "&quot;").replace(/'/g, "&#039;");
@@ -2460,26 +2479,54 @@ function convertBold(text) {
     return text.replace(/\*\*([^*]+)\*\*/g, '<span class="bold">$1</span>');
 }
 
+let currentHighlightIndex = -1;
+let highlights = [];
+
 function performSearch(term) {
     if (!contentEl.dataset.raw) return;
 
     const raw = contentEl.dataset.raw;
 
     if (!term || !term.trim()) {
-        contentEl.innerHTML = `<pre>${convertBold(escapeHtml(raw))}</pre>`;
+        const processed = convertBold(escapeHtml(raw));
+        contentEl.innerHTML = `<pre>${processed}</pre>`;
+        highlights = [];
+        currentHighlightIndex = -1;
         return;
     }
 
-    let textWithBold = convertBold(raw);
-    let escaped = escapeHtml(textWithBold);
-    const regex = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+    let withBold = convertBold(raw);
+    
+    let escaped = escapeHtml(withBold);
+    
+    const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(escapedTerm, 'gi');
     
     escaped = escaped.replace(regex, match => 
         `<span class="highlight">${match}</span>`
     );
 
     contentEl.innerHTML = `<pre>${escaped}</pre>`;
+
+    highlights = Array.from(contentEl.querySelectorAll('.highlight'));
+    currentHighlightIndex = -1;
+
+    if (highlights.length > 0) {
+        currentHighlightIndex = 0;
+        scrollToHighlight();
+    }
 }
+
+function scrollToHighlight() {
+    if (highlights.length === 0 || currentHighlightIndex < 0) return;
+    
+    const current = highlights[currentHighlightIndex];
+    current.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
 // ==================== PRESETS NEW TAB ====================
 function showPresets() {
     searchInput.parentElement.style.display = "none";
@@ -2557,7 +2604,7 @@ function showMessageMe() {
         <input type="text" id="discordUsername" placeholder="Your Discord username (ex: osam#1234)" 
                style="width: 100%; padding: 16px; margin-bottom: 16px; background: #222; color: #fff; border: 1px solid #555; border-radius: 10px; font-size: 16px;">
         
-        <textarea id="messageText" placeholder="Write your message, suggestion, bug report or anything you want..." 
+        <textarea id="messageText" placeholder="Write your message, suggestion, bug report or anything you want... JUST CHECK IF I DIDNT PUT IT ALREADY!!!!" 
                   style="width: 100%; min-height: 220px; padding: 16px; background: #222; color: #fff; border: 1px solid #555; border-radius: 10px; font-size: 16px; resize: vertical;"></textarea>
         
         <button id="sendMessageBtn" 
@@ -2628,7 +2675,7 @@ function showVideoExtractor() {
     
     contentEl.innerHTML = `
     <div id="video-extractor" style="max-width: 740px; margin: 30px auto; padding: 35px; background: #1a1a1a; border-radius: 16px; border: 1px solid #333;">
-        <h2 style="color: #ffd400; text-align: center; margin-bottom: 10px;">🎥 Video Frame Extractor</h2>
+        <h2 style="color: #ffd400; text-align: center; margin-bottom: 10px;">Video Frame Extractor</h2>
         <p style="text-align: center; color: #aaa; margin-bottom: 30px;">Extract all frames from a video at 24 fps (PNG + ZIP)</p>
         
         <input type="file" id="videoInput" accept="video/*" 
