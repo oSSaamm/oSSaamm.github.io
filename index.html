@@ -2479,8 +2479,8 @@ function convertBold(text) {
     return text.replace(/\*\*([^*]+)\*\*/g, '<span class="bold">$1</span>');
 }
 
-let currentHighlightIndex = -1;
 let highlights = [];
+let currentHighlightIndex = -1;
 
 function performSearch(term) {
     if (!contentEl.dataset.raw) return;
@@ -2488,6 +2488,7 @@ function performSearch(term) {
     const raw = contentEl.dataset.raw;
 
     if (!term || !term.trim()) {
+        // Sem pesquisa → aplica negrito normalmente
         const processed = convertBold(escapeHtml(raw));
         contentEl.innerHTML = `<pre>${processed}</pre>`;
         highlights = [];
@@ -2495,28 +2496,31 @@ function performSearch(term) {
         return;
     }
 
-    let withBold = convertBold(raw);
-    
-    let escaped = escapeHtml(withBold);
-    
+    // === COM PESQUISA ===
+    // 1. Aplica o negrito primeiro (antes de escapar)
+    let textWithBold = convertBold(raw);
+
+    // 2. Escapa o HTML, mas PRESERVA as tags <span class="bold">
+    let escaped = escapeHtml(textWithBold);
+
+    // 3. Aplica o highlight da pesquisa
     const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const regex = new RegExp(escapedTerm, 'gi');
-    
+
     escaped = escaped.replace(regex, match => 
         `<span class="highlight">${match}</span>`
     );
 
     contentEl.innerHTML = `<pre>${escaped}</pre>`;
 
+    // Atualiza a lista de highlights para navegação com Enter
     highlights = Array.from(contentEl.querySelectorAll('.highlight'));
-    currentHighlightIndex = -1;
+    currentHighlightIndex = highlights.length > 0 ? 0 : -1;
 
     if (highlights.length > 0) {
-        currentHighlightIndex = 0;
-        scrollToHighlight();
+        highlights[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 }
-
 function scrollToHighlight() {
     if (highlights.length === 0 || currentHighlightIndex < 0) return;
     
