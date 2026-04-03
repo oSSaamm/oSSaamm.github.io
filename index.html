@@ -2460,19 +2460,6 @@ function convertBold(text) {
     return text.replace(/\*\*([^*]+)\*\*/g, '<span class="bold">$1</span>');
 }
 
-function typeWriter(element, htmlText, speed = 5) {
-    element.innerHTML = "";
-    let i = 0;
-    function type() {
-        if (i < htmlText.length) {
-            element.innerHTML += htmlText.charAt(i) === '\n' ? '<br>' : htmlText.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    type();
-}
-
 function performSearch(term) {
     if (!term.trim()) {
         const raw = contentEl.dataset.raw || "";
@@ -2540,9 +2527,11 @@ function createTab(key, isVideoExtractor = false, isMessageMe = false, isPresets
         } else {
             let contentText = data[key] || "Content not found";
             contentEl.dataset.raw = contentText;
+            
             const processed = convertBold(escapeHtml(contentText));
-            contentEl.innerHTML = `<pre></pre>`;
-            typeWriter(contentEl.querySelector("pre"), processed);
+            
+            contentEl.innerHTML = `<pre>${processed}</pre>`;
+            
             searchInput.value = "";
             searchInput.parentElement.style.display = "block";
         }
