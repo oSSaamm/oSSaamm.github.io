@@ -2461,19 +2461,25 @@ function convertBold(text) {
 }
 
 function performSearch(term) {
-    if (!term.trim()) {
-        const raw = contentEl.dataset.raw || "";
+    if (!contentEl.dataset.raw) return;
+
+    const raw = contentEl.dataset.raw;
+
+    if (!term || !term.trim()) {
         contentEl.innerHTML = `<pre>${convertBold(escapeHtml(raw))}</pre>`;
         return;
     }
-    const rawContent = contentEl.dataset.raw || "";
-    let htmlContent = escapeHtml(rawContent);
-    const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(escapedTerm, 'gi');
-    htmlContent = htmlContent.replace(regex, match => `<span class="highlight">${match}</span>`);
-    contentEl.innerHTML = `<pre>${htmlContent}</pre>`;
-}
 
+    let textWithBold = convertBold(raw);
+    let escaped = escapeHtml(textWithBold);
+    const regex = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+    
+    escaped = escaped.replace(regex, match => 
+        `<span class="highlight">${match}</span>`
+    );
+
+    contentEl.innerHTML = `<pre>${escaped}</pre>`;
+}
 // ==================== PRESETS NEW TAB ====================
 function showPresets() {
     searchInput.parentElement.style.display = "none";
@@ -2541,78 +2547,124 @@ function createTab(key, isVideoExtractor = false, isMessageMe = false, isPresets
 
 function showMessageMe() {
     searchInput.parentElement.style.display = "none";
+    
     contentEl.innerHTML = `
-<div id="message-me">
-    <h2>Message Me</h2>
-    <input type="text" id="discordUsername" placeholder="Your discord username">
-    <textarea id="messageText" placeholder="Write here what you want to tell me"></textarea>
-    <button id="sendMessageBtn">Send message</button>
-    <div id="status"></div>
-</div>`;
+    <div id="message-me" style="max-width: 620px; margin: 40px auto; padding: 35px; background: #1a1a1a; border-radius: 16px; border: 1px solid #333;">
+        <h2 style="color: #ffd400; text-align: center; margin-bottom: 30px; font-size: 28px;">
+            💬 Message Me
+        </h2>
+        
+        <input type="text" id="discordUsername" placeholder="Your Discord username (ex: osam#1234)" 
+               style="width: 100%; padding: 16px; margin-bottom: 16px; background: #222; color: #fff; border: 1px solid #555; border-radius: 10px; font-size: 16px;">
+        
+        <textarea id="messageText" placeholder="Write your message, suggestion, bug report or anything you want..." 
+                  style="width: 100%; min-height: 220px; padding: 16px; background: #222; color: #fff; border: 1px solid #555; border-radius: 10px; font-size: 16px; resize: vertical;"></textarea>
+        
+        <button id="sendMessageBtn" 
+                style="width: 100%; padding: 18px; background: #ffd400; color: #111; border: none; border-radius: 10px; font-weight: bold; font-size: 17px; cursor: pointer; margin-top: 10px;">
+            Send Message
+        </button>
+        
+        <div id="status" style="margin-top: 15px; text-align: center; font-size: 15px; min-height: 24px;"></div>
+    </div>`;
+
     const usernameInput = document.getElementById('discordUsername');
     const messageInput = document.getElementById('messageText');
     const sendBtn = document.getElementById('sendMessageBtn');
     const statusEl = document.getElementById('status');
+
     sendBtn.onclick = async () => {
         const username = usernameInput.value.trim();
         const message = messageInput.value.trim();
+
         if (!username) {
-            statusEl.style.color = '#f88';
-            statusEl.textContent = "Send your discord name so I can warn you if i fixed/added it or not";
+            statusEl.style.color = '#ff6666';
+            statusEl.textContent = "❌ Please enter your Discord username";
             return;
         }
         if (!message) {
-            statusEl.style.color = '#f88';
-            statusEl.textContent = "You need a text to send a message broski";
+            statusEl.style.color = '#ff6666';
+            statusEl.textContent = "❌ Please write a message";
             return;
         }
+
         sendBtn.disabled = true;
-        statusEl.style.color = '#ff0';
-        statusEl.textContent = "Sending...";
+        sendBtn.textContent = "Sending...";
+        statusEl.style.color = '#ffd400';
+        statusEl.textContent = "Sending message...";
+
         try {
-            const payload = { content: `**Nova mensagem de ${username}**\n\n${message}` };
+            const payload = {
+                content: `**New message from ${username}**\n\n${message}`
+            };
             const res = await fetch("https://discord.com/api/webhooks/1487825172386939012/j-DMbySnWLAkkjWjff17AVh7kslDai6WYvNcFFbIN66H-v6wXC_GV5e_lSU3XyMDSbcw", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
             });
+
             if (res.ok) {
-                statusEl.style.color = '#0f8';
-                statusEl.textContent = "Sent!!1!!11!";
+                statusEl.style.color = '#00ff88';
+                statusEl.textContent = "✅ Message sent successfully!";
                 messageInput.value = "";
             } else {
-                statusEl.style.color = '#f88';
-                statusEl.textContent = "Failed for some reason.";
+                statusEl.style.color = '#ff6666';
+                statusEl.textContent = "❌ Failed to send. Try again.";
             }
         } catch (err) {
-            statusEl.style.color = '#f88';
-            statusEl.textContent = "Connection error.";
+            statusEl.style.color = '#ff6666';
+            statusEl.textContent = "❌ Connection error. Check your internet.";
             console.error(err);
         }
+
         sendBtn.disabled = false;
+        sendBtn.textContent = "Send Message";
     };
 }
 
+// ==================== SHOW VIDEO EXTRACTOR (English + Stylized) ====================
 function showVideoExtractor() {
     searchInput.parentElement.style.display = "none";
+    
     contentEl.innerHTML = `
-<div id="video-extractor">
-    <h2>Video Extractor (24 fps → PNGs → ZIP)</h2>
-    <input type="file" id="videoInput" accept="video/*">
-    <video id="preview" controls muted></video>
-    <div>
-        <button id="startBtn">Start Extraction (24 fps)</button>
-        <button id="downloadBtn" disabled>Download All as ZIP</button>
-    </div>
-    <progress id="progress" value="0" max="100"></progress>
-    <div id="status">Select a video to begin</div>
-</div>`;
+    <div id="video-extractor" style="max-width: 740px; margin: 30px auto; padding: 35px; background: #1a1a1a; border-radius: 16px; border: 1px solid #333;">
+        <h2 style="color: #ffd400; text-align: center; margin-bottom: 10px;">🎥 Video Frame Extractor</h2>
+        <p style="text-align: center; color: #aaa; margin-bottom: 30px;">Extract all frames from a video at 24 fps (PNG + ZIP)</p>
+        
+        <input type="file" id="videoInput" accept="video/*" 
+               style="width: 100%; padding: 14px; background: #222; color: #ddd; border: 2px dashed #555; border-radius: 12px; cursor: pointer; margin-bottom: 25px;">
+        
+        <video id="preview" controls muted 
+               style="width: 100%; max-height: 440px; background: #000; border-radius: 12px; margin-bottom: 25px; display: none;"></video>
+        
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button id="startBtn" 
+                    style="flex: 1; padding: 16px; background: #ffd400; color: #111; border: none; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer;">
+                ▶️ Start Extraction (24 fps)
+            </button>
+            
+            <button id="downloadBtn" disabled
+                    style="flex: 1; padding: 16px; background: #333; color: #aaa; border: none; border-radius: 10px; font-weight: bold; font-size: 16px;">
+                ⬇️ Download ZIP
+            </button>
+        </div>
+        
+        <progress id="progress" value="0" max="100" 
+                  style="width: 100%; height: 14px; margin: 25px 0; border-radius: 999px; background: #333;"></progress>
+        
+        <div id="status" style="text-align: center; font-size: 15px; color: #aaa; min-height: 28px;">
+            Select a video to begin
+        </div>
+    </div>`;
+
+    // Código do Video Extractor (mantido funcional)
     const videoInput = document.getElementById('videoInput');
     const preview = document.getElementById('preview');
     const startBtn = document.getElementById('startBtn');
     const downloadBtn = document.getElementById('downloadBtn');
     const progress = document.getElementById('progress');
     const status = document.getElementById('status');
+    
     let frames = [];
     let videoDuration = 0;
     const fps = 24;
@@ -2620,15 +2672,17 @@ function showVideoExtractor() {
     videoInput.onchange = e => {
         const file = e.target.files[0];
         if (!file) return;
+        
         const url = URL.createObjectURL(file);
         preview.src = url;
+        preview.style.display = "block";
+        
         preview.onloadedmetadata = () => {
             videoDuration = preview.duration;
-            status.textContent = `Video loaded — ${videoDuration.toFixed(2)} seconds`;
+            status.textContent = `✅ Video loaded — ${videoDuration.toFixed(1)} seconds`;
             startBtn.disabled = false;
         };
     };
-
     startBtn.onclick = async () => {
         startBtn.disabled = true;
         downloadBtn.disabled = true;
