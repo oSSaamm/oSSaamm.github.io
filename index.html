@@ -2497,13 +2497,12 @@ function performSearch(term) {
     });
 
     const processedLines = filtered.map(line => {
-        const safe = escapeHtml(line);
-        const withBold = convertBold(safe);
-
-        const escapedTerm = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const regex = new RegExp(`(${escapedTerm})`, "gi");
-
-        return withBold.replace(regex, `<span class="highlight">$1</span>`);
+       const safe = escapeHtml(line);
+   
+       const escapedTerm = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+       const regex = new RegExp(`(${escapedTerm})`, "gi");
+   
+       return safe.replace(regex, `<span class="highlight">$1</span>`);
     });
 
     contentEl.innerHTML = `<pre>${processedLines.join("\n")}</pre>`;
@@ -2614,7 +2613,6 @@ function showMessageMe() {
         <div id="status" style="margin-top: 15px; text-align: center; font-size: 15px; min-height: 24px;"></div>
     </div>`;
 
-    // ... (lógica de envio mantida igual à anterior)
     const usernameInput = document.getElementById('discordUsername');
     const messageInput = document.getElementById('messageText');
     const sendBtn = document.getElementById('sendMessageBtn');
