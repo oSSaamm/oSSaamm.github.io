@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Skillbuilder's Help + Video Extractor</title>
+<title>Skillbuilder's Help</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <style>
     * { box-sizing: border-box; }
@@ -2455,40 +2455,17 @@ const tabsEl = document.getElementById("tabs");
 const contentEl = document.getElementById("content");
 const searchInput = document.getElementById("search-input");
 
-searchInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-
-        if (highlights.length === 0) return;
-        currentHighlightIndex = (currentHighlightIndex + 1) % highlights.length;
-
-        scrollToHighlight();
-    }
-});
-
-searchInput.addEventListener('input', e => {
-    performSearch(e.target.value.trim());
-});
-
-function escapeHtml(unsafe) {
-    return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-                 .replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-}
-
-function convertBold(text) {
-    return text.replace(/\*\*([^*]+)\*\*/g, '<span class="bold">$1</span>');
-}
-
 let highlights = [];
 let currentHighlightIndex = -1;
 
+// ==================== PERFORM SEARCH (CORRIGIDO) ====================
 function performSearch(term) {
     if (!contentEl.dataset.raw) return;
 
     const raw = contentEl.dataset.raw;
 
     if (!term || !term.trim()) {
-        // Sem pesquisa → aplica negrito normalmente
+        // Sem pesquisa → negrito normal
         const processed = convertBold(escapeHtml(raw));
         contentEl.innerHTML = `<pre>${processed}</pre>`;
         highlights = [];
@@ -2497,13 +2474,13 @@ function performSearch(term) {
     }
 
     // === COM PESQUISA ===
-    // 1. Aplica o negrito primeiro (antes de escapar)
+    // 1. Aplica negrito ANTES de escapar
     let textWithBold = convertBold(raw);
 
-    // 2. Escapa o HTML, mas PRESERVA as tags <span class="bold">
+    // 2. Escapa o texto (mantém as tags <span class="bold"> intactas)
     let escaped = escapeHtml(textWithBold);
 
-    // 3. Aplica o highlight da pesquisa
+    // 3. Aplica highlight da pesquisa
     const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const regex = new RegExp(escapedTerm, 'gi');
 
@@ -2513,7 +2490,7 @@ function performSearch(term) {
 
     contentEl.innerHTML = `<pre>${escaped}</pre>`;
 
-    // Atualiza a lista de highlights para navegação com Enter
+    // Atualiza lista de highlights
     highlights = Array.from(contentEl.querySelectorAll('.highlight'));
     currentHighlightIndex = highlights.length > 0 ? 0 : -1;
 
@@ -2521,6 +2498,8 @@ function performSearch(term) {
         highlights[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 }
+
+// ==================== SCROLL TO HIGHLIGHT ====================
 function scrollToHighlight() {
     if (highlights.length === 0 || currentHighlightIndex < 0) return;
     
@@ -2530,6 +2509,22 @@ function scrollToHighlight() {
         block: "center"
     });
 }
+
+// ==================== EVENT LISTENERS ====================
+searchInput.addEventListener('input', e => {
+    performSearch(e.target.value.trim());
+});
+
+searchInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+        e.preventDefault();   // Impede descer a página
+
+        if (highlights.length === 0) return;
+
+        currentHighlightIndex = (currentHighlightIndex + 1) % highlights.length;
+        scrollToHighlight();
+    }
+});
 
 // ==================== PRESETS NEW TAB ====================
 function showPresets() {
