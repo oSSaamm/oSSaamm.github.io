@@ -2438,6 +2438,8 @@ Melee4 R forward
     -Added spaces and bold between all moves so dyslexic users can enjoy more using the site
     -Changed Tabs position
     -Improved Visuals overall for the site
+    -1.0.4.1
+    --Fixed Video Extractor
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
@@ -2654,7 +2656,7 @@ function showVideoExtractor() {
     
     contentEl.innerHTML = `
     <div style="max-width: 740px; margin: 30px auto; padding: 35px; background: #1a1a1a; border-radius: 16px; border: 1px solid #333;">
-        <h2 style="color: #ffd400; text-align: center; margin-bottom: 10px;">🎥 Video Frame Extractor</h2>
+        <h2 style="color: #ffd400; text-align: center; margin-bottom: 10px;">Video Frame Extractor</h2>
         <p style="text-align: center; color: #aaa; margin-bottom: 30px;">Extract all frames from a video at 24 fps (PNG + ZIP)</p>
         
         <input type="file" id="videoInput" accept="video/*" 
@@ -2709,7 +2711,7 @@ function showVideoExtractor() {
     };
 
     startBtn.onclick = async () => {
-        // ... (seu código de extração de frames continua aqui)
+       
         startBtn.disabled = true;
         downloadBtn.disabled = true;
         frames = [];
@@ -2757,6 +2759,31 @@ function showVideoExtractor() {
         }
         extractNext();
     };
+   downloadBtn.onclick = async () => {
+       if (frames.length === 0) return;
+   
+       downloadBtn.disabled = true;
+       status.textContent = "Creating ZIP...";
+   
+       const zip = new JSZip();
+   
+       for (let i = 0; i < frames.length; i++) {
+           zip.file(frames[i].name, frames[i].data);
+       }
+   
+       const content = await zip.generateAsync({ type: "blob" });
+   
+       const url = URL.createObjectURL(content);
+       const a = document.createElement("a");
+       a.href = url;
+       a.download = "frames.zip";
+       a.click();
+   
+       URL.revokeObjectURL(url);
+   
+       status.textContent = "ZIP downloaded ✅";
+       downloadBtn.disabled = false;
+   };
 }
 
 // ==================== INIT ====================
