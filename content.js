@@ -875,6 +875,7 @@ mix of normals m1s
 9114314398 BlackFlash
 ---
 **Higurama:**
+
 **Extended Swings:**
 4571259077 Swing
 8595975878 Hit
@@ -895,6 +896,7 @@ mix of normals m1s
 87590911386077 JudgeReachStart
 102880207942198 JudgeReachSwing
 105213688680216 JudgeReach
+108121946929288 JudgeReachFinisher
 
 **Twirling Strikes:**
 91477583246788 Start
@@ -2408,6 +2410,7 @@ Melee4 R forward
     -Added Ultrakill **Parry** sound to **Coin**
     -Added **Finisher** sound to **Justice Served**
     -Fixed **Message Me**
+    -Added **JudgeReachFinisher** to **Higurama**
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
