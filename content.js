@@ -2407,6 +2407,7 @@ Melee4 R forward
     -Added **Heian WCS** **voiceline** and **startup**
     -Added Ultrakill **Parry** sound to **Coin**
     -Added **Finisher** sound to **Justice Served**
+    -Fixed **Message Me**
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
