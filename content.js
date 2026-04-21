@@ -2411,6 +2411,8 @@ Melee4 R forward
     -Added **Finisher** sound to **Justice Served**
     -Fixed **Message Me**
     -Added **JudgeReachFinisher** to **Higurama**
+    -1.0.5.1
+    --Fixed **Presets** setting your clipboard to "undefined"
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
