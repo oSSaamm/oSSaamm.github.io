@@ -2416,6 +2416,7 @@ Melee4 R forward
     --Fixed **Presets** setting your clipboard to "undefined"
     -1.0.5.2
     --Added **Accurate M1s** preset to **Presets**
+    --Changed from **Alert** to **Notification** on the **Update LOG**
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
