@@ -96,12 +96,48 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 <script src="./perfection.js"></script>
 <script src="./yuji.js"></script>
+<script src="./m1.js"></script>
 <script type="module">
 import { data } from "./content.js"
-alert(
-`Current Version: 1.0.5
-Check the update log to know more`
-)
+const CURRENT_VERSION = "1.0.5.20"
+
+function initUpdateSystem() {
+    if (!localStorage.getItem("visited")) {
+        localStorage.setItem("visited", "true")
+    }
+
+    const lastSeenVersion = localStorage.getItem("lastSeenVersion")
+
+    if (lastSeenVersion !== CURRENT_VERSION) {
+        showUpdateNotification()
+    }
+}
+
+function showUpdateNotification() {
+    const updateTab = Array.from(document.querySelectorAll(".tab"))
+        .find(tab => tab.dataset.key.toLowerCase().includes("update"))
+
+    if (!updateTab) {
+        console.log("aba de update não encontrada 💀")
+        return
+    }
+
+    let badge = document.createElement("span")
+    badge.textContent = "1"
+    badge.style.marginLeft = "6px"
+    badge.style.background = "#ffd400"
+    badge.style.color = "#111"
+    badge.style.borderRadius = "50%"
+    badge.style.padding = "2px 6px"
+    badge.style.fontSize = "12px"
+
+    updateTab.appendChild(badge)
+
+    updateTab.addEventListener("click", () => {
+        localStorage.setItem("lastSeenVersion", CURRENT_VERSION)
+        badge.remove()
+    }, { once: true })
+}
 
 // ==================== FUNCS ====================
 const tabsEl = document.getElementById("tabs");
@@ -215,6 +251,7 @@ function showPresets() {
      const presets = [
         { name: "Yuji OLD", text: window.YujiPreset },
        { name: "Perfection OLD", text: window.MahitoPreset},
+       { name: "Accurate M1",text: window.m1Preset}
     ];
 
     presets.forEach(p => {
@@ -448,6 +485,7 @@ Object.keys(data).forEach(key => createTab(key));
 createTab("Presets", false, false, true);
 createTab("Video Extractor", true);
 createTab("Message Me", false, true);
+initUpdateSystem();
 
 const firstTab = tabsEl.querySelector(".tab");
 if (firstTab) firstTab.click();
