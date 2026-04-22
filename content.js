@@ -1871,7 +1871,8 @@ mix of m1s
 91971313816789 qte_1
 133545655546336 qte_2
 ---
-**Emotes:**
+`,
+    "Emotes": `
 **Conga:**
 1840682726 Music
 
@@ -1963,7 +1964,7 @@ mix of m1s
 
 **Cursed Child:**
 109314500910458 Music
-`,
+    `,
     "Punches + Direction": `
 Everything under here is by Apple Lover
 Key: left arm =L right arm = R both =B
@@ -2413,6 +2414,8 @@ Melee4 R forward
     -Added **JudgeReachFinisher** to **Higurama**
     -1.0.5.1
     --Fixed **Presets** setting your clipboard to "undefined"
+    -1.0.5.2
+    --Added **Accurate M1s** preset to **Presets**
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
