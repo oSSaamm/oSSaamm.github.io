@@ -96,6 +96,9 @@ export const data = {
 4306994267 Block1
 4306994664 Block2
 4306994923 Block3
+**MetalHit**(plays alongside with )
+9125669515 Block1
+9116618112 Block3
 
 **M1:**
 
@@ -312,15 +315,18 @@ Im not fucking doing it it is a mix of normal M1s hit
 4059009185 Swing
 5795505380 Divergent
 7515452875 DivergentHit
-
 **— Black Flash:**
 12764933067 BlackFlashSparks
-9114314398 BlackFlash
-112426502291350 PerfectHit (back)
-
+9114314398 BlackFlash (Front Hit)
+112426502291350 PerfectHit (Black Flash Chain)
 **— Finisher:**
 12764933067 BlackFlashHit
 12761286504 Voice (Kôkusen)
+**— 4th black flash**
+102672006215074 Startup
+12764933067 BlackFlashSparks
+9114314398 BlackFlash
+93167187278849  Music
 
 **Manji Kick:**
 9125615451 Startup
@@ -1146,6 +1152,7 @@ mix of swings and hit of his m1s
 139616349986648 FloorClimb
 111234176541963 VideoAppear
 134118844472163 VideoEnd
+108742052808505 Hurt
 
 **Miracle Cannon:**
 93972901144059 AttemptCharge
@@ -2417,6 +2424,10 @@ Melee4 R forward
     -1.0.5.2
     --Added **Accurate M1s** preset to **Presets**
     --Changed from **Alert** to **Notification** on the **Update LOG**
+    -1.0.5.3
+    --Added **MetalHit** Block Sound
+    --Added **4th black flash** to **Yuji**
+    --Added **ROBOOOOOT** hurt sound to **Mechamaru**
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
