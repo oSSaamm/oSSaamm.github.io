@@ -1,6 +1,6 @@
 export const data = {
     "ALL JJS Sounds": `
-**Credits:** oSam aka pinguimdoimalia (site owner) and his friend
+**Site Owner:** **oSam** aka **pinguimdoimalia** (site owner) and his friend
 
 **DOMAIN CLASH:**
 
@@ -210,7 +210,47 @@ export const data = {
 3059775624 Explode
 
 **Rapid Punches:**
-Im not fucking doing it it is a mix of normal M1s hit
+8595975878 1x
+8595975878 1x
+8595975458 1.2x
+8595975458 1.2x
+8595975878 0.9x
+8595975878 0.9x
+8595974357 1x
+8595974357 1x
+8595975878 1x
+8595975878 1x
+8595974357 1x
+8595974357 1x
+8595974357 1x
+8595974357 1x
+8595975458 1.2x
+8595975458 1.2x
+8595975458 1.2x
+8595975458 1.2x
+8595975878 1x
+8595975878 1x
+8595975878 1x
+8595975878 1x
+8595974357 1x
+8595974357 1x
+8595975878 1x
+8595975878 1x
+8595975458 1.2x
+8595975458 1.2x
+8595975878 1x
+8595975878 1x
+8595975458 1.2x
+8595975458 1.2x
+8595975878 0.9x
+8595975878 0.9x
+8595975458 1.2x
+8595975458 1.2x
+8595975878 1x
+8595975878 1x
+8595974357 1x
+8595974357 1x
+(I did this cuz my friend said i couldn't)
 12764933067 BlackflashHit (1.5x)
 
 **Twofold Kick:**
@@ -2428,6 +2468,8 @@ Melee4 R forward
     --Added **MetalHit** Block Sound
     --Added **4th black flash** to **Yuji**
     --Added **ROBOOOOOT** hurt sound to **Mechamaru**
+    -1.0.5.4
+    --Added **ALL** rapid punches sounds(my friend challenged me)
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
