@@ -100,7 +100,7 @@ export const data = {
 9125669515 Block1
 9116618112 Block3
 
-**M1:**
+**— M1:**
 
 **Normal:**
 4571259077 Swing
@@ -155,6 +155,22 @@ export const data = {
 88685272276380 Hit1
 83770717073727 Hit2
 74317472561001 Hit3
+**-NEW**
+90045339954472  Swing1
+101012088379497 Swing2
+86863533715011  Swing3
+4571259077      Swing4(speed 1.1x)
+75487544146387  Swing4Sword
+85608110116893  Hit1
+71064172624438  Hit2
+119908133360580 Hit3
+8595974357      Hit4
+105620422413126 HitDown
+78554756765213  HitUp
+113344342875514 MetalHit
+108742052808505 MetalHit2
+104021116814815 MetalHit3
+
 
 **LocustGuy:**
 6881026094 Slash
@@ -194,6 +210,13 @@ export const data = {
 3932145654 Hit2
 3848125583 Hit3
 8595974357 Hit4
+
+**Kurouroshi**
+79820354186531  Hit1
+125485263588435 Hit2
+106665047526422 Hit3
+130832989916480 Swing1
+140347479317758 Swing3
 
 ---
 **CHARACTERS**
@@ -250,7 +273,7 @@ export const data = {
 8595975878 1x
 8595974357 1x
 8595974357 1x
-(I did this cuz my friend said i couldn't)
+(I did this cuz my friend dared me)
 12764933067 BlackflashHit (1.5x)
 
 **Twofold Kick:**
@@ -1017,10 +1040,20 @@ mix of normals m1s
 84293649223671 Start
 109731283975341 Absorb
 ---
-**Yuta (goat):**
+**Yuta**
+
 **Severing Path:**
 128763907862260 Leap
 mix of swings and hit of his m1s
+**NEW**
+95876856890836  Start
+120714154715812 Swing1
+129682722005190 Swing2
+73434180515706  Swing3
+137337069510286 Hit1
+86231967919037  Hit2
+97003333926852  Hit3
+117756899811635 Hit4
 
 **Resolute Slash:**
 122209095269858 SwordGrab
@@ -1033,7 +1066,7 @@ mix of swings and hit of his m1s
 85972589629135 - Windup2
 132879779265336 - Land2 (electric shock and knockback)
 132472285449398 - Land1 (the music with voiceline)
-12764933067 - BlackFlashHit
+12764933067 - BlackFlashHit(1.5x)
 
 **Veilstep:**
 121354995604661 Veilstep
@@ -1045,6 +1078,14 @@ mix of swings and hit of his m1s
 90439756216771 VeilstepHit
 71472197762839 Impact
 
+**Outburst**
+115816722667586 Start
+86752717770401  Charge
+83164718262698  Swing
+83796511190884  Explosion
+82314797872585  ExplosionHit
+
+
 **Revolve:**
 96045121549069 Swing1
 88685272276380 Hit1
@@ -1054,6 +1095,12 @@ mix of swings and hit of his m1s
 113403339442588 RevolveDive
 79148321721845 VeilstepDive
 122860314546755 RevolveLand
+
+**Second Wind**
+122018900711660 Dash
+80892604094179  Grab
+The others sounds are probably from veilstep use again variant
+
 
 **Rika Special:**
 81914373674135 Summon
@@ -1086,6 +1133,14 @@ mix of swings and hit of his m1s
 82858286583983 PutRing
 93926154797041 VL
 138460768017549 Break
+**NEW**
+96210507614652 Start
+82858286583983 PutRing
+87637812190192 BreakChain
+120155303418484 Voiceline
+96857444594355 ShakeArm
+82010180737404 EquipArm
+
 
 **Elbow Rush:**
 84493401750489 Whiff
@@ -1105,6 +1160,17 @@ mix of swings and hit of his m1s
 76485051513534 CursedSpeechStart
 88080590196375 Voice
 91630012293502 VoiceDontMove
+
+**Energy Ripple**
+102285974755522 Start
+73393411828542  Bomb1
+72879767828886  Bomb2
+**—Feint:**
+77514337135425  Swing
+102450195424013 CEBurst
+129389928559036 Explosion
+86382772357027  Feint
+128669563112488 Hit
 
 **True Love Beam:**
 118689694101518 TrueLove
@@ -1137,6 +1203,9 @@ mix of swings and hit of his m1s
 128573990774413 VoiceCrush
 129151959162409 VoiceDie
 6737582452 TLBGlassBreak
+**—NEW OST**
+84395583379130 OST
+107921124631537 OSTDomainClashWin
 ---
 **Mechamaru:**
 
@@ -1487,13 +1556,18 @@ Flower Field Hit : 118109994896373
 **Special:**
 77417792700571 Comb
 140476433079342 Hair
+-Sweet
+82086397349945 Comb
 77659919167587 SWEEET
+-Recover Ult
+120486776927289 Recovery
 
 **Awakening:**
 89655786683392 UltimateStart
-137364280179144 Aizo Instrumentals
+137364280179144 Aizo/Larpzo Instrumentals
 129375015802470 Jingle
 92475178445200 Aizo Vocals
+73905683100406 Larpzo Vocals
 117201550249538 UltimateFire
 8595975878 Hit
 
@@ -1532,6 +1606,16 @@ Flower Field Hit : 118109994896373
 81751127529448 Hit2 0.21s after
 105961802014473 Impact 0.78s after
 17169365111 Hit4 2.54s after
+
+**"You weren't Invited"**
+125360177222726 Windup
+79379409212286  Swing
+114191015848865 Charge
+110086889584801 PowerDash
+85164048354891  FullCharge
+71672117204710  Dash
+100409424308279 Hit
+
 ---
 **Locust Guy:**
 **Clever:**
@@ -1701,6 +1785,127 @@ mix of m1s
 **Jawbreaker:**
 94680472414828 JawBreaker
 
+**Meimei:**
+
+**Updraft:**
+102930929366058 Slash
+79423034421628 Hit
+
+**Circling:**
+119142203253321 AirSlash
+96429366234284 Charge1
+93758496042865 Charge2
+71283069341606 FinisherHit
+107240505684079 FinisherSlash
+133644222097997 FinisherWoosh
+79490575410915 Hit1
+83282493896478 Hit2
+72700191895039 Slash1
+129555200163898 Slash2
+117215651521928 Start
+
+**Gliding:**
+99243622771297 FallHit
+99243622771297 FallSlash
+107260062344288 Impact
+78400218029025 Slash1
+120697290435030 Slash2
+99519848911330 Slash3
+140010761148859 SpinHit1
+119754485666227 SpinHit2
+73914060900348 Start
+
+**Bird Control:**
+87021710886866 CrowEye
+79225972873710 Fly
+79048435945491 Grab
+94132201322663 Hit
+72894267845813 Impact
+
+**Crow sounds:**
+9118066963 Caw1
+9118066964 Caw2
+9118066302 Caw3
+6324425941 Mad1
+89659350030351 Mad2 (speed 0.5, start 0.2)
+
+**Misc:**
+115544964121243 Crush
+73946250167893 Fall
+74218342289851 Flock
+---
+
+**Kurouroshi**
+
+**Festering Strikes**
+93286266865153  Swing1
+104907904159399 Swing2
+106311045947290 Swing3
+88980176364383  PunchSwing1
+81109554460735  PunchSwing2
+99060595035893  PunchSwing3
+116242006916525 Hit1
+98493239356787  Hit2
+101346445611474 Hit3
+99724696924791  FinalHit1
+85421364144658  FinalHit2
+133398263235788 Throw
+
+**Detach**
+109029348910711 Detach
+137501745215626 Hit
+135978563187719 Reattach
+93140879342737  WallHit
+
+**Chokehold**
+90805933413832 Start
+104198667495225 CleaveGrab
+109402680359235 CleaveHit1
+108072576247551 CleaveHit2
+113019008368244 PunchGrab
+112347897421173 PunchHit1
+117318006773809 PunchHit2
+
+**Roach Swarm**
+74666116625885 Swarm1
+75559353370329 Swarm2
+79232669620094 SwarmFollowup
+70700553092129 SwarmFollowupWoosh
+86411356240367 Explosion
+93651725220212 Hit
+
+**SPECIAL(Earthen Insect Trance)**
+72746768653220 Start
+96413924453295 BugAppear
+127107526984301 BugDisappear
+121940982680472 BugExplode
+101147988114470 FlyLoop
+131607143679266 Screen
+
+**Tick**
+131578725133089 Tick1
+78365892014897  Tick2
+74362920031076  Tick3
+
+**Parthenogenesis**
+140489322474010 Startup
+72012026236266  Explode
+106970207163140 Explode2
+
+**Bugnado**
+113266643332344 Start
+70550841608303  Explosion
+82589163918117  Tornado
+
+**EXTRA**
+106428537939718 StartInvade
+84206413372567  Hatch
+73225130279309  EatStart
+99300073151078  Egg1
+116964825206058 Egg2
+86783201350495  Egg3
+72909343949477  Egg4
+
 ---
 **Heian Sugooner:**
 **Strong Dismantle:**
@@ -1772,55 +1977,7 @@ mix of m1s
 135309023186303 Slashes
 124012721234128 Voice3
 ---
-**Meimei:**
 
-**Updraft:**
-102930929366058 Slash
-79423034421628 Hit
-
-**Circling:**
-119142203253321 AirSlash
-96429366234284 Charge1
-93758496042865 Charge2
-71283069341606 FinisherHit
-107240505684079 FinisherSlash
-133644222097997 FinisherWoosh
-79490575410915 Hit1
-83282493896478 Hit2
-72700191895039 Slash1
-129555200163898 Slash2
-117215651521928 Start
-
-**Gliding:**
-99243622771297 FallHit
-99243622771297 FallSlash
-107260062344288 Impact
-78400218029025 Slash1
-120697290435030 Slash2
-99519848911330 Slash3
-140010761148859 SpinHit1
-119754485666227 SpinHit2
-73914060900348 Start
-
-**Bird Control:**
-87021710886866 CrowEye
-79225972873710 Fly
-79048435945491 Grab
-94132201322663 Hit
-72894267845813 Impact
-
-**Crow sounds:**
-9118066963 Caw1
-9118066964 Caw2
-9118066302 Caw3
-6324425941 Mad1
-89659350030351 Mad2 (speed 0.5, start 0.2)
-
-**Misc:**
-115544964121243 Crush
-73946250167893 Fall
-74218342289851 Flock
----
 **Goku:**
 **Kamehameha:**
 128138421943286 Use
@@ -2470,6 +2627,28 @@ Melee4 R forward
     --Added **ROBOOOOOT** hurt sound to **Mechamaru**
     -1.0.5.4
     --Added **ALL** rapid punches sounds(my friend challenged me)
+    -1.0.6
+    --Added **M1 Sounds** to **Kurouroshi**
+    --Added **Festering Strikes** sounds to **Kurouroshi**
+    --Added **Detach** sounds to **Kurouroshi**
+    --Added **Chokehold** sounds to **Kurouroshi**
+    --Added **Roach Swarm** sounds to **Kurouroshi**
+    --Added **SPECIAL(Earthen Insect Trance)** to **Kurouroshi**
+    --Added **Tick** sounds to **Kurouroshi**
+    --Gave **Kurouroshi** both **Parthenogenesis** and **Bugnado** sounds
+    --Added **Extra** sounds to **Kurouroshi**
+    --Added NEW **M1 swings** sounds to **Yuta**(im not removing the old sounds)
+    --Added **NEW Severing Path** to **Yuta**
+    --Added **Outburst** sounds to **Yuta**
+    --Added **Second Wind** sounds to **Yuta**
+    --Added **NEW Awakening** sounds to **Yuta**
+    --Added **Energy Ripple** sounds to **Yuta**
+    --Added **NEW OSTs(normal and clash win)** musics to **Yuta**
+    --Added Missing **SPECIAL** sounds to **Jane Juliet**
+    --Added **Larpzo** voice to **Ryu's Awakening**
+    --Added **"You weren't Invited"** sounds to **Ryu's Awakening**
+    --Removed **OLD Yuji** and **OLD Mahito** preset cuz people on my videos've been saying that i stole my **OWN** stuff 😭(OLD movesets are now in **Workshop**, search for **"oSam"**)
+    --Updated **M1 Preset**
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
