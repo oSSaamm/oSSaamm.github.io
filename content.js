@@ -26,7 +26,7 @@ export const data = {
 **Naginata:**
 94107281648467 Hit1
 103563218704266 Hit2 and Hit3
-
+ 
 **Gun:**
 5735280081 GunFire
 3932141920 Hit
