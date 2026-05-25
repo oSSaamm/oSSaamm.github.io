@@ -2627,7 +2627,7 @@ Melee4 R forward
     --Added **ROBOOOOOT** hurt sound to **Mechamaru**
     -1.0.5.4
     --Added **ALL** rapid punches sounds(my friend challenged me)
-    -1.0.6
+    **-1.0.6**
     --Added **M1 Sounds** to **Kurouroshi**
     --Added **Festering Strikes** sounds to **Kurouroshi**
     --Added **Detach** sounds to **Kurouroshi**
