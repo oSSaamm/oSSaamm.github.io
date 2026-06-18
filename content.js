@@ -1,6 +1,6 @@
 export const data = {
     "ALL JJS Sounds": `
-**Site Owner:** **oSam** aka **pinguimdoimalia** (site owner) and his friend
+**Site Owner:** **oSam** aka **djdavireizao11232** (site owner) and his friend
 
 **DOMAIN CLASH:**
 
@@ -879,7 +879,6 @@ mix of normals m1
 7978512114 Swing
 9118614717 Hit2
 98484366943330 Hit
-
 **— Black Flash:**
 83892455359949 Music
 92231886696392 Voice
@@ -966,6 +965,10 @@ mix of normals m1s
 102880207942198 JudgeReachSwing
 105213688680216 JudgeReach
 108121946929288 JudgeReachFinisher
+**—Judgement's Reach NEW**
+17169364647 Swing
+17169365111 Hit
+108671308229639 LastHit
 
 **Twirling Strikes:**
 91477583246788 Start
@@ -977,6 +980,12 @@ mix of normals m1s
 95667653480776 Final
 9118614717 FinalHit
 17169365331 FinalHit1
+**—Pressing Charges**
+91477583246788 Start
+16773286492 Aim(start .15, 1.2x)
+138752442741376 Hit
+9118614717 FinalHit(1.25x)
+17169365331 FinalHit
 
 **No Escape:**
 117657083645864 Recall
@@ -1788,7 +1797,7 @@ mix of m1s
 **Meimei:**
 
 **Updraft:**
-102930929366058 Slash
+102930929366058 Slash(0.1 start)
 79423034421628 Hit
 
 **Circling:**
@@ -1814,6 +1823,12 @@ mix of m1s
 140010761148859 SpinHit1
 119754485666227 SpinHit2
 73914060900348 Start
+**—Murmurate:**
+134502721603797 AxeThrow
+119173276613424 AxeSpin
+140010761148859 SpinHit1
+119754485666227 SpinHit2
+111347810430996 AxeCatch 
 
 **Bird Control:**
 87021710886866 CrowEye
@@ -2649,6 +2664,11 @@ Melee4 R forward
     --Added **"You weren't Invited"** sounds to **Ryu's Awakening**
     --Removed **OLD Yuji** and **OLD Mahito** preset cuz people on my videos've been saying that i stole my **OWN** stuff 😭(OLD movesets are now in **Workshop**, search for **"oSam"**)
     --Updated **M1 Preset**
+    -1.0.6.1
+    --Added **Pressing Charges** to **Higuruma**
+    --Added **Judgement's Reach NEW** to **Higuruma**
+    --Added **Murmurate** to **Meimei**
+    ---Next upd imma add like 40 emotes srry for being lazy 
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
