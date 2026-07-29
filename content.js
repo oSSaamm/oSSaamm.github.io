@@ -88,7 +88,7 @@ export const data = {
 17866718764 Strike (mahito blade hit)
 17866720253 ClubDash(mahito club and awk dash)
 4909206080 Chase (normal frontdash)
-8595975458 DashHit (normal frontdash hit)
+8595975458(1.2x) DashHit (normal frontdash hit)
 103563218704266 DashHit (Mangaka frontdash hit)
 3929467229 SideDash
 
@@ -105,13 +105,15 @@ export const data = {
 **Normal:**
 4571259077 Swing
 8595975878 Hit1
-8595975878 Hit2
-8595975458 Hit3
+8595975878 Hit2(0.9x)
+8595975458 Hit3(1.2x)
 8595974357 Hit
 
 **Yuji:**
-8595975878 Hit1,2,3
-8595975458 Hit4
+8595975878 Hit1
+8595975878 Hit2(0.9x)
+8595975878 Hit3(0.8x)
+8595975458 Hit4(1.1x)
 
 **Mechamaru Robot (Absolute):**
 96898767418731 Swing1
@@ -119,7 +121,7 @@ export const data = {
 128596780293930 Swing3
 138499167704645 Swing4
 
-**Higurama:**
+**Higuruma:**
 113209095877671 Swing1
 84939324218501 Swing2
 135909874140545 Swing3
@@ -340,7 +342,7 @@ export const data = {
 **0.2:**
 111507747920000 - ShortOpen
 16071901783 - Music
-135495866944584 - Startup
+135405966044594 - Startup
 77956271026948 - ShortDomain2
 93070893390347 - Boost1
 86891100502580 - ShortDomain3
@@ -357,36 +359,36 @@ export const data = {
 
 **Cursed Strikes:**
 16773286492 Startup
-3084314259 FrontSlide
+3084314259 FrontSlide(1.1x)
 16773286330 Hit
 (another hits are just his m1s)
 
 **— Aerial:**
 8120249833 Spin
-3084314259 Rush
+3084314259 Rush(1.1x)
 7093763783 GroundImpact
 
 **Crushing Blow:**
 4403634269 Crack
 4571259077 Fist
 7093763783 GroundImpact
-7307838125 Hit1 \ __ plays at the same time
-9118614717 Hit2 /
+7307838125 Hit \ __ plays at the same time(both 1.25x)
+9118614717 Hit /
 
 **Divergent Fist:**
 4403634269 Crack
 4059009185 Swing
-5795505380 Divergent
+5795505380 Divergent(1.5x)
 7515452875 DivergentHit
 **— Black Flash:**
-12764933067 BlackFlashSparks
-9114314398 BlackFlash (Front Hit)
+12764933067 BlackFlashHit(1.5x)
+9114314398 BlackFlashSparks
 112426502291350 PerfectHit (Black Flash Chain)
 **— Finisher:**
 12764933067 BlackFlashHit
 12761286504 Voice (Kôkusen)
 **— 4th black flash**
-102672006215074 Startup
+12764933067 BlackFlashHit(1.5x)
 12764933067 BlackFlashSparks
 9114314398 BlackFlash
 93167187278849  Music
@@ -410,7 +412,7 @@ export const data = {
 4458760518 BlindsOff
 
 **Dismantle:**
-935843979 Slash (multiple times)
+935843979 Slash (multiple times)(1.5x)
 9119749145 FinishSlash (finisher and m1 sound)
 8120249833 Spin (air variant)
 
@@ -637,7 +639,7 @@ mix of normals m1
 17612867532 Adapt
 
 **World Slash:**
-4299510555 Swing
+4299625271 Swing
 4299510555 SlashThrow
 
 **Special:**
@@ -942,7 +944,7 @@ mix of normals m1s
 12764933067 BlackFlashHit
 9114314398 BlackFlash
 ---
-**Higurama:**
+**Higuruma:**
 
 **Extended Swings:**
 4571259077 Swing
@@ -1310,7 +1312,7 @@ The others sounds are probably from veilstep use again variant
 ---
 **Naoya:**
 **Misc:**
-9116384757 Frame
+9116384757 Frame(1.5x)
 117947531369694 FrameBreak
 
 **Projection Breaker:**
@@ -1321,7 +1323,7 @@ The others sounds are probably from veilstep use again variant
 16773286330 Hit
 
 **Bleedout:**
-120434937298193 Startup
+120434937298193 Startup(1.25x)
 103711283192425 Hit
 80064422113149 Bleed
 113551991267513 Hemorrhage
@@ -1624,6 +1626,78 @@ Flower Field Hit : 118109994896373
 85164048354891  FullCharge
 71672117204710  Dash
 100409424308279 Hit
+---
+
+**Reggie:**
+
+**Garage Sale**
+91453853141113  GarageSaleFire
+111249233187427 Blood
+80999206489420  Metal2
+107796049493315 Metal3
+75753405975943  Plastic
+140656310469778 Wood
+116249662210202 Wood2
+101380531513364 Wood3
+
+**Littering**
+103301083087000 Start
+86764689887681 Land
+99759086455482 BallSpawn
+100748769985426 BallHit
+125716556337114 CouponBurn
+114347179797315 CouponBurn2
+
+
+**Gushing Wound**
+71774765966659 KnifeHit
+111244393435078 KnifeThrow
+
+**Coupon**
+108402568417321 CouponWhoosh
+
+**Piano Drop**
+92044295160013 PianoFall
+131621337491363 PianoBreak
+
+**Speed Crash**
+109685696309687 Start
+82405804083158 Slide
+118132147240619 Hit
+74567233471387 Explode
+74389594563083 DriveBoost
+114988990044033 Drive
+
+**Blunt Trauma**
+95348847008043  Start
+113083056429013 Jump
+125154542788300 Whoosh1
+123238394993400 Whoosh2
+77372942368028  Whoosh3
+120766776714585 Whoosh4
+85676063616925  Whoosh5
+102164697067872 Hit1
+136680620487323 Hit2
+109959088160341 Hit3
+138544666565067 Hit4
+85532716555972  Hit5
+96902489129057  Break1
+94678591956485  Break2
+
+**Homerun**
+114429572456597 Start
+126020536706311 Followup
+125930049555363 Hit
+81782379432866 Hit2
+122913259127813 Hit2Homerun
+133735049749688 BallFire
+100207477013610 BallHit
+135769065921066 BallLaunch1
+124003902760206 BallLaunch2
+
+**R SPECIAL(Discard)**
+103301083087000 Discard
+9125634964      Spa(idk what its doing here)
 
 ---
 **Locust Guy:**
@@ -2205,7 +2279,7 @@ Focus strike R forward
 Focus strike(Home Run) R up
 Idle transfiguration R forward
 Mahito Ultimate2 R sideways
-Ok I literally cannot process things fast enough for **widespread strikes** last hit is R forward
+Ok I literally cannot process things fast enough for **Widespread Strikes** last hit is R forward
 Red scale1 L forward
 Red scale2 R sideways
 Supernova counter R forward
@@ -2652,7 +2726,7 @@ Melee4 R forward
     --Added **Tick** sounds to **Kurouroshi**
     --Gave **Kurouroshi** both **Parthenogenesis** and **Bugnado** sounds
     --Added **Extra** sounds to **Kurouroshi**
-    --Added NEW **M1 swings** sounds to **Yuta**(im not removing the old sounds)
+       --Added NEW **M1 swings** sounds to **Yuta**(im not removing the old sounds)
     --Added **NEW Severing Path** to **Yuta**
     --Added **Outburst** sounds to **Yuta**
     --Added **Second Wind** sounds to **Yuta**
@@ -2669,6 +2743,13 @@ Melee4 R forward
     --Added **Judgement's Reach NEW** to **Higuruma**
     --Added **Murmurate** to **Meimei**
     ---Next upd imma add like 40 emotes srry for being lazy 
+    -1.0.7
+    --Added **SOUND PREVIEW**(finally) for the **tabs**!!!
+    --Fixed Mahoraga **World Slash** Swing Sound
+    --Fixed sounds for **0.2 domain**
+    --Fixed speeds for **m1 hits** and **normal chase hit**
+    --Added **Reggie** Sounds
+    --Added **VFX Presets** of **JJS Chars**, made by **TheNoob**(@dhdvru2i on discord)
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money

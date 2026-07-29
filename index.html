@@ -51,35 +51,57 @@
     .highlight { background-color: #ffd400; color: #000; padding: 2px 4px; border-radius: 4px; }
     .bold { font-weight: bold; color: #f5dab3; }
 
-    /* Presets */
-    #presets-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 10px;
+    /* Sound Preview Styles */
+    #sound-preview {
+        max-width: 520px;
+        margin: 40px auto;
+        padding: 40px 20px;
+        background: #1a1a1a;
+        border-radius: 16px;
+        border: 1px solid #333;
+        text-align: center;
     }
-    .preset-btn {
-        background: #1f1f1f;
-        color: #eaeaea;
-        border: 1px solid #444;
-        padding: 12px 16px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 14px;
-        transition: all 0.2s;
-        min-width: 180px;
+    #sound-input {
+        width: 100%;
+        max-width: 280px;
+        padding: 16px;
+        font-size: 18px;
+        text-align: center;
+        background: #222;
+        color: #fff;
+        border: 2px solid #444;
+        border-radius: 12px;
+        outline: none;
     }
-    .preset-btn:hover {
-        background: #2a2a2a;
+    #sound-input:focus {
         border-color: #ffd400;
-        transform: translateY(-2px);
+        box-shadow: 0 0 0 4px rgba(255,212,0,0.2);
     }
-    .preset-btn:active {
+    #find-btn {
+        margin-top: 20px;
+        padding: 14px 32px;
+        font-size: 16px;
         background: #ffd400;
         color: #111;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
     }
+    #find-btn:hover { background: #ffed80; }
 
-    #message-me, #video-extractor { padding: 20px; }
+    #player-container {
+        margin-top: 30px;
+        padding: 20px;
+        background: #111;
+        border-radius: 12px;
+        display: none;
+    }
+    #audio-info {
+        margin: 15px 0;
+        font-size: 14px;
+        color: #aaa;
+    }
 </style>
 </head>
 <body>
@@ -92,12 +114,25 @@
         <div id="content">Loading 😭🥀/if you get this message for too long then it means im updating the site/trying to fix something</div>
     </div>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 <script src="./m1.js"></script>
+<script src="./nanami.js"></script>
+<script src="./ryu.js"></script>
+<script src="./yuji.js"></script>
+<script src="./naoya.js"></script>
+<script src="./megumi.js"></script>
+<script src="./mecha.js"></script>
+<script src="./yuta.js"></script>
+<script src="./mangaka.js"></script>
+<script src="./heian.js"></script>
+<script src="./higuruma.js"></script>
+<script src="./gojo.js"></script>
+
 <script type="module">
 import { data } from "./content.js"
-const CURRENT_VERSION = "1.0.61"
+const CURRENT_VERSION = "1.0.7"
 
 function initUpdateSystem() {
     if (!localStorage.getItem("visited")) {
@@ -135,6 +170,87 @@ function showUpdateNotification() {
         localStorage.setItem("lastSeenVersion", CURRENT_VERSION)
         badge.remove()
     }, { once: true })
+}
+
+// ==================== SOUND PREVIEW ====================
+function showSoundPreview() {
+    searchInput.parentElement.style.display = "none";
+    
+    contentEl.innerHTML = `
+    <div id="sound-preview">
+        <h2 style="color: #ffd400; margin-bottom: 30px;">🔊 Sound Preview</h2>
+        
+        <input type="text" id="sound-input" placeholder="Audio ID" maxlength="20" inputmode="numeric">
+        
+        <button id="find-btn">🔍 Find the sound</button>
+        
+        <div id="player-container">
+            <audio id="audio-player" controls></audio>
+            <div id="audio-info"></div>
+        </div>
+    </div>`;
+
+    const input = document.getElementById('sound-input');
+    const findBtn = document.getElementById('find-btn');
+    const playerContainer = document.getElementById('player-container');
+    const audio = document.getElementById('audio-player');
+    const info = document.getElementById('audio-info');
+
+    // Nums only
+    input.addEventListener('input', () => {
+        input.value = input.value.replace(/[^0-9]/g, '');
+    });
+
+    findBtn.onclick = () => {
+        const num = input.value.trim();
+        if (!num) {
+            alert("❌ Numbers only son");
+            return;
+        }
+
+        playerContainer.style.display = "none";
+        audio.src = "";
+
+        const possibleExtensions = ['.mp3', '.wav', '.ogg'];
+        let found = false;
+
+        for (let ext of possibleExtensions) {
+            const url = `/audio/${num}${ext}`;
+            
+            // if exists
+            fetch(url, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok && !found) {
+                        found = true;
+                        audio.src = url;
+                        playerContainer.style.display = "block";
+                        
+                        audio.onloadedmetadata = () => {
+                            info.textContent = `${num} Loaded | Duration: ${formatTime(audio.duration)}`;
+                        };
+                    }
+                })
+                .catch(() => {
+                    // last try fail
+                    if (ext === '.ogg' && !found) {
+                        alert(`❌ None of the sounds has ${num} as an ID!!`);
+                    }
+                });
+        }
+    };
+
+    function formatTime(seconds) {
+        if (!seconds || isNaN(seconds)) return "0:00";
+        const min = Math.floor(seconds / 60);
+        const sec = Math.floor(seconds % 60);
+        return `${min}:${sec.toString().padStart(2, '0')}`;
+    }
+
+    audio.addEventListener('timeupdate', () => {
+        if (audio.duration) {
+            info.textContent = `Audio ${input.value} | ${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+        }
+    });
 }
 
 // ==================== FUNCS ====================
@@ -202,7 +318,7 @@ function scrollToHighlight() {
 }
 
 // ==================== CREATE TAB ====================
-function createTab(key, isVideoExtractor = false, isMessageMe = false, isPresets = false) {
+function createTab(key, isVideoExtractor = false, isMessageMe = false, isPresets = false, isSoundPreview = false) {
     const div = document.createElement("div");
     div.className = "tab";
     div.textContent = key;
@@ -218,6 +334,8 @@ function createTab(key, isVideoExtractor = false, isMessageMe = false, isPresets
             showMessageMe();
         } else if (isVideoExtractor) {
             showVideoExtractor();
+        } else if (isSoundPreview) {
+            showSoundPreview();
         } else {
             let contentText = data[key] || "Content not found";
 
@@ -247,7 +365,18 @@ function showPresets() {
     const container = document.getElementById("presets-container");
     
      const presets = [
-       { name: "Accurate M1",text: window.m1Preset}
+       { name: "Accurate M1",text: window.m1Preset},
+       { name: "Mechamaru VFX",text: window.mechaPreset},
+       { name: "Mangaka VFX",text: window.charlesPreset},
+       { name: "Yuji VFX",text: window.yujiPreset},
+       { name: "Naoya VFX",text: window.naoyaPreset},
+       { name: "Ryu VFX",text: window.ryuPreset},
+       { name: "Heian VFX",text: window.heianPreset},
+       { name: "Nanami VFX",text: window.nanamiPreset},
+       { name: "Megumi VFX",text: window.megumiPreset},
+       { name: "Gojo VFX",text: window.gojoPreset},
+       { name: "Yuta VFX",text: window.yutaPreset},
+       { name: "Higuruma VFX",text: window.higurumaPreset},
     ];
 
     presets.forEach(p => {
@@ -269,7 +398,7 @@ function showPresets() {
     });
 }
 
-// ==================== MESSAGE ME (Estilizado) ====================
+// ==================== MESSAGE ME ====================
 function showMessageMe() {
     searchInput.parentElement.style.display = "none";
     
@@ -306,7 +435,7 @@ function showMessageMe() {
         }
         if (!message) {
             statusEl.style.color = '#ff6666';
-            statusEl.textContent = "❌ Please write a message";
+            statusEl.textContent = "❌ gng i need a text to read";
             return;
         }
         sendBtn.disabled = true;
@@ -316,7 +445,7 @@ function showMessageMe() {
 
         try {
             const payload = { content: `**New message from ${username}**\n\n${message}` };
-            const res = await fetch("https://discord.com/api/webhooks/1495427397582061739/xPxHztH1_tIkTBQfzVgEqnjksXotZKFzXCDdBlaWzsxAZhtUOoMgnfVw5ozC7U6Zi9JS", {
+            const res = await fetch("https://discord.com/api/webhooks/1525952461418922216/lKGsHx3TBIoGKV9SuxlpA2Bp_sS2NYDuMBn2lLmHfzf4PScuwF17hKJzJCuH5aaBCo4U", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
@@ -375,7 +504,6 @@ function showVideoExtractor() {
         </div>
     </div>`;
 
-    // Lógica do Video Extractor (mantida)
     const videoInput = document.getElementById('videoInput');
     const preview = document.getElementById('preview');
     const startBtn = document.getElementById('startBtn');
@@ -401,7 +529,6 @@ function showVideoExtractor() {
     };
 
     startBtn.onclick = async () => {
-       
         startBtn.disabled = true;
         downloadBtn.disabled = true;
         frames = [];
@@ -449,6 +576,7 @@ function showVideoExtractor() {
         }
         extractNext();
     };
+
    downloadBtn.onclick = async () => {
        if (frames.length === 0) return;
    
@@ -481,6 +609,8 @@ Object.keys(data).forEach(key => createTab(key));
 createTab("Presets", false, false, true);
 createTab("Video Extractor", true);
 createTab("Message Me", false, true);
+createTab("Sound Preview", false, false, false, true);
+
 initUpdateSystem();
 
 const firstTab = tabsEl.querySelector(".tab");
