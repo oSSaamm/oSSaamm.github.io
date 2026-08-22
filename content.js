@@ -1,6 +1,6 @@
 export const data = {
     "ALL JJS Sounds": `
-**Site Owner:** **oSam** aka **djdavireizao11232** (site owner) and his friend
+**Site Owner:** **oSam**(site owner) and his friend
 
 **DOMAIN CLASH:**
 
@@ -17,7 +17,7 @@ export const data = {
 3784889529 RagdollFall3
 3778609188 Break (downslam)
 
-**ITEMS (finally):**
+**ITEMS:**
 
 **Coin:**
 81202220081219 Parry
@@ -32,8 +32,19 @@ export const data = {
 3932141920 Hit
 1358442317 GunBreak
 
+**CROWBAR(FINALLY!!!!!!)**
+113373990352365 Start
+111213038660342 Start(plays alongside the first)
+114235921050731 Swing
+95443546571326  Hit(0.05 start)
+
+**Arayashiki**
+88813089730068 SlashFX
+86812684303392 Hit
+81029444709032 Music
+
 **TNT:**
-433141679 TNT
+4633141679 TNT
 90854697257230 Explode
 
 **Jet Black:**
@@ -178,7 +189,7 @@ export const data = {
 6881026094 Slash
 106685608076122 Punch (plays at the 3rd m1)
 
-**Charles (Mangaka):**
+**Ch*rles (Mangaka):**
 94107281648467 Hit1
 103563218704266 Hit2
 103563218704266 Hit3
@@ -388,6 +399,7 @@ export const data = {
 12764933067 BlackFlashHit
 12761286504 Voice (Kôkusen)
 **— 4th black flash**
+102672006215074 WindUp
 12764933067 BlackFlashHit(1.5x)
 12764933067 BlackFlashSparks
 9114314398 BlackFlash
@@ -1505,6 +1517,7 @@ Hit4 - 70397374333185
 94475379772653 - DebreeDrop
 ---
 **Hanami:**
+
 **Root Swarm:**
 102970184623188 Startup
 103290587422612 Swarm
@@ -1528,15 +1541,48 @@ Hit4 - 70397374333185
 78001037313968 Startup
 79583362062555 Hit1
 83044567135942 Hit2
-77781927063804 Root
 78330240985463 AirStartup
+77781927063804 Root
 
 **Flower Field (Special):**
-Flower Field Startup : 117000088170934
-Flower FIeld Appear : 76363463402061
-Flower Field Hit : 118109994896373
+Flower Field Startup 117000088170934
+Flower Field Appear  76363463402061
+Flower Field Hit     118109994896373
+
+**Awakening**
+110390473056942 Awakening
+88996378164806  ArmWrapRip
+77781927063804  Root(5 times)
+
+**SPECIAL**
+126484135817532 EmpowerStart
+121507843776522 Empower
+-Beam
+136525288045173 Windup
+128589895747977 Shoot
+
+**Root Rampage**
+130090012774324 Start
+124241243130190 OST
+96909600400910  RootAppear
+76362638159759  RootLoop
+17169365111     Hit
+
+**Cursed Buds**
+78278433425386 Start
+101070040828999 Appear
+83883449987100 Throw
+84359158055042 Hit2
+
+**Shining Sea of Growing Branches**
+123270105224744 DomainVL
+3059775781      DomainOpen
+7260423115      Domain
+127491777315078 DomainOST
+
 ---
 **Ryu:**
+
 **Granite Blast:**
 107571923469306 Charge
 126461458989078 Fire
@@ -1684,6 +1730,23 @@ Flower Field Hit : 118109994896373
 96902489129057  Break1
 94678591956485  Break2
 
+**Fleche**
+125716556337114 Start
+105229282385221 Dash
+112053484765331 Hit
+118548537635667 PullOut
+
+**Drone Strike**
+107291925076757 Drone Start
+99028553321196  Loop
+125716556337114 Spawn
+110959680539377 Press
+120730870285645 Explode
+
+**Pole Vault**
+93759638792144  Slam
+106529011379327 Hit
+
 **Homerun**
 114429572456597 Start
 126020536706311 Followup
@@ -1701,6 +1764,7 @@ Flower Field Hit : 118109994896373
 
 ---
 **Locust Guy:**
+
 **Clever:**
 80668615055821 FourArmed
 mix of normals m1s and swings
@@ -1737,6 +1801,7 @@ mix of normals m1s and swings
 18110706601 Transform1
 ---
 **Yuki:**
+
 **Garuda Rebound:**
 94830582667262 Startup
 3755636825 Swing2
@@ -1793,7 +1858,8 @@ ChargeFail (variant)
 137050048462822 Start
 75191661535842 Finish
 ---
-**Mangaka:**
+**Ch*rles (Mangaka):**
+
 **Despair:**
 107284905728635 Startup
 102170331317268 Spin
@@ -1831,6 +1897,11 @@ mix of m1s
 83082182015605 UltVoice
 ---
 **Haruta:**
+
+**Miracles:**
+135375336346189  Gain(1.05x)
+106582622347034  Lose(0.92x)
+
 **Ambush:**
 75682608773801 AmbushSwing
 130435802660891 AmbushHit
@@ -1866,7 +1937,11 @@ mix of m1s
 3932142219 StabHit
 
 **Jawbreaker:**
-94680472414828 JawBreaker
+107873525040694 Basic
+76523688182264  Slowdown
+133486111948739 Curb
+94680472414828  JawBreaker
+5507815764      Step
 
 **Meimei:**
 
@@ -2716,7 +2791,7 @@ Melee4 R forward
     --Added **ROBOOOOOT** hurt sound to **Mechamaru**
     -1.0.5.4
     --Added **ALL** rapid punches sounds(my friend challenged me)
-    **-1.0.6**
+    **1.0.6**
     --Added **M1 Sounds** to **Kurouroshi**
     --Added **Festering Strikes** sounds to **Kurouroshi**
     --Added **Detach** sounds to **Kurouroshi**
@@ -2726,7 +2801,7 @@ Melee4 R forward
     --Added **Tick** sounds to **Kurouroshi**
     --Gave **Kurouroshi** both **Parthenogenesis** and **Bugnado** sounds
     --Added **Extra** sounds to **Kurouroshi**
-       --Added NEW **M1 swings** sounds to **Yuta**(im not removing the old sounds)
+    --Added NEW **M1 swings** sounds to **Yuta**(im not removing the old sounds)
     --Added **NEW Severing Path** to **Yuta**
     --Added **Outburst** sounds to **Yuta**
     --Added **Second Wind** sounds to **Yuta**
@@ -2743,18 +2818,36 @@ Melee4 R forward
     --Added **Judgement's Reach NEW** to **Higuruma**
     --Added **Murmurate** to **Meimei**
     ---Next upd imma add like 40 emotes srry for being lazy 
-    -1.0.7
+    **1.0.7**
     --Added **SOUND PREVIEW**(finally) for the **tabs**!!!
     --Fixed Mahoraga **World Slash** Swing Sound
     --Fixed sounds for **0.2 domain**
     --Fixed speeds for **m1 hits** and **normal chase hit**
     --Added **Reggie** Sounds
     --Added **VFX Presets** of **JJS Chars**, made by **TheNoob**(@dhdvru2i on discord)
+    --Fixed **Message me**
+    --some sounds might be missing on preview warn me if you find any(974 sounds for now 🥀)
+    **1.0.8**
+    --Added **Missing Sounds** to **Sound Preview**(like 20 or sum)
+    **1.0.9**
+    --Censored **Ch*rles** since his name must **NOT** be mentioned fully
+    --Added **Awakening** Sounds to **Hanami**
+    --Added **Shining Sea of Growing Branches** Sounds to **Hanami**
+    --Added **Cursed Buds** Sounds to **Hanami**
+    --Added **Root Rampage** Sounds to **Hanami**
+    --Added **Fleche** Sounds to **Reggie**
+    --Added **Drone Strike** Sounds to **Reggie**
+    --Added **Pole Vault** Sounds to **Reggie**
+    --Added **Miracle Gain and Lose** sounds to **Haruta**
+    --Added **Accurate Chase** inside **Accurate M1 Preset**
+    --Added **CROWBAR** SOUNDS AFTER **287** REQUESTS WHAT ARE YOU DOING WITH CROWBAR SOOOUNDS
+    --Added **Arayashiki** sounds to **Items**
+    **1.1.0**
+    --????(September 16th)
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
    https://www.youtube.com/@oSSamm1
    if you cant get the link go to yt search and put:
    @ossamm1
-`,
-};
+`};
