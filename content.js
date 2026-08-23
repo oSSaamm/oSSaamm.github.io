@@ -1108,6 +1108,7 @@ mix of swings and hit of his m1s
 83164718262698  Swing
 83796511190884  Explosion
 82314797872585  ExplosionHit
+74854125236607  Parry
 
 
 **Revolve:**
@@ -1805,44 +1806,45 @@ mix of normals m1s and swings
 
 **Garuda Rebound:**
 94830582667262 Startup
-3755636825 Swing2
-7978512114 Swing
+3755636825      Swing2
+7978512114      Swing
 140210011421911 Bounce
-12482038747864 Charged
-93528549345434 Slow
-91677916810574 Punch
+12482038747864  Charged
+93528549345434  Slow
+91677916810574  Punch
 124116283788613 Return
+74854125236607  GarudaParry
 
 **Rising Rage:**
-83066231638545 Startup
+83066231638545  Startup
 130483916115974 ChargeFail (variant)
 114235921050731 Swing
-72214797814045 Hit
+72214797814045  Hit
 114235921050731 Swing
-72214797814045 Hit
+72214797814045  Hit
 114235921050731 Swing
 108671308229639 Hit3
-94234054127236 Hit2 (full charge)
+94234054127236  Hit2 (full charge)
 126216905119949 Charge
 
 **Mass Breaker:**
 115575205427140 Start
 105475201107176 Miss
-72214797814045 Hit
-75089222303073 Hit2
-ChargeFail (variant)
+72214797814045  Hit
+75089222303073  Hit2
+130483916115974 ChargeFail (variant)
 
 **Garuda Stab:**
-9113837941 Startup2
+9113837941      Startup2
 137783275962038 Stab
-7072652156 Stab
-72214797814045 Hit
-75089222303073 Hit2
+7072652156      Stab
+72214797814045  Hit
+75089222303073  Hit2
 
 **— Charge:**
 104413303615093 WhipFlyBack
 108271854301469 FirstWhip
-76311359826097 SecondWhip
+76311359826097  SecondWhip
 
 **Awakening:**
 17309157540 Scream
@@ -2015,6 +2017,7 @@ mix of m1s
 99724696924791  FinalHit1
 85421364144658  FinalHit2
 133398263235788 Throw
+74854125236607  Parry
 
 **Detach**
 109029348910711 Detach
@@ -2843,6 +2846,9 @@ Melee4 R forward
     --Added **Accurate Chase** inside **Accurate M1 Preset**
     --Added **CROWBAR** SOUNDS AFTER **287** REQUESTS WHAT ARE YOU DOING WITH CROWBAR SOOOUNDS
     --Added **Arayashiki** sounds to **Items**
+    -1.0.9.2
+    --Added **Parry** sound to **Mahoraga Adaptation**
+    --Added **Clash** to **Kuro**, **Yuki** and **Yuta**
     **1.1.0**
     --????(September 16th)
 `,
