@@ -649,6 +649,7 @@ mix of normals m1
 **Adaptation:**
 3932669033 AdaptGlow
 17612867532 Adapt
+7868507340  Parry
 
 **World Slash:**
 4299625271 Swing
