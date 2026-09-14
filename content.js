@@ -2850,7 +2850,7 @@ Melee4 R forward
     --Added **Parry** sound to **Mahoraga Adaptation**
     --Added **Clash** to **Kuro**, **Yuki** and **Yuta**
     **1.1.0**
-    --????(September 19th) SORRY FOR THE DELAY, some things happened which has delayed me, im REALLY sorry 
+    --????(September 20th) SORRY FOR THE DELAY, some things happened which has delayed me, im REALLY sorry 
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
