@@ -2187,6 +2187,51 @@ mix of m1s
 116964825206058 Egg2
 86783201350495  Egg3
 72909343949477  Egg4
+---
+
+**Takako Uro/Sky Assassin**:
+
+**Blind Rage**:
+
+(Temper)
+119543162312906 Swing1
+102318601910197 Swing2
+(Normal)
+129081570292387 Swing3(normal)
+72880483019101  Fly
+71672117204710  Fly1(plays with Fly)
+77586579310356  Collide
+120706760824134 Throw
+
+**Sky Distortion**:
+
+129081570292387 Swing
+113748500437243 Throw
+
+**Thin Ice Breaker**:
+140527314975641 Start
+110205767230561 Crack
+110825030672837 Impact(0.9x start 0.1)
+97374948075214  Crack2
+129058536378584 Die(Voiceline)
+105792362821593 Explode
+
+
+**ARE YOU THAT AFRAID**?
+107283239051825 Voice(put 2 SFX node)
+18265315478 Start
+132457128699700 Break
+
+**THIN ICE BREAKER BIG**:
+82449568099992  Voice
+72880483019101  Fly
+128241049474311 Voice2
+110825030672837 Impact(0.9x start 0.1)
+0.5 wait
+110205767230561 Crack
+0.5 wait
+105792362821593 Explode
+
 
 ---
 **Heian Sugooner:**
@@ -3036,7 +3081,8 @@ Melee4 R forward
     --Added **CHASE** and revamped **M1S**in m1 Preset
     --Maybe protected ***** so now it probably won't break anymore
     --**SORRY** for taking long and not doing, i was busy with school and stuff, but now im back
-
+    -1.1.0(part 1 fix)
+    --Added Takako Uro(search for Sky assassin or takako) sounds forgot them sorry ✌💔
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
