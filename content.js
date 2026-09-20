@@ -3083,6 +3083,9 @@ Melee4 R forward
     --**SORRY** for taking long and not doing, i was busy with school and stuff, but now im back
     -1.1.0(part 1 fix)
     --Added Takako Uro(search for Sky assassin or takako) sounds forgot them sorry ✌💔
+    -1.1.0(part 1 fix2)
+    --Added Max messages to **Mesage Me**(now you can send 6 messages per 60s)
+    --FULLY **Secured** and **fixed** **Message Me**(now it won't break anymore i SWEAR)**
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money

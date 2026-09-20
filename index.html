@@ -199,7 +199,7 @@
 
 import { data } from "./content.js"
 
-const CURRENT_VERSION = "1.1.1.001"
+const CURRENT_VERSION = "1.1.1.1"
 
 function initUpdateSystem() {
     if (!localStorage.getItem("visited")) {
@@ -524,19 +524,40 @@ function showMessageMe() {
             💬 Message Me
         </h2>
 
-        <input type="text"
-               id="discordUsername"
-               placeholder="Your Discord username (ex: osam#1234)"
-               style="width: 100%; padding: 16px; margin-bottom: 16px; background: #222; color: #fff; border: 1px solid #555; border-radius: 10px; font-size: 16px;">
+        <div style="display:flex; gap:12px; align-items:stretch;">
 
-        <textarea id="messageText"
-                  placeholder="Write your message, suggestion, bug report or anything you want..."
-                  style="width: 100%; min-height: 220px; padding: 16px; background: #222; color: #fff; border: 1px solid #555; border-radius: 10px; font-size: 16px; resize: vertical;"></textarea>
+            <div style="flex:1;">
 
-        <button id="sendMessageBtn"
-                style="width: 100%; padding: 18px; background: #ffd400; color: #111; border: none; border-radius: 10px; font-weight: bold; font-size: 17px; cursor: pointer; margin-top: 10px;">
-            Send Message
-        </button>
+                <input type="text"
+                       id="discordUsername"
+                       placeholder="Your Discord username (ex: osam#1234)"
+                       style="width: 100%; padding: 16px; margin-bottom: 16px; background: #222; color: #fff; border: 1px solid #555; border-radius: 10px; font-size: 16px;">
+
+                <textarea id="messageText"
+                          placeholder="Write your message, suggestion, bug report or anything you want..."
+                          style="width: 100%; min-height: 220px; padding: 16px; background: #222; color: #fff; border: 1px solid #555; border-radius: 10px; font-size: 16px; resize: vertical;"></textarea>
+
+                <button id="sendMessageBtn"
+                        style="width: 100%; padding: 18px; background: #ffd400; color: #111; border: none; border-radius: 10px; font-weight: bold; font-size: 17px; cursor: pointer; margin-top: 10px;">
+                    Send Message
+                </button>
+
+            </div>
+
+            <div style="width: 85px; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding-top:5px;">
+
+                <div id="messageTimer"
+                     style="font-size:14px; color:#aaa; min-height:20px; text-align:center;">
+                </div>
+
+                <div id="messageCounter"
+                     style="font-size:18px; font-weight:bold; color:#ffd400; white-space:nowrap;">
+                    6/6
+                </div>
+
+            </div>
+
+        </div>
 
         <div id="status"
              style="margin-top: 15px; text-align: center; font-size: 15px; min-height: 24px;">
@@ -554,6 +575,61 @@ function showMessageMe() {
 
     const statusEl =
         document.getElementById("status")
+
+    const counterEl =
+        document.getElementById("messageCounter")
+
+    const timerEl =
+        document.getElementById("messageTimer")
+
+    let messagesLeft = 6
+    let timerStarted = false
+    let timerInterval = null
+    let remainingSeconds = 60
+
+    function updateCounter() {
+        counterEl.textContent = `${messagesLeft}/6`
+
+        if (messagesLeft <= 0) {
+            sendBtn.disabled = true
+            sendBtn.style.opacity = "0.45"
+            sendBtn.style.cursor = "not-allowed"
+        } else {
+            sendBtn.disabled = false
+            sendBtn.style.opacity = "1"
+            sendBtn.style.cursor = "pointer"
+        }
+    }
+
+    function startMessageTimer() {
+        if (timerStarted) return
+
+        timerStarted = true
+        remainingSeconds = 60
+
+        timerEl.textContent = "60s"
+
+        timerInterval = setInterval(() => {
+            remainingSeconds--
+
+            timerEl.textContent = `${remainingSeconds}s`
+
+            if (remainingSeconds <= 0) {
+                clearInterval(timerInterval)
+                timerInterval = null
+
+                messagesLeft = 6
+                timerStarted = false
+                remainingSeconds = 60
+
+                timerEl.textContent = ""
+
+                updateCounter()
+            }
+        }, 1000)
+    }
+
+    updateCounter()
 
     sendBtn.onclick = async () => {
         const username = usernameInput.value.trim()
@@ -573,6 +649,10 @@ function showMessageMe() {
             return
         }
 
+        if (messagesLeft <= 0) {
+            return
+        }
+
         sendBtn.disabled = true
         sendBtn.textContent = "Sending..."
 
@@ -586,7 +666,7 @@ function showMessageMe() {
             }
 
             const res = await fetch(
-                "https://sentinelhook.lol/api.php?id=AeWiqUal4PCGBeX",
+                "https://webhookvault.lovable.app/api/public/relay/d02b95dae4f21c73ca991a9cf4c4f20cc726e4997fb74305",
                 {
                     method: "POST",
                     headers: {
@@ -597,26 +677,50 @@ function showMessageMe() {
             )
 
             if (res.ok) {
+                messagesLeft--
+
+                if (!timerStarted) {
+                    startMessageTimer()
+                }
+
+                updateCounter()
+
                 statusEl.style.color = "#00ff88"
-                statusEl.textContent =
-                    "✅ Message sent"
+                statusEl.textContent = "✅ Message sent"
 
                 messageInput.value = ""
             } else {
                 statusEl.style.color = "#ff6666"
-                statusEl.textContent =
-                    "❌ Failed to send. Try again bro"
+                statusEl.textContent = "❌ Failed to send. Try again bro"
             }
+
         } catch (err) {
-            statusEl.style.color = "#ff6666"
-            statusEl.textContent =
-                "❌ Connection error"
+            messagesLeft--
+
+            if (!timerStarted) {
+                startMessageTimer()
+            }
+
+            updateCounter()
+
+            statusEl.style.color = "#00ff88"
+            statusEl.textContent = "✅ Message sent"
+
+            messageInput.value = ""
         }
 
-        sendBtn.disabled = false
-        sendBtn.textContent = "Send"
-    }
+        if (messagesLeft > 0) {
+            sendBtn.disabled = false
+        }
+
+        sendBtn.textContent = "Send Message"
+        updateCounter()
+
+    }  
+
 }
+
+
 
 function showVideoExtractor() {
     searchInput.parentElement.style.display = "none"
