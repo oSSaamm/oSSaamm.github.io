@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <style>
     * { box-sizing: border-box; }
+
     body {
         margin: 0;
         background: #0f0f0f;
@@ -13,54 +15,93 @@
         font-family: Arial, Helvetica, sans-serif;
         overflow-x: hidden;
     }
-    #container { display: flex; flex-direction: column; min-height: 100vh; }
+
+    #container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
     #tabs {
         width: 100%;
         background: #151515;
         border-bottom: 2px solid #222;
         overflow-x: auto;
         padding: 8px 0;
-
         position: sticky;
         top: 0;
         z-index: 100;
     }
+
     .tab {
-        display: inline-block   ;
+        display: inline-block;
         padding: 14px 18px;
         cursor: pointer;
         color: #ccc;
         transition: all .2s;
     }
-    .tab:hover { background: #1f1f1f; color: #fff; }
+
+    .tab:hover {
+        background: #1f1f1f;
+        color: #fff;
+    }
+
     .tab.active {
         background: #272727;
         color: #ffd400;
         border-bottom: 3px solid #ffd400;
     }
 
-    #content-area { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+    #content-area {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
     #search-bar {
         padding: 12px 15px;
         background: #151515;
         border-bottom: 1px solid #222;
+    }
 
-    }
     #search-input {
-        width: 100%; padding: 12px 16px; font-size: 16px; background: #1f1f1f; color: #eaeaea;
-        border: 1px solid #444; border-radius: 8px; outline: none;
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 16px;
+        background: #1f1f1f;
+        color: #eaeaea;
+        border: 1px solid #444;
+        border-radius: 8px;
+        outline: none;
     }
-    #search-input:focus { border-color: #ffd400; box-shadow: 0 0 0 3px rgba(255,212,0,0.2); }
+
+    #search-input:focus {
+        border-color: #ffd400;
+        box-shadow: 0 0 0 3px rgba(255,212,0,0.2);
+    }
 
     #content {
-        flex: 1; padding: 15px; overflow-y: auto; line-height: 1.6;
-        font-family: 'Courier New', monospace; font-size: 14.5px;
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        line-height: 1.6;
+        font-family: 'Courier New', monospace;
+        font-size: 14.5px;
     }
 
-    .highlight { background-color: #ffd400; color: #000; padding: 2px 4px; border-radius: 4px; }
-    .bold { font-weight: bold; color: #f5dab3; }
+    .highlight {
+        background-color: #ffd400;
+        color: #000;
+        padding: 2px 4px;
+        border-radius: 4px;
+    }
 
-    /* Sound Preview Styles */
+    .bold {
+        font-weight: bold;
+        color: #f5dab3;
+    }
+
     #sound-preview {
         max-width: 520px;
         margin: 40px auto;
@@ -70,6 +111,7 @@
         border: 1px solid #333;
         text-align: center;
     }
+
     #sound-input {
         width: 100%;
         max-width: 280px;
@@ -82,10 +124,12 @@
         border-radius: 12px;
         outline: none;
     }
+
     #sound-input:focus {
         border-color: #ffd400;
         box-shadow: 0 0 0 4px rgba(255,212,0,0.2);
     }
+
     #find-btn {
         margin-top: 20px;
         padding: 14px 32px;
@@ -97,7 +141,10 @@
         font-weight: bold;
         cursor: pointer;
     }
-    #find-btn:hover { background: #ffed80; }
+
+    #find-btn:hover {
+        background: #ffed80;
+    }
 
     #player-container {
         margin-top: 30px;
@@ -106,6 +153,7 @@
         border-radius: 12px;
         display: none;
     }
+
     #audio-info {
         margin: 15px 0;
         font-size: 14px;
@@ -113,23 +161,31 @@
     }
 </style>
 </head>
+
 <body>
 <div id="container">
     <div id="tabs"></div>
+
     <div id="content-area">
         <div id="search-bar">
             <input type="text" id="search-input" placeholder="Example: Emotes">
         </div>
-        <div id="content">Loading 😭🥀/if you get this message for too long then it means im updating the site/trying to fix something</div>
+
+        <div id="content">
+            Loading 😭🥀/if you get this message for too long then it means im updating the site/trying to fix something
+        </div>
     </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
 <script src="./m1.js"></script>
 <script src="./nanami.js"></script>
 <script src="./ryu.js"></script>
 <script src="./yuji.js"></script>
+<script src="./hanami.js"></script>]
+<script src="./hakari.js"></script>
 <script src="./naoya.js"></script>
 <script src="./megumi.js"></script>
 <script src="./mecha.js"></script>
@@ -140,8 +196,10 @@
 <script src="./gojo.js"></script>
 
 <script type="module">
+
 import { data } from "./content.js"
-const CURRENT_VERSION = "1.0.9.2"
+
+const CURRENT_VERSION = "1.1.1.000"
 
 function initUpdateSystem() {
     if (!localStorage.getItem("visited")) {
@@ -164,7 +222,8 @@ function showUpdateNotification() {
         return
     }
 
-    let badge = document.createElement("span")
+    const badge = document.createElement("span")
+
     badge.textContent = "1"
     badge.style.marginLeft = "6px"
     badge.style.background = "#ffd400"
@@ -181,460 +240,674 @@ function showUpdateNotification() {
     }, { once: true })
 }
 
-// ==================== SOUND PREVIEW ====================
 function showSoundPreview() {
-    searchInput.parentElement.style.display = "none";
-    
+    searchInput.parentElement.style.display = "none"
+
     contentEl.innerHTML = `
     <div id="sound-preview">
         <h2 style="color: #ffd400; margin-bottom: 30px;">🔊 Sound Preview</h2>
-        
+
         <input type="text" id="sound-input" placeholder="Audio ID" maxlength="20" inputmode="numeric">
-        
+
         <button id="find-btn">🔍 Find the sound</button>
-        
+
         <div id="player-container">
             <audio id="audio-player" controls></audio>
             <div id="audio-info"></div>
         </div>
-    </div>`;
+    </div>`
 
-    const input = document.getElementById('sound-input');
-    const findBtn = document.getElementById('find-btn');
-    const playerContainer = document.getElementById('player-container');
-    const audio = document.getElementById('audio-player');
-    const info = document.getElementById('audio-info');
+    const input = document.getElementById("sound-input")
+    const findBtn = document.getElementById("find-btn")
+    const playerContainer = document.getElementById("player-container")
+    const audio = document.getElementById("audio-player")
+    const info = document.getElementById("audio-info")
 
-    // Nums only
-    input.addEventListener('input', () => {
-        input.value = input.value.replace(/[^0-9]/g, '');
-    });
+    input.addEventListener("input", () => {
+        input.value = input.value.replace(/[^0-9]/g, "")
+    })
 
     findBtn.onclick = () => {
-        const num = input.value.trim();
+        const num = input.value.trim()
+
         if (!num) {
-            alert("❌ Numbers only son");
-            return;
+            alert("❌ Numbers only son")
+            return
         }
 
-        playerContainer.style.display = "none";
-        audio.src = "";
+        playerContainer.style.display = "none"
+        audio.src = ""
 
-        const possibleExtensions = ['.mp3', '.wav', '.ogg'];
-        let found = false;
+        const possibleExtensions = [".mp3", ".wav", ".ogg"]
+        let found = false
 
-        for (let ext of possibleExtensions) {
-            const url = `/audio/${num}${ext}`;
-            
-            // if exists
-            fetch(url, { method: 'HEAD' })
+        for (const ext of possibleExtensions) {
+            const url = `/audio/${num}${ext}`
+
+            fetch(url, { method: "HEAD" })
                 .then(response => {
                     if (response.ok && !found) {
-                        found = true;
-                        audio.src = url;
-                        playerContainer.style.display = "block";
-                        
+                        found = true
+                        audio.src = url
+                        playerContainer.style.display = "block"
+
                         audio.onloadedmetadata = () => {
-                            info.textContent = `${num} Loaded | Duration: ${formatTime(audio.duration)}`;
-                        };
+                            info.textContent = `${num} Loaded | Duration: ${formatTime(audio.duration)}`
+                        }
                     }
                 })
                 .catch(() => {
-                    // last try fail
-                    if (ext === '.ogg' && !found) {
-                        alert(`❌ None of the sounds has ${num} as an ID!!`);
+                    if (ext === ".ogg" && !found) {
+                        alert(`❌ None of the sounds has ${num} as an ID!!`)
                     }
-                });
+                })
         }
-    };
-
-    function formatTime(seconds) {
-        if (!seconds || isNaN(seconds)) return "0:00";
-        const min = Math.floor(seconds / 60);
-        const sec = Math.floor(seconds % 60);
-        return `${min}:${sec.toString().padStart(2, '0')}`;
     }
 
-    audio.addEventListener('timeupdate', () => {
+    function formatTime(seconds) {
+        if (!seconds || isNaN(seconds)) return "0:00"
+
+        const min = Math.floor(seconds / 60)
+        const sec = Math.floor(seconds % 60)
+
+        return `${min}:${sec.toString().padStart(2, "0")}`
+    }
+
+    audio.addEventListener("timeupdate", () => {
         if (audio.duration) {
-            info.textContent = `Audio ${input.value} | ${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+            info.textContent =
+                `Audio ${input.value} | ${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`
         }
-    });
+    })
 }
 
-// ==================== FUNCS ====================
-const tabsEl = document.getElementById("tabs");
-const contentEl = document.getElementById("content");
-const searchInput = document.getElementById("search-input");
+const tabsEl = document.getElementById("tabs")
+const contentEl = document.getElementById("content")
+const searchInput = document.getElementById("search-input")
 
-let highlights = [];
-let currentHighlightIndex = -1;
+let highlights = []
+let currentHighlightIndex = -1
+let searchTimeout = null
+let searchVersion = 0
 
 function escapeHtml(text) {
     return text
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
 }
 
 function convertBold(text) {
-    return text.replace(/\*\*(.*?)\*\*/g, '<span class="bold">$1</span>');
+    return text.replace(
+        /\*\*(.*?)\*\*/g,
+        '<span class="bold">$1</span>'
+    )
 }
 
 function render(text) {
-    const safe = escapeHtml(text);
-    const withBold = convertBold(safe);
-    contentEl.innerHTML = `<pre>${withBold}</pre>`;
+    const safe = escapeHtml(text)
+    const withBold = convertBold(safe)
+
+    contentEl.innerHTML = `<pre>${withBold}</pre>`
 }
 
-// ==================== SEARCH ====================
 function performSearch(term) {
-    if (!contentEl.dataset.raw) return;
+    if (!contentEl.dataset.raw) return
 
-    const raw = contentEl.dataset.raw;
+    const raw = contentEl.dataset.raw
 
-    highlights = [];
-    currentHighlightIndex = -1;
+    highlights = []
+    currentHighlightIndex = -1
 
     if (!term || !term.trim()) {
-        render(raw);
-        return;
+        render(raw)
+        return
     }
 
-    const safe = escapeHtml(raw);
+    const safe = escapeHtml(raw)
 
-    const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`(${escapedTerm})`, "gi");
+    const escapedTerm = term.replace(
+        /[.*+?^${}()|[\]\\]/g,
+        "\\$&"
+    )
+
+    const regex = new RegExp(`(${escapedTerm})`, "gi")
 
     const highlighted = convertBold(
-    safe.replace(regex, `<span class="highlight">$1</span>`)
-);
+        safe.replace(
+            regex,
+            '<span class="highlight">$1</span>'
+        )
+    )
 
-    contentEl.innerHTML = `<pre>${highlighted}</pre>`;
+    contentEl.innerHTML = `<pre>${highlighted}</pre>`
 
-    highlights = Array.from(contentEl.querySelectorAll(".highlight"));
-    currentHighlightIndex = highlights.length > 0 ? 0 : -1;
+    highlights = Array.from(
+        contentEl.querySelectorAll(".highlight")
+    )
 
-    scrollToHighlight();
+    currentHighlightIndex = highlights.length > 0 ? 0 : -1
 }
-function scrollToHighlight() {
-    if (highlights.length === 0 || currentHighlightIndex < 0) return;
 
-    highlights[currentHighlightIndex].scrollIntoView({
+function scrollToHighlight() {
+    if (
+        highlights.length === 0 ||
+        currentHighlightIndex < 0
+    ) {
+        return
+    }
+
+    const highlight = highlights[currentHighlightIndex]
+
+    highlight.scrollIntoView({
         behavior: "smooth",
         block: "center"
-    });
+    })
 }
 
-// ==================== CREATE TAB ====================
-function createTab(key, isVideoExtractor = false, isMessageMe = false, isPresets = false, isSoundPreview = false) {
-    const div = document.createElement("div");
-    div.className = "tab";
-    div.textContent = key;
-    div.dataset.key = key;
+function createTab(
+    key,
+    isVideoExtractor = false,
+    isMessageMe = false,
+    isPresets = false,
+    isSoundPreview = false
+) {
+    const div = document.createElement("div")
+
+    div.className = "tab"
+    div.textContent = key
+    div.dataset.key = key
 
     div.onclick = () => {
-        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-        div.classList.add("active");
+        document
+            .querySelectorAll(".tab")
+            .forEach(t => t.classList.remove("active"))
+
+        div.classList.add("active")
+
+        clearTimeout(searchTimeout)
+        searchVersion++
 
         if (isPresets) {
-            showPresets();
+            showPresets()
         } else if (isMessageMe) {
-            showMessageMe();
+            showMessageMe()
         } else if (isVideoExtractor) {
-            showVideoExtractor();
+            showVideoExtractor()
         } else if (isSoundPreview) {
-            showSoundPreview();
+            showSoundPreview()
         } else {
-            let contentText = data[key] || "Content not found";
+            const contentText =
+                data[key] || "Content not found"
 
-            contentEl.dataset.raw = contentText;
+            contentEl.dataset.raw = contentText
 
-            render(contentText);
+            render(contentText)
 
-            searchInput.value = "";
-            searchInput.parentElement.style.display = "block";
+            searchInput.value = ""
+            searchInput.parentElement.style.display = "block"
 
-            highlights = [];
-            currentHighlightIndex = -1;
+            highlights = []
+            currentHighlightIndex = -1
         }
-    };
+    }
 
-    tabsEl.appendChild(div);
+    tabsEl.appendChild(div)
 }
 
-// ==================== PRESETS ====================
 function showPresets() {
-    searchInput.parentElement.style.display = "none";
-    contentEl.innerHTML = `
-        <h2 style="color:#ffd400; text-align:center; margin-bottom:25px;">Presets</h2>
-        <div id="presets-container" style="display:flex; flex-wrap:wrap; gap:12px; padding:10px;"></div>
-    `;
+    searchInput.parentElement.style.display = "none"
 
-    const container = document.getElementById("presets-container");
-    
-     const presets = [
-       { name: "Accurate M1",text: window.m1Preset},
-       { name: "Mechamaru VFX",text: window.mechaPreset},
-       { name: "Mangaka VFX",text: window.charlesPreset},
-       { name: "Yuji VFX",text: window.yujiPreset},
-       { name: "Naoya VFX",text: window.naoyaPreset},
-       { name: "Ryu VFX",text: window.ryuPreset},
-       { name: "Heian VFX",text: window.heianPreset},
-       { name: "Nanami VFX",text: window.nanamiPreset},
-       { name: "Megumi VFX",text: window.megumiPreset},
-       { name: "Gojo VFX",text: window.gojoPreset},
-       { name: "Yuta VFX",text: window.yutaPreset},
-       { name: "Higuruma VFX",text: window.higurumaPreset},
-    ];
+    contentEl.innerHTML = `
+        <h2 style="color:#ffd400; text-align:center; margin-bottom:25px;">
+            Presets
+        </h2>
+
+        <div id="presets-container"
+             style="display:flex; flex-wrap:wrap; gap:12px; padding:10px;">
+        </div>
+    `
+
+    const container =
+        document.getElementById("presets-container")
+
+    const presets = [
+        { name: "Accurate M1", text: window.m1Preset },
+        { name: "Mechamaru VFX", text: window.mechaPreset },
+        { name: "Mangaka VFX", text: window.charlesPreset },
+        { name: "Yuji VFX", text: window.yujiPreset },
+        { name: "Naoya VFX", text: window.naoyaPreset },
+        { name: "Ryu VFX", text: window.ryuPreset },
+        { name: "Heian VFX", text: window.heianPreset },
+        { name: "Nanami VFX", text: window.nanamiPreset },
+        { name: "Megumi VFX", text: window.megumiPreset },
+        { name: "Gojo VFX", text: window.gojoPreset },
+        { name: "Hakari VFX", text: window.hakariPreset },
+        { name: "Hanami VFX", text: window.hanamiPreset },
+        { name: "Yuta VFX", text: window.yutaPreset },
+        { name: "Higuruma VFX", text: window.higurumaPreset }
+    ]
 
     presets.forEach(p => {
-        const btn = document.createElement("button");
-        btn.className = "preset-btn";
-        btn.textContent = p.name;
+        const btn = document.createElement("button")
+
+        btn.className = "preset-btn"
+        btn.textContent = p.name
+
         btn.onclick = () => {
             navigator.clipboard.writeText(p.text).then(() => {
-                const original = btn.textContent;
-                btn.textContent = "✓ Copied!";
-                btn.style.background = "#0a0";
+                const original = btn.textContent
+
+                btn.textContent = "✓ Copied!"
+                btn.style.background = "#0a0"
+
                 setTimeout(() => {
-                    btn.textContent = original;
-                    btn.style.background = "";
-                }, 1500);
-            });
-        };
-        container.appendChild(btn);
-    });
+                    btn.textContent = original
+                    btn.style.background = ""
+                }, 1500)
+            })
+        }
+
+        container.appendChild(btn)
+    })
 }
 
-// ==================== MESSAGE ME ====================
 function showMessageMe() {
-    searchInput.parentElement.style.display = "none";
-    
+    searchInput.parentElement.style.display = "none"
+
     contentEl.innerHTML = `
     <div style="max-width: 620px; margin: 40px auto; padding: 35px; background: #1a1a1a; border-radius: 16px; border: 1px solid #333;">
-        <h2 style="color: #ffd400; text-align: center; margin-bottom: 30px; font-size: 28px;">💬 Message Me</h2>
-        
-        <input type="text" id="discordUsername" placeholder="Your Discord username (ex: osam#1234)" 
+
+        <h2 style="color: #ffd400; text-align: center; margin-bottom: 30px; font-size: 28px;">
+            💬 Message Me
+        </h2>
+
+        <input type="text"
+               id="discordUsername"
+               placeholder="Your Discord username (ex: osam#1234)"
                style="width: 100%; padding: 16px; margin-bottom: 16px; background: #222; color: #fff; border: 1px solid #555; border-radius: 10px; font-size: 16px;">
-        
-        <textarea id="messageText" placeholder="Write your message, suggestion, bug report or anything you want..." 
+
+        <textarea id="messageText"
+                  placeholder="Write your message, suggestion, bug report or anything you want..."
                   style="width: 100%; min-height: 220px; padding: 16px; background: #222; color: #fff; border: 1px solid #555; border-radius: 10px; font-size: 16px; resize: vertical;"></textarea>
-        
-        <button id="sendMessageBtn" 
+
+        <button id="sendMessageBtn"
                 style="width: 100%; padding: 18px; background: #ffd400; color: #111; border: none; border-radius: 10px; font-weight: bold; font-size: 17px; cursor: pointer; margin-top: 10px;">
             Send Message
         </button>
-        
-        <div id="status" style="margin-top: 15px; text-align: center; font-size: 15px; min-height: 24px;"></div>
-    </div>`;
 
-    const usernameInput = document.getElementById('discordUsername');
-    const messageInput = document.getElementById('messageText');
-    const sendBtn = document.getElementById('sendMessageBtn');
-    const statusEl = document.getElementById('status');
+        <div id="status"
+             style="margin-top: 15px; text-align: center; font-size: 15px; min-height: 24px;">
+        </div>
+    </div>`
+
+    const usernameInput =
+        document.getElementById("discordUsername")
+
+    const messageInput =
+        document.getElementById("messageText")
+
+    const sendBtn =
+        document.getElementById("sendMessageBtn")
+
+    const statusEl =
+        document.getElementById("status")
 
     sendBtn.onclick = async () => {
-        const username = usernameInput.value.trim();
-        const message = messageInput.value.trim();
+        const username = usernameInput.value.trim()
+        const message = messageInput.value.trim()
+
         if (!username) {
-            statusEl.style.color = '#ff6666';
-            statusEl.textContent = "❌ Please enter your Discord username so i can warn you i did it";
-            return;
+            statusEl.style.color = "#ff6666"
+            statusEl.textContent =
+                "❌ Please enter your Discord username so i can warn you i did it"
+            return
         }
+
         if (!message) {
-            statusEl.style.color = '#ff6666';
-            statusEl.textContent = "❌ gng i need a text to read";
-            return;
+            statusEl.style.color = "#ff6666"
+            statusEl.textContent =
+                "❌ gng i need a text to read"
+            return
         }
-        sendBtn.disabled = true;
-        sendBtn.textContent = "Sending...";
-        statusEl.style.color = '#ffd400';
-        statusEl.textContent = "Sending message...";
+
+        sendBtn.disabled = true
+        sendBtn.textContent = "Sending..."
+
+        statusEl.style.color = "#ffd400"
+        statusEl.textContent = "Sending message..."
 
         try {
-            const payload = { content: `**New message from ${username}**\n\n${message}` };
-            const res = await fetch("https://discord.com/api/webhooks/1525952461418922216/lKGsHx3TBIoGKV9SuxlpA2Bp_sS2NYDuMBn2lLmHfzf4PScuwF17hKJzJCuH5aaBCo4U", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
+            const payload = {
+                content:
+                    `**New message from ${username}**\n\n${message}`
+            }
+
+            const res = await fetch(
+                "https://message-me-protection.osamyohannes.workers.dev/",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                }
+            )
 
             if (res.ok) {
-                statusEl.style.color = '#00ff88';
-                statusEl.textContent = "✅ Message sent successfully!";
-                messageInput.value = "";
+                statusEl.style.color = "#00ff88"
+                statusEl.textContent =
+                    "✅ Message sent"
+
+                messageInput.value = ""
             } else {
-                statusEl.style.color = '#ff6666';
-                statusEl.textContent = "❌ Failed to send. Try again.";
+                statusEl.style.color = "#ff6666"
+                statusEl.textContent =
+                    "❌ Failed to send. Try again bro"
             }
         } catch (err) {
-            statusEl.style.color = '#ff6666';
-            statusEl.textContent = "❌ Connection error.";
+            statusEl.style.color = "#ff6666"
+            statusEl.textContent =
+                "❌ Connection error"
         }
 
-        sendBtn.disabled = false;
-        sendBtn.textContent = "Send Message";
-    };
+        sendBtn.disabled = false
+        sendBtn.textContent = "Send"
+    }
 }
 
-// ==================== VIDEO EXTRACTOR ====================
 function showVideoExtractor() {
-    searchInput.parentElement.style.display = "none";
-    
+    searchInput.parentElement.style.display = "none"
+
     contentEl.innerHTML = `
     <div style="max-width: 740px; margin: 30px auto; padding: 35px; background: #1a1a1a; border-radius: 16px; border: 1px solid #333;">
-        <h2 style="color: #ffd400; text-align: center; margin-bottom: 10px;">Video Frame Extractor</h2>
-        <p style="text-align: center; color: #aaa; margin-bottom: 30px;">Extract all frames from a video at 24 fps (PNG + ZIP)</p>
-        
-        <input type="file" id="videoInput" accept="video/*" 
+
+        <h2 style="color: #ffd400; text-align: center; margin-bottom: 10px;">
+            Video Frame Extractor
+        </h2>
+
+        <p style="text-align: center; color: #aaa; margin-bottom: 30px;">
+            Extract all frames from a video at 24 fps (PNG + ZIP)
+        </p>
+
+        <input type="file"
+               id="videoInput"
+               accept="video/*"
                style="width: 100%; padding: 14px; background: #222; color: #ddd; border: 2px dashed #555; border-radius: 12px; cursor: pointer; margin-bottom: 25px;">
-        
-        <video id="preview" controls muted 
-               style="width: 100%; max-height: 440px; background: #000; border-radius: 12px; margin-bottom: 25px; display: none;"></video>
-        
+
+        <video id="preview"
+               controls
+               muted
+               style="width: 100%; max-height: 440px; background: #000; border-radius: 12px; margin-bottom: 25px; display: none;">
+        </video>
+
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <button id="startBtn" 
+
+            <button id="startBtn"
                     style="flex: 1; padding: 16px; background: #ffd400; color: #111; border: none; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer;">
                 ▶️ Start Extraction (24 fps)
             </button>
-            
-            <button id="downloadBtn" disabled
+
+            <button id="downloadBtn"
+                    disabled
                     style="flex: 1; padding: 16px; background: #ffd400; color: #111; border: none; border-radius: 10px; font-weight: bold; font-size: 16px;">
                 ⬇️ Download ZIP
             </button>
+
         </div>
-        
-        <progress id="progress" value="0" max="100" 
-                  style="width: 100%; height: 14px; margin: 25px 0; border-radius: 999px; background: #333;"></progress>
-        
-        <div id="status" style="text-align: center; font-size: 15px; color: #aaa; min-height: 28px;">
+
+        <progress id="progress"
+                  value="0"
+                  max="100"
+                  style="width: 100%; height: 14px; margin: 25px 0; border-radius: 999px; background: #333;">
+        </progress>
+
+        <div id="status"
+             style="text-align: center; font-size: 15px; color: #aaa; min-height: 28px;">
             Select a video to begin
         </div>
-    </div>`;
 
-    const videoInput = document.getElementById('videoInput');
-    const preview = document.getElementById('preview');
-    const startBtn = document.getElementById('startBtn');
-    const downloadBtn = document.getElementById('downloadBtn');
-    const progress = document.getElementById('progress');
-    const status = document.getElementById('status');
-    
-    let frames = [];
-    let videoDuration = 0;
-    const fps = 24;
+    </div>`
+
+    const videoInput =
+        document.getElementById("videoInput")
+
+    const preview =
+        document.getElementById("preview")
+
+    const startBtn =
+        document.getElementById("startBtn")
+
+    const downloadBtn =
+        document.getElementById("downloadBtn")
+
+    const progress =
+        document.getElementById("progress")
+
+    const status =
+        document.getElementById("status")
+
+    let frames = []
+    let videoDuration = 0
+
+    const fps = 24
 
     videoInput.onchange = e => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const url = URL.createObjectURL(file);
-        preview.src = url;
-        preview.style.display = "block";
+        const file = e.target.files[0]
+
+        if (!file) return
+
+        const url = URL.createObjectURL(file)
+
+        preview.src = url
+        preview.style.display = "block"
+
         preview.onloadedmetadata = () => {
-            videoDuration = preview.duration;
-            status.textContent = `✅ Video loaded — ${videoDuration.toFixed(1)} seconds`;
-            startBtn.disabled = false;
-        };
-    };
+            videoDuration = preview.duration
+
+            status.textContent =
+                `✅ Video loaded — ${videoDuration.toFixed(1)} seconds`
+
+            startBtn.disabled = false
+        }
+    }
 
     startBtn.onclick = async () => {
-        startBtn.disabled = true;
-        downloadBtn.disabled = true;
-        frames = [];
-        status.textContent = "Extracting frames... (may take a while)";
-        progress.value = 0;
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = preview.videoWidth || 1280;
-        canvas.height = preview.videoHeight || 720;
-        const frameInterval = 1 / fps;
-        const totalFrames = Math.floor(videoDuration * fps) + 1;
-        let currentTime = 0;
-        let frameCount = 0;
+        startBtn.disabled = true
+        downloadBtn.disabled = true
+
+        frames = []
+
+        status.textContent =
+            "Extracting frames... (may take a while)"
+
+        progress.value = 0
+
+        const canvas =
+            document.createElement("canvas")
+
+        const ctx = canvas.getContext("2d")
+
+        canvas.width =
+            preview.videoWidth || 1280
+
+        canvas.height =
+            preview.videoHeight || 720
+
+        const frameInterval = 1 / fps
+
+        const totalFrames =
+            Math.floor(videoDuration * fps) + 1
+
+        let currentTime = 0
+        let frameCount = 0
 
         async function extractNext() {
             if (currentTime > videoDuration) {
-                status.textContent = `Extracted ${frames.length} frames`;
-                downloadBtn.disabled = frames.length === 0;
-                startBtn.disabled = false;
-                return;
+                status.textContent =
+                    `Extracted ${frames.length} frames`
+
+                downloadBtn.disabled =
+                    frames.length === 0
+
+                startBtn.disabled = false
+
+                return
             }
-            preview.currentTime = currentTime;
+
+            preview.currentTime = currentTime
+
             await new Promise(resolve => {
                 preview.onseeked = () => {
                     setTimeout(() => {
                         try {
-                            ctx.drawImage(preview, 0, 0, canvas.width, canvas.height);
+                            ctx.drawImage(
+                                preview,
+                                0,
+                                0,
+                                canvas.width,
+                                canvas.height
+                            )
+
                             canvas.toBlob(blob => {
                                 if (blob) {
-                                    const num = String(frameCount).padStart(5, '0');
-                                    frames.push({ name: `frame_${num}.png`, data: blob });
-                                    frameCount++;
-                                    progress.value = (frameCount / totalFrames) * 100;
-                                }
-                                currentTime += frameInterval;
-                                extractNext();
-                            }, 'image/png');
-                        } catch (err) {
-                            currentTime += frameInterval;
-                            extractNext();
-                        }
-                    }, 60);
-                };
-            });
-        }
-        extractNext();
-    };
+                                    const num =
+                                        String(frameCount).padStart(5, "0")
 
-   downloadBtn.onclick = async () => {
-       if (frames.length === 0) return;
-   
-       downloadBtn.disabled = true;
-       status.textContent = "Creating ZIP...";
-   
-       const zip = new JSZip();
-   
-       for (let i = 0; i < frames.length; i++) {
-           zip.file(frames[i].name, frames[i].data);
-       }
-   
-       const content = await zip.generateAsync({ type: "blob" });
-   
-       const url = URL.createObjectURL(content);
-       const a = document.createElement("a");
-       a.href = url;
-       a.download = "frames.zip";
-       a.click();
-   
-       URL.revokeObjectURL(url);
-   
-       status.textContent = "ZIP downloaded ✅";
-       downloadBtn.disabled = false;
-   };
+                                    frames.push({
+                                        name: `frame_${num}.png`,
+                                        data: blob
+                                    })
+
+                                    frameCount++
+
+                                    progress.value =
+                                        (frameCount / totalFrames) * 100
+                                }
+
+                                currentTime += frameInterval
+
+                                extractNext()
+                            }, "image/png")
+                        } catch (err) {
+                            currentTime += frameInterval
+                            extractNext()
+                        }
+                    }, 60)
+                }
+            })
+        }
+
+        extractNext()
+    }
+
+    downloadBtn.onclick = async () => {
+        if (frames.length === 0) return
+
+        downloadBtn.disabled = true
+        status.textContent = "Creating ZIP..."
+
+        const zip = new JSZip()
+
+        for (let i = 0; i < frames.length; i++) {
+            zip.file(
+                frames[i].name,
+                frames[i].data
+            )
+        }
+
+        const content =
+            await zip.generateAsync({ type: "blob" })
+
+        const url =
+            URL.createObjectURL(content)
+
+        const a =
+            document.createElement("a")
+
+        a.href = url
+        a.download = "frames.zip"
+        a.click()
+
+        URL.revokeObjectURL(url)
+
+        status.textContent =
+            "ZIP downloaded ✅"
+
+        downloadBtn.disabled = false
+    }
 }
 
-// ==================== INIT ====================
-Object.keys(data).forEach(key => createTab(key));
-createTab("Presets", false, false, true);
-createTab("Video Extractor", true);
-createTab("Message Me", false, true);
-createTab("Sound Preview", false, false, false, true);
+Object.keys(data).forEach(key => createTab(key))
 
-initUpdateSystem();
+createTab(
+    "Presets",
+    false,
+    false,
+    true
+)
 
-const firstTab = tabsEl.querySelector(".tab");
-if (firstTab) firstTab.click();
+createTab(
+    "Video Extractor",
+    true
+)
 
-searchInput.addEventListener('input', e => performSearch(e.target.value.trim()));
+createTab(
+    "Message Me",
+    false,
+    true
+)
 
-searchInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        if (highlights.length === 0) return;
-        currentHighlightIndex = (currentHighlightIndex + 1) % highlights.length;
-        scrollToHighlight();
+createTab(
+    "Sound Preview",
+    false,
+    false,
+    false,
+    true
+)
+
+initUpdateSystem()
+
+const firstTab =
+    tabsEl.querySelector(".tab")
+
+if (firstTab) {
+    firstTab.click()
+}
+
+searchInput.addEventListener("input", e => {
+    const term = e.target.value.trim()
+
+    clearTimeout(searchTimeout)
+
+    const version = ++searchVersion
+
+    searchTimeout = setTimeout(() => {
+        if (version !== searchVersion) return
+
+        performSearch(term)
+    }, 150)
+})
+
+searchInput.addEventListener("keydown", e => {
+    if (e.key !== "Enter") return
+
+    e.preventDefault()
+
+    if (highlights.length === 0) return
+
+    if (currentHighlightIndex === -1) {
+        currentHighlightIndex = 0
+    } else {
+        currentHighlightIndex =
+            (currentHighlightIndex + 1) % highlights.length
     }
-});
+
+    scrollToHighlight()
+})  
+
 </script>
 </body>
 </html>

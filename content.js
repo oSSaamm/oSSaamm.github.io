@@ -3,9 +3,123 @@ export const data = {
 **Site Owner:** **oSam**(site owner) and his friend
 
 **DOMAIN CLASH:**
-
-**Music:**
 89526560746434
+
+**Taunts**
+
+**mahito itadori:**
+136360298072269
+
+**sorry nanami:**
+78896502619972
+
+**best friend:**
+83421804187475
+
+**BEST FRIEND:**
+97653793049098
+
+**what are you mahito:**
+81647678860208
+
+**yo its been a while:**
+134720365521601
+
+**yowai mo:**
+7147847068
+
+**next:**
+18956314488
+
+**idiot:**
+91314701968093
+
+**you did it:**
+124723824798365
+
+**laugh:**
+124478817965650
+
+**oi:**
+109660701821480
+
+**mambo**
+72270862303024
+
+**yujiiiiiii:**
+85458465816182
+
+**convergence:**
+130066562156553
+
+**apologize:**
+126062298173538
+
+**huh:**
+83353502086066
+
+**vibraslap:**
+79557514967485
+
+**nanami sigh:**
+83040544565202
+
+**don:**
+83684170238132
+
+**heavenly ramble:**
+133255654446521
+
+**satoru gojo!!!:**
+120491615591769
+
+**for real:**
+136810908754750
+
+**for real**
+136033743459006
+
+**you cryin:**
+85491616155103
+
+**toji fushiguro:**
+120433297149723
+
+**ganbare ganbare:**
+127466398361373
+
+**disrespectful rush:**
+113451393764801
+
+**somethings off:**
+74559114283681
+
+**angry:**
+93687341563646
+
+**stand proud:**
+96682343073262
+
+**waste of time:**
+75909189523782
+
+**sata andagi:**
+75069825195204
+
+**where are you going:**
+129765136259554
+
+**idk this guy:**
+71783048161793
+
+**hidoi na:**
+117890102723144
+
+**JACKPOT:**
+131171831543343
+
+**words are unnecessary:**
+103780040278292
 
 **Impacts and Ragdolls:**
 91186117342 Impact1
@@ -236,14 +350,14 @@ export const data = {
 
 **Gojo:**
 **Lapse Blue:**
-411286671 LapseBluePull
-9105467029 Grab
+411286671 LapseBluePull(.75x)
+9105467029 Grab(0.2 start)
 9066732918 Infinity
 
-**Red:**
-6006851551 Wind
+**Reversal Red:**
+6006851551 Wind(1.2x)
 154787303 Throw
-3059775624 Explode
+3059775624 Explode(1.4x)
 
 **Rapid Punches:**
 8595975878 1x
@@ -2462,6 +2576,64 @@ Star Rage:
 Melee1 R sideways(R)
 Melee2 L forward
 `,
+"Awk/Melee Trails": `
+
+**CREDITS TO THE KNIGHT!!!**
+
+**Honored one:** "Six eyes" **85,255,255**
+
+**Vessel:** "King of Curses" **255,0,0**
+
+**Restless Gambler:** "Idle Death Gamble" **85,255,127**
+
+**Ten Shadows:** "Insanity" **45,45,45**
+
+**Mahoraga:** "Ritual" **255, 255, 255**
+
+**Perfection:** "Essence of the Soul" **170,170,255**
+
+**Blood Manipulator:** "Duty as a Brother" **130,0,0**
+
+**Switcher:** "False memories" **255,255,255**
+
+**Defense Attorney:** "Deadly Sentencing" **179,130,61**
+
+**Cursed partners:** "True Love" **255,170,255**
+
+**Puppet Manipulator:** "Absolute" **255,10,75**
+
+**Head of the Hei:** "Vengeance" **255,255,255**
+
+**Salaryman:** "Overtime" **131,203,199**
+
+**Disaster Plants:** "Unwrap" **172, 203, 163**
+
+**True Cannon:** "Every Last Drop" **170, 255, 255**
+
+**Register:** "Con Artistry" **255,255,255**
+
+**Locust Guy:** "Directed Poison" **85,170,0**
+
+**Star Rage:** "Unrestricted Density" **0, 0, 0**
+
+**Aspiring Mangaka:** "Foresight" **255,255,255**
+
+**Lucky Coward:** "Jawbreaker" **167, 125, 203**
+
+**Crow Charmer:** "Bird Strike" **35, 40, 80**
+
+**Black Death:** "Parthenogenesis" **101, 35, 44**
+
+**Sky Assasin:** "Temper" **170, 255, 255** | NEW **255, 133, 172**
+
+**The Strongest in History:** "Incomplete Shrine" **85, 0, 0**
+
+**Monkey Kid:** "Monkey" **255, 0, 0**
+
+**Mokou:** "Immortal Blaze" **255, 170, 0**
+
+**Chara:** "SINCE WHEN WERE YOU THE ONE IN CONTROL?" **255, 0, 0**
+`,
     "Run/Walk Anim": `
 MOVE ANIMATIONS
 Rush
@@ -2849,8 +3021,22 @@ Melee4 R forward
     -1.0.9.2
     --Added **Parry** sound to **Mahoraga Adaptation**
     --Added **Clash** to **Kuro**, **Yuki** and **Yuta**
-    **1.1.0**
-    --????(September 16th)
+    **1.1.0** (PART 1)
+    --Fixed **Start** and **Speeds** to **Gojo's** **Lapse Blue** and **Reversal Red**
+    --Added **Taunts** to the list
+    --1/3 of the presets are now from **JJS**!(its hell to do this thats why im making a **part **2 of this upd)
+    --Updated **Visuals **to **Naoya **Preset
+    --Updated **Visuals **to **Choso **Preset
+    --Updated **Visuals **to **Yuji **Preset
+    --Updated **Visuals **to **Mangaka **Preset
+    --Updated **Visuals **to **Gojo **Preset
+    --Updated **Visuals **to **Nanami**
+    --Added **HANAMI **Preset
+    --Added **HAKARI**Preset
+    --Added **CHASE** and revamped **M1S**in m1 Preset
+    --Maybe protected ***** so now it probably won't break anymore
+    --**SORRY** for taking long and not doing, i was busy with school and stuff, but now im back
+
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
