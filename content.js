@@ -358,6 +358,7 @@ export const data = {
 6006851551 Wind(1.2x)
 154787303 Throw
 3059775624 Explode(1.4x)
+79055523886516 AKA(variant)
 
 **Rapid Punches:**
 8595975878 1x
@@ -3086,6 +3087,8 @@ Melee4 R forward
     -1.1.0(part 1 fix2)
     --Added Max messages to **Mesage Me**(now you can send 6 messages per 60s)
     --FULLY **Secured** and **fixed** **Message Me**(now it won't break anymore i SWEAR)**
+    -1.1.0(part 1 addition):
+    --Added **AKA** variant to **Gojo's** sounds
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
