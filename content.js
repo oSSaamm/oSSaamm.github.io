@@ -1,125 +1,9 @@
 export const data = {
-    "ALL JJS Sounds": `
+    "Character Sounds": `
 **Site Owner:** **oSam**(site owner) and his friend
 
 **DOMAIN CLASH:**
 89526560746434
-
-**Taunts**
-
-**mahito itadori:**
-136360298072269
-
-**sorry nanami:**
-78896502619972
-
-**best friend:**
-83421804187475
-
-**BEST FRIEND:**
-97653793049098
-
-**what are you mahito:**
-81647678860208
-
-**yo its been a while:**
-134720365521601
-
-**yowai mo:**
-7147847068
-
-**next:**
-18956314488
-
-**idiot:**
-91314701968093
-
-**you did it:**
-124723824798365
-
-**laugh:**
-124478817965650
-
-**oi:**
-109660701821480
-
-**mambo**
-72270862303024
-
-**yujiiiiiii:**
-85458465816182
-
-**convergence:**
-130066562156553
-
-**apologize:**
-126062298173538
-
-**huh:**
-83353502086066
-
-**vibraslap:**
-79557514967485
-
-**nanami sigh:**
-83040544565202
-
-**don:**
-83684170238132
-
-**heavenly ramble:**
-133255654446521
-
-**satoru gojo!!!:**
-120491615591769
-
-**for real:**
-136810908754750
-
-**for real**
-136033743459006
-
-**you cryin:**
-85491616155103
-
-**toji fushiguro:**
-120433297149723
-
-**ganbare ganbare:**
-127466398361373
-
-**disrespectful rush:**
-113451393764801
-
-**somethings off:**
-74559114283681
-
-**angry:**
-93687341563646
-
-**stand proud:**
-96682343073262
-
-**waste of time:**
-75909189523782
-
-**sata andagi:**
-75069825195204
-
-**where are you going:**
-129765136259554
-
-**idk this guy:**
-71783048161793
-
-**hidoi na:**
-117890102723144
-
-**JACKPOT:**
-131171831543343
-
-**words are unnecessary:**
-103780040278292
 
 **Impacts and Ragdolls:**
 91186117342 Impact1
@@ -130,83 +14,6 @@ export const data = {
 3784888809 RagdollFall2
 3784889529 RagdollFall3
 3778609188 Break (downslam)
-
-**ITEMS:**
-
-**Coin:**
-81202220081219 Parry
-136124980150792 Coin
-
-**Naginata:**
-94107281648467 Hit1
-103563218704266 Hit2 and Hit3
- 
-**Gun:**
-5735280081 GunFire
-3932141920 Hit
-1358442317 GunBreak
-
-**CROWBAR(FINALLY!!!!!!)**
-113373990352365 Start
-111213038660342 Start(plays alongside the first)
-114235921050731 Swing
-95443546571326  Hit(0.05 start)
-
-**Arayashiki**
-88813089730068 SlashFX
-86812684303392 Hit
-81029444709032 Music
-
-**TNT:**
-4633141679 TNT
-90854697257230 Explode
-
-**Jet Black:**
-4085938599 Swing
-3932145123 Hit
-
-**Soda:**
-6315580910 Open (1.3x)
-2245190929 Drink (1.3x)
-
-**Banana Peel:**
-1606631241 Peel
-129432532096499 Slip
-
-**Hazenoki's Eye:**
-83364996869460 EyeExplode
-
-**Voice Recorder:**
-90506072322224 Switch
-88080590196375 Voice (thing that has in all modes)
-128573990774413 Crush
-117637019344223 DontMove
-81923105628397 BlastAway
-
-**Transfigured Flesh:**
-134228799555671 Wall
-
-**Playful Cloud:**
-116901112122156 Swing1
-97228090794267 Swing2
-103222009007167 Swing3
-116901112122156 Swing4 (0.8x)
-1358442317 Break
-3755636825 Swing2 (0.9x)
-7978512114 Swing
-3932141920 Hit
-134273082284707 Sever
-
-**Sniper:**
-136523485 Fire
-131265718595511 Recharge
-3932141920 Hit
-2227416952 Explode (Finisher)
-4459572763 Explode (finisher)
-
-**Bowling ball:**
-96331415600436 Loop
-79710336574311 Hit
 
 **Dashes:**
 17866719328 StrikeStart (Mahito blade windup)
@@ -2404,6 +2211,296 @@ mix of m1s
 133545655546336 qte_2
 ---
 `,
+"Taunts": `
+**mahito itadori:**
+136360298072269
+
+**sorry nanami:**
+78896502619972
+
+**best friend:**
+83421804187475
+
+**BEST FRIEND:**
+97653793049098
+
+**what are you mahito:**
+81647678860208
+
+**yo its been a while:**
+134720365521601
+
+**yowai mo:**
+7147847068
+
+**next:**
+18956314488
+
+**idiot:**
+91314701968093
+
+**you did it:**
+124723824798365
+
+**laugh:**
+124478817965650
+
+**oi:**
+109660701821480
+
+**mambo**
+72270862303024
+
+**yujiiiiiii:**
+85458465816182
+
+**convergence:**
+130066562156553
+
+**apologize:**
+126062298173538
+
+**huh:**
+83353502086066
+
+**vibraslap:**
+79557514967485
+
+**nanami sigh:**
+83040544565202
+
+**don:**
+83684170238132
+
+**heavenly ramble:**
+133255654446521
+
+**satoru gojo!!!:**
+120491615591769
+
+**for real:**
+136810908754750
+
+**for real**
+136033743459006
+
+**you cryin:**
+85491616155103
+
+**toji fushiguro:**
+120433297149723
+
+**ganbare ganbare:**
+127466398361373
+
+**disrespectful rush:**
+113451393764801
+
+**somethings off:**
+74559114283681
+
+**angry:**
+93687341563646
+
+**stand proud:**
+96682343073262
+
+**waste of time:**
+75909189523782
+
+**sata andagi:**
+75069825195204
+
+**where are you going:**
+129765136259554
+
+**idk this guy:**
+71783048161793
+
+**hidoi na:**
+117890102723144
+
+**JACKPOT:**
+131171831543343
+
+**words are unnecessary:**
+103780040278292
+`,
+"Items": `
+**Coin:**
+81202220081219 Parry
+136124980150792 Coin
+
+**Naginata:**
+94107281648467 Hit1
+103563218704266 Hit2 and Hit3
+ 
+**Gun:**
+5735280081 GunFire
+3932141920 Hit
+1358442317 GunBreak
+
+**CROWBAR(FINALLY!!!!!!)**
+113373990352365 Start
+111213038660342 Start(plays alongside the first)
+114235921050731 Swing
+95443546571326  Hit(0.05 start)
+
+**Arayashiki**
+88813089730068 SlashFX
+86812684303392 Hit
+81029444709032 Music
+
+**TNT:**
+4633141679 TNT
+90854697257230 Explode
+
+**Jet Black:**
+4085938599 Swing
+3932145123 Hit
+
+**Soda:**
+6315580910 Open (1.3x)
+2245190929 Drink (1.3x)
+
+**Banana Peel:**
+1606631241 Peel
+129432532096499 Slip
+
+**Hazenoki's Eye:**
+83364996869460 EyeExplode
+
+**Voice Recorder:**
+90506072322224 Switch
+88080590196375 Voice (thing that has in all modes)
+128573990774413 Crush
+117637019344223 DontMove
+81923105628397 BlastAway
+
+**Transfigured Flesh:**
+134228799555671 Wall
+
+**Playful Cloud:**
+116901112122156 Swing1
+97228090794267 Swing2
+103222009007167 Swing3
+116901112122156 Swing4 (0.8x)
+1358442317 Break
+3755636825 Swing2 (0.9x)
+7978512114 Swing
+3932141920 Hit
+134273082284707 Sever
+
+**Sniper:**
+136523485 Fire
+131265718595511 Recharge
+3932141920 Hit
+2227416952 Explode (Finisher)
+4459572763 Explode (finisher)
+
+**Bowling ball:**
+96331415600436 Loop
+79710336574311 Hit
+`,
+"UI": `
+
+**Achievement**
+79492884728625
+
+**Announcement**
+138718776377217
+
+**Cardflip**
+9113578540
+
+**Click**
+8388724806
+
+**Coin**(0.1 start)
+8997512318
+
+**CoinTotal**
+7381723507
+
+**CoinTotal2**
+96344550985110
+
+**CoinZero**
+1848197629
+
+**CoinZero2**
+103287988053146
+
+**Countdown**
+6238869231
+
+**Create**
+7545317681
+
+**Destroy**(0.4 start)
+8284575295
+
+**DuelEnd**
+7464806648
+
+**Error**
+137921141959085
+
+**Gamemode**
+17161210152
+
+**GamemodeSelect**
+16480560696
+
+**Hover**
+10066942189
+
+**Load1**
+3320590485
+
+**Load2**
+9085317509
+
+**Load3**(0.3 Start)
+117303393612962
+
+**Duel Lose**
+8713437441
+
+**Purchase**
+4612383453
+
+**SpectateStart**
+8930408685
+
+**Squeak**
+9125994570
+
+**Duel Life lost**
+91191741418347
+
+**Switch**
+15675012262
+
+**Binding vow Music**
+1835642179
+
+**Duel Win**
+4816978981
+
+**Winner1**
+110964600384165(1.1x)
+
+**Winner2**
+110964600384165(1x)
+
+**Winner3**
+110964600384165(0.9x)
+
+**Wrap**
+9117409728
+
+`,
     "Emotes": `
 **Conga:**
 1840682726 Music
@@ -3089,6 +3186,10 @@ Melee4 R forward
     --FULLY **Secured** and **fixed** **Message Me**(now it won't break anymore i SWEAR)**
     -1.1.0(part 1 addition):
     --Added **AKA** variant to **Gojo's** sounds
+    -1.1.0(part 1 additions)
+    --Added **UI** Sounds to **tabs**
+    --Gave **Items** its own **tab**
+    --Gave **Taunts** its own **tab**
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
