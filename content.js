@@ -1686,6 +1686,22 @@ Flower Field Hit     118109994896373
 103301083087000 Discard
 9125634964      Spa(idk what its doing here)
 
+**Ultimate**
+114379547049860 Awk
+
+**Arson**
+121940982680472 GasolineBurst
+
+**Big Moves**
+115128547715948 Truckhorn(start 0.15 - end 1)
+9120270688      TruckHit (0.2 start)
+
+**Mayhem**
+98547001406564  Start
+86764689887681  Land
+114347179797315 Burn
+94308685887450 Heal
+
 ---
 **Locust Guy:**
 
@@ -3190,6 +3206,12 @@ Melee4 R forward
     --Added **UI** Sounds to **tabs**
     --Gave **Items** its own **tab**
     --Gave **Taunts** its own **tab**
+    -1.1.0(part 2 addition)
+    --Changed the top bar to work as a slider(for mobile users)
+    --Added **Arson** sounds to **Reggie**
+    --Added **Big Moves** sounds to **Reggie**
+    --Added **Mayhem** sounds to **Reggie**
+    if yall want **HEAD SPLITTER/Mahito OLD** updated presets(and maybe more of them), go to **My channel** Tab, watch and share the head splitter vid pls
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
