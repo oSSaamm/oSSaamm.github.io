@@ -74,6 +74,28 @@ export const data = {
 3932142219 StabHit4
 8595974357 Hit4
 
+**Toji:**
+
+SSK:
+91707076522300  Swing1
+136664308377432 Hit1
+130240353047377 Swing2
+72615536739576  Hit2
+114366755251105 Swing3
+107646103722641 Hit3
+91310475777082  SwingDown
+131068030211196 HitDown
+132347495224618 SwingUp
+131068030211196 HitUp
+
+ISOH:
+137767596313668 Swing1
+116329900402844 Hit1
+93238755693569  Swing2
+125393950010036 Hit2
+97154673671077  swing3
+
+
 **Nanami:**
 91344226850535 Hit1
 91019449442779 Hit2
@@ -1702,6 +1724,20 @@ Flower Field Hit     118109994896373
 114347179797315 Burn
 94308685887450 Heal
 
+**Road Rage**
+107352599317355 CarStart
+134735351544907 CarLoop
+125341343783543 Hit1
+72864381464861  Hit3
+
+-----
+
+**Toji:**
+
+**Special**
+127112282803918 Unequip
+139428688216066 SSKEquip
+
 ---
 **Locust Guy:**
 
@@ -2032,6 +2068,16 @@ mix of m1s
 129081570292387 Swing
 113748500437243 Throw
 
+**Turbulence**
+116466537239343 Start
+70449756871810 Hit
+-AIR
+ 111041349226136 Kick
+ 83176431614071 Flip
+ 74324781247417  Hit1
+ 97495017892553 Burst
+74324781247417  Hit2
+
 **Thin Ice Breaker**:
 140527314975641 Start
 110205767230561 Crack
@@ -2039,12 +2085,21 @@ mix of m1s
 97374948075214  Crack2
 129058536378584 Die(Voiceline)
 105792362821593 Explode
-
+-**NEW**
+79108121677113  Start
+95723598539974  Hit1
+85908427155450  Impact
+126311271304428 Crack
+74324781247417  Hit2
+114718217957373 Explode
 
 **ARE YOU THAT AFRAID**?
 107283239051825 Voice(put 2 SFX node)
 18265315478 Start
 132457128699700 Break
+-**NEW**
+ 107283239051825 Voice
+ 122256072747876 Ult
 
 **THIN ICE BREAKER BIG**:
 82449568099992  Voice
@@ -2055,10 +2110,15 @@ mix of m1s
 110205767230561 Crack
 0.5 wait
 105792362821593 Explode
+**NEW**
+82449568099992 Voice1
+75844289662156 Fly
+2 Wait
+128241049474311 Voice2
 
 
 ---
-**Heian Sugooner:**
+**Heian Sukuna:**
 **Strong Dismantle:**
 70482785888704 Start
 125288142627715 Fire
@@ -2343,6 +2403,17 @@ mix of m1s
 103780040278292
 `,
 "Items": `
+
+**Throwables**
+3929467655 PickupSwing(1.3x)
+4086209336 Pick
+3929467655 ThrowSwing(1.3x)
+3755636825 Throw
+7515452875 Hit
+-**Fire extinguisher**
+ 9114437231 SmokeSFX
+ 9117314713 Hit2SFX
+
 **Coin:**
 81202220081219 Parry
 136124980150792 Coin
@@ -2350,7 +2421,7 @@ mix of m1s
 **Naginata:**
 94107281648467 Hit1
 103563218704266 Hit2 and Hit3
- 
+
 **Gun:**
 5735280081 GunFire
 3932141920 Hit
@@ -2864,121 +2935,127 @@ Sword Surfing B but the player is facing to the right
 Streamer Adventures S
 Spin2 F (The only one i’d see myself actually using in the emote section)
 `,
-    "Moves Startup": `
-DOMAIN EXPANSION: 1.233~
-HONORED ONE
-Lapse blue 0.483~
-Rapid punches 0.500~
-Twofold kick 0.350~
-Red 0.500~
-MAX blue 0.500~
-MAX red 1.183~
-Purple 2.666~(spooky)
-VESSEL
-Cursed strikes 0.466~
-Crushing blow 0.466~
-Divergent fist 0.466~ (TZE must really like that number)
-Dismantle 0.383~
-Rush 0.466~(ok seriously what’s going on here)
-Open 2.700~
-RESTLESS GAMBLER
-Reserve balls 0.283~
-Shutter doors 0.366~
-Rough energy 0.683~
-Fever breaker 0.466~
-Lucky volley 0.383~
-Lucky rushdown 0.583~
-Energy surge 0.550~
-Overwhelming luck 2.083~
-TEN SHADOWS
-Rabbit Escape 0.466~
-Nue 0.366~
-Toad 0.366~
-Divine dog 0.15~ idk
-Great serpent 1.100~
-Shadow swarm 0.866~(very rough calculation)
-Mahoraga 3.033~
-MAHORAGA
-Divine pummel 0.616~
-Ground pitch 0.350~
-Earthquake 0.466~
-Takedown 0.800~
-No windup for adaptation
-World Cutting slash 1.333~
-PERFECTION
-Stockpile 0.466~
-Soul fire 0.466~
-Focus strike 0.333~
-Body repel 1.416~
-Idle transfiguration 0.850~
-Drill splitter 0.750~
-Spike wrath 0.800~
-Wide spread strikes 2.650~
-Face blitz 0.783~
-BLOOD MANIPULATOR
-Piercing blood 0.783~
-Flowing red scale 0.333~
-Blood edge 0.366~
-Slicing exorcism 0.333~
-Wing king is instant (I think)
-Plasma wave 2.016~
-SWITCHER
-Swift kick 0.466~
-Brute force 0.733~
-Pebble throw 0.683~
-Elbow drop 0.566~
-Idols debut 0.383~
-Climax jumping 1.000~
-Dreams 0.333~
-Brothers 1.883~
-DEFENSE ATTORNEY
-Extended swings 0.316~
-Justice served 0.616~
-Twirling strikes 0.516~
-Execution 1~
-Final judgment 1.583~
-Verdict 0.366~
-Triple sentence 0.500~
-CURSED PARTNERS
-Severing path 0.466~
-Resolute slash 0.466~
-Veilstep 0.233~
-Revolve 0.250~
-LOCUST GUY
-Clever 0.383~
-Black mucus 0.500~
-Crushing jaws 0.366~
-Wing throw 0.366~
-STAR RAGE
-Garuda rebound 0.500~
-Rising rage 0.333~
-Mass breaker 0.633~
-Garuda stab 0.466~
-ASPIRING MANGAKA
-Despair 0.333~
-Shut up! 0.466~
-Sacrilege 0.466~
-STRONGEST OF HISTORY
-Strong dismantle 0.4~
-Open furnace 4.200~
-Cleave rush 0.800~
-Kamutoke 0.466~
-First 3 Chants (not added up) 0.5~
-Waffle Maker(4th chant) Cant do it yet because my pc is bugging out like crazy when doing this
-HEAD OF THE HEI
-projection breaker 0.750~
-Bleedout 0.533~
-cursory impact 0.716~
-decisive strike 1.050~
-PUPPET MASTER
-Ultra Spin 0.466~
-Boost On 0.433~
-Ultra Cannon 0.5~
-Heat Emission 0.333~
-Miracle Cannon 0.7~
-SALARYMAN
-Cleaving Whirlwind(Startup before movement) 0.233~ doing it past here will break the move
-Severance Kick ~0.3478(0.35)
+"Moves Startup": `
+
+    **INFO: ? means you can't change it**
+
+    **Gojo**
+    Lapse Blue: 0.55
+    Reversal Red: ?
+    Rapid Punches: 0.5
+    Twofold Kick: ?
+    -----------------------
+    Lapse Blue MAX: 0
+    Reversal Red MAX: 1.2
+    Hollow Purple: 2.7
+    Infinite Void: 1.25
+
+    **Yuji**
+    Cursed Strikes: 0.5
+    Crushing Blow: 0.466
+    Divergent Fist: 0.416
+    Manji Kick: 1.1
+    ----------------------
+    Dismantle: 0.4
+    Open: 3.59
+    Rush: 0.466
+    Malevolent Shrine: 1.25
+
+    **Hakari**
+    Reserve Balls: 0.466
+    Shutter Doors: 0
+    Rough Energy: 0.7 - AIR: 2.3(vfx)
+    Fever Breaker: 0.433 - Crusher: 3.93
+    --------------------------------------
+    Lucky Volley: 0.4
+    Lucky Rushdown: 0.5
+    Overwhelming Luck: ?
+    Energy Surge: 0.56
+
+    **Megumi**
+    Rabbit Escape: 0.5
+    Nue: 0.4
+    Toad: 0.4
+    Divine Dog: 0.15
+    ------------------
+    Max Elephant: 0
+    Great Serpent: 1.13
+    Shadow Swarm: 1.33
+    Mahoraga: 2.9
+
+    **Mahito**
+    Stockpile: 0.48
+    Soul Fire: 0.45
+    Focus Strike: 0.4
+    Body Repel: 1.38
+    -----------------
+    Idle Transfiguration: 0.8
+    Body Disfigure: - Drill: 0.76 - HeartPiecer: 0.7 - ForceGrab: 0.55
+    Spike Wrath: 0.8
+    Embodiement of Self Perfection: 1.5
+    --------------------------------------------------------------------
+    Widespread Strikes: 3.23
+    Face Blitz: 0.7
+    Crushing Rushdown: .25
+    Head Splitter: 2
+
+    **Choso**
+    Piercing Blood: 0.75
+    Flowing Red Scale: ?
+    Supernova: 1.2
+    Blood Edge: .41
+    ---------------------
+    Slicing Exorcism: 0.38 - SPECIAL: 0.4
+    Wing King: ?
+    Blood Rain: 1.25
+    Plasma Wave: 3.08
+
+    **Todo**
+    Swift Kick: 0.5
+    Brute Force: 0.765
+    Pebble Throw: 0.666
+    Elbow Drop: 0.6
+    -----------------------
+    Idol's Debut: 0.4
+    Climax Jumping: 1
+    Dreams: 0.38
+    Brothers: - Yuji: 2 - BlackFlash: 3.1
+
+    **Higuruma**
+    Extended Swings: 0.4
+    Justice Served: 0.61
+    Judgement's Reach: 0.45
+    Pressing Charges: 0.4
+    -------------------------
+    Execution: 1
+    Final Judgement: 1.6
+    Verdict: 0.38
+    Triple Sentence: 0.55
+
+    **Yuta**
+    Severing Path: 0.6
+    Resolute Slash: 0.3
+    Outburst: ?
+    Veilstep: 0.25
+    VeilstepDive: 0.3
+    Second Wind: 0.15
+    ----------------------
+    Elbow Rush: 0.38
+    Copy: 0.88
+    Energy Ripple: 0.75
+    Authentic Mutual Love: 1.5
+
+    **Mechamaru**
+    Ultra Spin: 0.6
+    Boost On: 0.5
+    Ultra Cannon: 0.8
+    Heat Emission: 0.35
+    ---------------------------
+    Miracle Cannon: 1.2
+    Pigeon Viola: 0.4
+    Absolute Destruction: 0.5
+    Technique Charge: ?
+
 `,
     "Kicks + Direction": `
 Key: left leg =L right leg = R both =B
@@ -3206,12 +3283,21 @@ Melee4 R forward
     --Added **UI** Sounds to **tabs**
     --Gave **Items** its own **tab**
     --Gave **Taunts** its own **tab**
-    -1.1.0(part 2 addition)
+    -1.1.0(part 2 addition):
     --Changed the top bar to work as a slider(for mobile users)
     --Added **Arson** sounds to **Reggie**
     --Added **Big Moves** sounds to **Reggie**
     --Added **Mayhem** sounds to **Reggie**
     if yall want **HEAD SPLITTER/Mahito OLD** updated presets(and maybe more of them), go to **My channel** Tab, watch and share the head splitter vid pls
+    -1.1.1:
+    --Added **Throwables** to **Items** tab
+    --Added NEW **Thin Ice Breaker** sounds to **Takako Uro**
+    --Added **Turbulence** sounds to **Takako Uro**
+    --Added NEW both **Awakening** sounds to **Takako Uro**
+    --Added **132-Square-Foot-Two-Story-House** sounds to **Reggie**
+    --Added **Road Rage** sounds to **Reggie**
+    --Added **Finisher** sounds to **JSD Chara**
+    --Added **Toji** sounds
 `,
     "My channel": `
    If you wanna support me go to my channel pls i want money
